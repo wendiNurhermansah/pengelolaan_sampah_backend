@@ -8,7 +8,7 @@
 
     <!-- Title -->
     <link rel="icon" href="{{asset('images/icon_sampah.png')}}" type="image/x-icon">
-    <title>{{ config('app.name') }} | Form Login</title>
+    <title>{{ config('app.name') }} | Login</title>
 
     <!-- CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/app.css') }}">

@@ -55,6 +55,15 @@ Route::prefix('MasterTpa')->namespace('masterTpa')->name('MasterTpa.')->group(fu
     Route::resource('tpa', 'TpaController');
     Route::post('tpa/api', 'TpaController@api')->name('tpa.api');
 
+    //tambah Tpa
+    Route::get('tambah_tpa', 'TpaController@create')->name('tpa.tambah_tpa');
+
+    //alamat
+    Route::get('kabupatenByProvinsi/{id}', 'TpaController@kabupatenByProvinsi')->name('kabupatenByProvinsi');
+    Route::get('kecamatanByKabupaten/{id}', 'TpaController@kecamatanByKabupaten')->name('kecamatanByKabupaten');
+    Route::get('kelurahanByKecamatan/{id}', 'TpaController@kelurahanByKecamatan')->name('kelurahanByKecamatan');
+
+
 
 
 

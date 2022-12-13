@@ -37,32 +37,93 @@
     </li>
     @endcan
 
+    
+
+    <li class="header light"><strong>MASTER PENGELOLAAN SAMPAH</strong></li>
     @can('masterTpa')
-    <li class="header light"><strong>MASTER TPA</strong></li>
+    
+    <li class="treeview"><a href="#"><i class="icon icon-refresh orange-text s-18"></i>TPA<i
+                    class="icon icon-chevron-down s-10 mr-2 pull-right"></i></a>
+        <ul class="treeview-menu">
+            <li><a href="{{route('MasterTpa.jenis_tpa.index')}}"><i class="icon icon-circle-o"></i><span>Jenis TPA</span>  <i class="icon icon-angle-right s-18 pull-right"></i></a>
+            </li>
+            <li><a href="{{route('MasterTpa.status_tpa.index')}}"><i class="icon icon-circle-o"></i><span>Status TPA</span>  <i class="icon icon-angle-right s-18 pull-right"></i></a>
+            </li>
+            <li><a href="{{route('MasterTpa.tpa.index')}}"><i class="icon icon-circle-o"></i><span>TPA</span><i class="icon icon-angle-right s-18 pull-right"></i></a>
+                </li>
+            </ul>
+    </li> 
 
-    <li>
-        <a href="{{route('MasterTpa.jenis_tpa.index')}}"><i class="icon icon-code-fork blue-text s-18"></i>
-        <span>Jenis TPA</span>
-        <i class="icon icon-angle-right s-18 pull-right"></i>
-        </a>
-    </li>
-    <li>
-        <a href="{{route('MasterTpa.status_tpa.index')}}"><i class="icon icon-check blue-text s-18"></i>
-        <span>Status TPA</span>
-        <i class="icon icon-angle-right s-18 pull-right"></i>
-        </a>
-    </li>
-
-    <li>
-        <a href="{{route('MasterTpa.tpa.index')}}"><i class="icon icon-retweet blue-text s-18"></i>
-        <span>TPA</span>
-        <i class="icon icon-angle-right s-18 pull-right"></i>
-        </a>
-    </li>
-
+    
+   
+    
 
     @endcan 
 
+    @can('bank_sampah')
+
+    
+
+    <li class="treeview"><a href="#"><i class="icon icon-archive blue-text s-18"></i>BANK SAMPAH<i
+        class="icon icon-chevron-down s-10 mr-2 pull-right"></i></a>
+        <ul class="treeview-menu">
+            <li><a href="{{route('MasterTpa.jenis_tpa.index')}}"><i class="icon icon-circle-o"></i><span>Jenis Bank Sampah</span>  <i class="icon icon-angle-right s-18 pull-right"></i></a>
+            </li>
+            <li><a href="{{route('MasterTpa.status_tpa.index')}}"><i class="icon icon-circle-o"></i><span>Status Bank Sampah</span>  <i class="icon icon-angle-right s-18 pull-right"></i></a>
+            </li>
+            <li><a href="{{route('MasterTpa.tpa.index')}}"><i class="icon icon-circle-o"></i><span>Bank Sampah</span><i class="icon icon-angle-right s-18 pull-right"></i></a>
+                </li>
+            </ul>
+    </li> 
+
+    @endcan
+
+    
+    @can('tps3r')
+    
+
+    <li class="treeview"><a href="#"><i class="icon icon-building light-green-text s-18"></i>TPS3R<i
+            class="icon icon-chevron-down s-10 mr-2 pull-right"></i></a>
+        <ul class="treeview-menu">
+            <li><a href="{{route('MasterTpa.jenis_tpa.index')}}"><i class="icon icon-circle-o"></i><span>Jenis TPS3R</span>  <i class="icon icon-angle-right s-18 pull-right"></i></a>
+            </li>
+            <li><a href="{{route('MasterTpa.status_tpa.index')}}"><i class="icon icon-circle-o"></i><span>Status TPS3R</span>  <i class="icon icon-angle-right s-18 pull-right"></i></a>
+            </li>
+            <li><a href="{{route('MasterTpa.tpa.index')}}"><i class="icon icon-circle-o"></i><span>TPS3R</span><i class="icon icon-angle-right s-18 pull-right"></i></a>
+                </li>
+            </ul>
+    </li> 
+
+    
+    @endcan
+
+    @can('masterHasil_pengolahan')
+    <li class="header light"><strong>MASTER HASIL PENGOLAHAN SAMPAH</strong></li>
+    <li>
+        <a href="{{route('MasterRole.pengguna.index')}}"><i class="icon icon-leaf green-text s-18"></i>
+        <span>Komposisi Sampah</span>
+        <i class="icon icon-angle-right s-18 pull-right"></i>
+        </a>
+    </li>
+
+    <li>
+        <a href="{{route('MasterRole.pengguna.index')}}"><i class="icon icon-filter orange-text s-18"></i>
+        <span>Sumber Sampah</span>
+        <i class="icon icon-angle-right s-18 pull-right"></i>
+        </a>
+    </li>
+
+    <li>
+        <a href="{{route('MasterRole.pengguna.index')}}"><i class="icon icon-retweet blue-text s-18"></i>
+        <span>Hasil Pengolahan Sampah</span>
+        <i class="icon icon-angle-right s-18 pull-right"></i>
+        </a>
+    </li>
+    @endcan
+
+
+
+    <li class="header light"><strong></strong></li>
     
    
 </ul>
