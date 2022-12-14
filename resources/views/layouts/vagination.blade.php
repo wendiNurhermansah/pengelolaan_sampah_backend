@@ -71,7 +71,7 @@
             </li>
             <li><a href="{{route('MasterBankSampah.status_bank_sampah.index')}}"><i class="icon icon-circle-o"></i><span>Status Bank Sampah</span>  <i class="icon icon-angle-right s-18 pull-right"></i></a>
             </li>
-            <li><a href="{{route('MasterTpa.tpa.index')}}"><i class="icon icon-circle-o"></i><span>Bank Sampah</span><i class="icon icon-angle-right s-18 pull-right"></i></a>
+            <li><a href="#"><i class="icon icon-circle-o"></i><span>Bank Sampah</span><i class="icon icon-angle-right s-18 pull-right"></i></a>
                 </li>
             </ul>
     </li> 
@@ -89,7 +89,7 @@
             </li>
             <li><a href="{{route('MasterTps3r.status_tps3r.index')}}"><i class="icon icon-circle-o"></i><span>Status TPS3R</span>  <i class="icon icon-angle-right s-18 pull-right"></i></a>
             </li>
-            <li><a href="{{route('MasterTpa.tpa.index')}}"><i class="icon icon-circle-o"></i><span>TPS3R</span><i class="icon icon-angle-right s-18 pull-right"></i></a>
+            <li><a href="#"><i class="icon icon-circle-o"></i><span>TPS3R</span><i class="icon icon-angle-right s-18 pull-right"></i></a>
                 </li>
             </ul>
     </li> 
@@ -114,7 +114,7 @@
     </li>
 
     <li>
-        <a href="{{route('MasterRole.pengguna.index')}}"><i class="icon icon-retweet blue-text s-18"></i>
+        <a href="#"><i class="icon icon-retweet blue-text s-18"></i>
         <span>Hasil Pengolahan Sampah</span>
         <i class="icon icon-angle-right s-18 pull-right"></i>
         </a>
