@@ -32,10 +32,10 @@
                 <div class="card no-b">
                     <div class="card-body">
                         <div id="alert"></div>
-                            <form class="needs-validation" id="form" method="POST"  enctype="multipart/form-data" novalidate>
-                                {{ method_field('POST') }}
-                                @csrf
-                                <input type="hidden" id="id" name="id"/>
+                            <form class="needs-validation" id="form" method="PATCH"  enctype="multipart/form-data" novalidate>
+                            {{ method_field('PATCH') }}
+                                
+                                <input type="hidden" id="id" value="{{$tpa->id}}" name="id"/>
                                 <h4 id="formTitle">Edit TPA</h4><hr>
                                 <div class="">
                                     <h6><b>Data TPA :</b> </h6>
@@ -402,8 +402,7 @@
         }
         else{
             $('#alert').html('');
-            $('#load').show();
-            url = "{{ route('MasterTpa.tpa.store') }}",
+            url = "{{ route('MasterTpa.tpa.update', ':id') }}".replace(':id', $('#id').val());
             $.ajax({
                 url : url,
                 type : 'POST',
@@ -413,8 +412,7 @@
                 success : function(data) {
                     console.log(data);
                     $('#alert').html("<div role='alert' class='alert alert-success alert-dismissible'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>×</span></button><strong>Success!</strong> " + data.message + "</div>");
-                    $('#load').hide();
-                    add();
+                   location.reload();
                 },
                 error : function(data){
                     err = '';
@@ -424,7 +422,6 @@
                             err = err + "<li>" + value +"</li>";
                         });
                     }
-                    $('#load').hide();
                     $('#alert').html("<div role='alert' class='alert alert-danger alert-dismissible'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>×</span></button><strong>Error!</strong> " + respon.message + "<ol class='pl-3 m-0'>" + err + "</ol></div>");
                 }
             });

@@ -223,7 +223,70 @@ class TpaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $tpa = Tpa::findOrFail($id);
+        $request->validate([
+            'nama_fasilitas' => 'required',
+            'id_jenis_tpa' => 'required',
+            'id_status_tpa' => 'required',
+            'alamat' => 'required',
+            'id_kabupaten' => 'required',
+            'id_kelurahan' => 'required',
+            'id_provinsi' => 'required',
+            'id_kecamatan' => 'required',
+            'tahun' => 'required',
+            'sampah_masuk' => 'required',
+            'sampah_landfil' => 'required',
+            'pengelola' => 'required',
+        
+        ]);
+
+        $tpa->update([
+            'nama_fasilitas' => $request->nama_fasilitas,
+            'id_jenis_tpa' => $request->id_jenis_tpa, 
+            'id_status_tpa' => $request->id_status_tpa, 
+            'alamat' => $request->alamat, 
+            'id_kabupaten' => $request->id_kabupaten, 
+            'id_kelurahan' => $request->id_kelurahan, 
+            'id_provinsi' => $request->id_provinsi, 
+            'id_kecamatan' => $request->id_kecamatan, 
+            'tahun' => $request->tahun, 
+            'sampah_masuk' => $request->sampah_masuk, 
+            'sampah_landfil' => $request->sampah_landfil, 
+            'pengelola' => $request->pengelola, 
+
+        ]);
+
+        $terkelola = Sampah_terkelola::where('id_tpa', $id);
+        $terkelola->update([
+           'id_tpa' => $tpa->id,
+           'sampah_organik' => $request->sampah_organik,
+           'sampah_an_organik' => $request->sampah_an_organik,
+           'recovery_pemulung' => $request->recovery_pemulung,
+           'energy' => $request->energy,
+
+        ]);
+
+        $oprational = Data_oprasional_tpa::where('id_tpa', $id);
+        $oprational->update([
+            'id_tpa' => $tpa->id,
+            'awal_beroprasi' => $request->awal_beroprasi,
+            'luas' => $request->luas,
+            'luas_landfil_aktif' => $request->luas_landfil_aktif,
+            'pencatatan' => $request->pencatatan,
+            'jembatan_timbang' => $request->jembatan_timbang,
+            'penutupan_sampah_aktif' => $request->penutupan_sampah_aktif,
+            'jumlah_sumur_pantau' => $request->jumlah_sumur_pantau,
+            'ipl' => $request->ipl,
+            'uji_lindi' => $request->uji_lindi,
+            'drainase' => $request->drainase,
+            'gas_metana' => $request->gas_metana,
+            'jumlah_kk' => $request->jumlah_kk,
+        ]);
+
+        return response()->json([
+            'message' => 'Data Berhasil Dirubah!'
+        ]);
+
     }
 
     /**

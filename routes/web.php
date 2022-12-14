@@ -63,10 +63,45 @@ Route::prefix('MasterTpa')->namespace('masterTpa')->name('MasterTpa.')->group(fu
     Route::get('kecamatanByKabupaten/{id}', 'TpaController@kecamatanByKabupaten')->name('kecamatanByKabupaten');
     Route::get('kelurahanByKecamatan/{id}', 'TpaController@kelurahanByKecamatan')->name('kelurahanByKecamatan');
 
+});
+
+Route::prefix('MasterBankSampah')->namespace('masterBankSampah')->name('MasterBankSampah.')->group(function(){
+    //jenis bank sampah
+    Route::resource('jenis_bank_sampah', 'JenisBankSampahController');
+    Route::post('jenis_bank_sampah/api', 'JenisBankSampahController@api')->name('jenis_bank_sampah.api');
+
+    //status bank sampah
+    Route::resource('status_bank_sampah', 'StatusBankSampahController');
+    Route::post('status_bank_sampah/api', 'StatusBankSampahController@api')->name('status_bank_sampah.api');
+
+    
+
+});
+
+Route::prefix('MasterTps3r')->namespace('masterTps3r')->name('MasterTps3r.')->group(function(){
+    //jenis TPS3R
+    Route::resource('jenis_tps3r', 'JenisTps3rController');
+    Route::post('jenis_tps3r/api', 'JenisTps3rController@api')->name('jenis_tps3r.api');
+
+    //status TPS3R
+    Route::resource('status_tps3r', 'StatusTps3rController');
+    Route::post('status_tps3r/api', 'StatusTps3rController@api')->name('status_tps3r.api');
+
+    
+
+});
 
 
+Route::prefix('MasterPengolahan')->namespace('masterPengolahan')->name('MasterPengolahan.')->group(function(){
+    //Komposisi Sampah
+    Route::resource('komposisi_sampah', 'KomposisiSampahController');
+    Route::post('komposisi_sampah/api', 'KomposisiSampahController@api')->name('komposisi_sampah.api');
 
+    //Sumber sampah
+    Route::resource('sumber_sampah', 'SumberSampahController');
+    Route::post('sumber_sampah/api', 'SumberSampahController@api')->name('sumber_sampah.api');
 
+    
 
 });
 

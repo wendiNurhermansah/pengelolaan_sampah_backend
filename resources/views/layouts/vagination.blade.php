@@ -67,9 +67,9 @@
     <li class="treeview"><a href="#"><i class="icon icon-archive blue-text s-18"></i>BANK SAMPAH<i
         class="icon icon-chevron-down s-10 mr-2 pull-right"></i></a>
         <ul class="treeview-menu">
-            <li><a href="{{route('MasterTpa.jenis_tpa.index')}}"><i class="icon icon-circle-o"></i><span>Jenis Bank Sampah</span>  <i class="icon icon-angle-right s-18 pull-right"></i></a>
+            <li><a href="{{route('MasterBankSampah.jenis_bank_sampah.index')}}"><i class="icon icon-circle-o"></i><span>Jenis Bank Sampah</span>  <i class="icon icon-angle-right s-18 pull-right"></i></a>
             </li>
-            <li><a href="{{route('MasterTpa.status_tpa.index')}}"><i class="icon icon-circle-o"></i><span>Status Bank Sampah</span>  <i class="icon icon-angle-right s-18 pull-right"></i></a>
+            <li><a href="{{route('MasterBankSampah.status_bank_sampah.index')}}"><i class="icon icon-circle-o"></i><span>Status Bank Sampah</span>  <i class="icon icon-angle-right s-18 pull-right"></i></a>
             </li>
             <li><a href="{{route('MasterTpa.tpa.index')}}"><i class="icon icon-circle-o"></i><span>Bank Sampah</span><i class="icon icon-angle-right s-18 pull-right"></i></a>
                 </li>
@@ -85,9 +85,9 @@
     <li class="treeview"><a href="#"><i class="icon icon-building light-green-text s-18"></i>TPS3R<i
             class="icon icon-chevron-down s-10 mr-2 pull-right"></i></a>
         <ul class="treeview-menu">
-            <li><a href="{{route('MasterTpa.jenis_tpa.index')}}"><i class="icon icon-circle-o"></i><span>Jenis TPS3R</span>  <i class="icon icon-angle-right s-18 pull-right"></i></a>
+            <li><a href="{{route('MasterTps3r.jenis_tps3r.index')}}"><i class="icon icon-circle-o"></i><span>Jenis TPS3R</span>  <i class="icon icon-angle-right s-18 pull-right"></i></a>
             </li>
-            <li><a href="{{route('MasterTpa.status_tpa.index')}}"><i class="icon icon-circle-o"></i><span>Status TPS3R</span>  <i class="icon icon-angle-right s-18 pull-right"></i></a>
+            <li><a href="{{route('MasterTps3r.status_tps3r.index')}}"><i class="icon icon-circle-o"></i><span>Status TPS3R</span>  <i class="icon icon-angle-right s-18 pull-right"></i></a>
             </li>
             <li><a href="{{route('MasterTpa.tpa.index')}}"><i class="icon icon-circle-o"></i><span>TPS3R</span><i class="icon icon-angle-right s-18 pull-right"></i></a>
                 </li>
@@ -100,14 +100,14 @@
     @can('masterHasil_pengolahan')
     <li class="header light"><strong>MASTER HASIL PENGOLAHAN SAMPAH</strong></li>
     <li>
-        <a href="{{route('MasterRole.pengguna.index')}}"><i class="icon icon-leaf green-text s-18"></i>
+        <a href="{{route('MasterPengolahan.komposisi_sampah.index')}}"><i class="icon icon-leaf green-text s-18"></i>
         <span>Komposisi Sampah</span>
         <i class="icon icon-angle-right s-18 pull-right"></i>
         </a>
     </li>
 
     <li>
-        <a href="{{route('MasterRole.pengguna.index')}}"><i class="icon icon-filter orange-text s-18"></i>
+        <a href="{{route('MasterPengolahan.sumber_sampah.index')}}"><i class="icon icon-filter orange-text s-18"></i>
         <span>Sumber Sampah</span>
         <i class="icon icon-angle-right s-18 pull-right"></i>
         </a>
