@@ -91,6 +91,10 @@ Route::prefix('MasterTps3r')->namespace('masterTps3r')->name('MasterTps3r.')->gr
     Route::resource('status_tps3r', 'StatusTps3rController');
     Route::post('status_tps3r/api', 'StatusTps3rController@api')->name('status_tps3r.api');
 
+    //tps3r
+    Route::resource('tps3r', 'Tps3rController');
+    Route::post('tps3r/api', 'Tps3rController@api')->name('tps3r.api');
+
     
 
 });

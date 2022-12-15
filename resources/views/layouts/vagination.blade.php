@@ -60,6 +60,27 @@
 
     @endcan 
 
+    
+
+    
+    @can('tps3r')
+    
+
+    <li class="treeview"><a href="#"><i class="icon icon-building light-green-text s-18"></i>TPS3R<i
+            class="icon icon-chevron-down s-10 mr-2 pull-right"></i></a>
+        <ul class="treeview-menu">
+            <li><a href="{{route('MasterTps3r.jenis_tps3r.index')}}"><i class="icon icon-circle-o"></i><span>Jenis TPS3R</span>  </a>
+            </li>
+            <li><a href="{{route('MasterTps3r.status_tps3r.index')}}"><i class="icon icon-circle-o"></i><span>Status TPS3R</span>  </a>
+            </li>
+            <li><a href="{{route('MasterTps3r.tps3r.index')}}"><i class="icon icon-circle-o"></i><span>TPS3R</span></a>
+                </li>
+            </ul>
+    </li> 
+
+    
+    @endcan
+
     @can('bank_sampah')
 
     
@@ -76,25 +97,6 @@
             </ul>
     </li> 
 
-    @endcan
-
-    
-    @can('tps3r')
-    
-
-    <li class="treeview"><a href="#"><i class="icon icon-building light-green-text s-18"></i>TPS3R<i
-            class="icon icon-chevron-down s-10 mr-2 pull-right"></i></a>
-        <ul class="treeview-menu">
-            <li><a href="{{route('MasterTps3r.jenis_tps3r.index')}}"><i class="icon icon-circle-o"></i><span>Jenis TPS3R</span>  </a>
-            </li>
-            <li><a href="{{route('MasterTps3r.status_tps3r.index')}}"><i class="icon icon-circle-o"></i><span>Status TPS3R</span>  </a>
-            </li>
-            <li><a href="#"><i class="icon icon-circle-o"></i><span>TPS3R</span></a>
-                </li>
-            </ul>
-    </li> 
-
-    
     @endcan
 
     @can('masterHasil_pengolahan')
