@@ -54,7 +54,11 @@ Route::prefix('MasterTpa')->namespace('masterTpa')->name('MasterTpa.')->group(fu
     //TPA
     Route::resource('tpa', 'TpaController');
     Route::post('tpa/api', 'TpaController@api')->name('tpa.api');
+    Route::get('tambah_pengolahan/{id}', 'TpaController@pengolahan')->name('tambah_pengolahan.pengolahan');
+    Route::post('tambah_pengolahan', 'TpaController@pengolahan_store')->name('tambah_pengolahan.pengolahan_store');
 
+    Route::get('edit_pengolahan/{id}', 'TpaController@edit_pengolahan')->name('edit_pengolahan.edit_pengolahan');
+    Route::post('edit_pengolahan', 'TpaController@pengolahan_update')->name('edit_pengolahan.pengolahan_update');
     //tambah Tpa
     Route::get('tambah_tpa', 'TpaController@create')->name('tpa.tambah_tpa');
 

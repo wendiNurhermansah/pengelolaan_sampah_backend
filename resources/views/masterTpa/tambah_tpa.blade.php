@@ -43,6 +43,8 @@
                                 <div class="row">
                                       
                                     <div class="col-md-6">
+                                        <input type="text" class="form-control light fs-14" name="kode"
+                                                id="kode" value="" hidden>
                                         <div class="form-group mt-2 ml-3">
                                             <label for="pengelola" class="font-weight-bold fs-14">Pengelola<span
                                                     class="text-danger fs-12">*</span></label>
@@ -83,115 +85,16 @@
                                         <div class="form-group mt-2 ml-3">
                                             <label for="alamat" class="font-weight-bold fs-14">Alamat<span
                                                     class="text-danger fs-12">*</span></label>
-                                            <textarea name="alamat" id="alamat" class="form-control light" cols="5" rows="2"></textarea>
+                                            <textarea name="alamat" id="alamat" class="form-control light" cols="5" rows="2" required></textarea>
                                         </div>
-                                        
-           
-                                                    
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group mt-2 ml-3">
-                                            <label for="nama_fasilitas" class="font-weight-bold fs-14">Nama Fasilitas<span
-                                                    class="text-danger fs-12">*</span></label>
-                                            <input type="text" class="form-control light fs-14" name="nama_fasilitas" id="nama_fasilitas"
-                                                value="" required>
-                                        </div>
-                                        <div class="form-group mt-2 ml-3">
-                                            <label for="tahun" class="font-weight-bold fs-14">Tahun<span
-                                                    class="text-danger fs-12">*</span></label>
-                                            <input type="text" class="form-control light fs-14" name="tahun" id="datepicker"
-                                                value="" required>
-                                        </div>
-                                        <div class="form-group mt-2 ml-3">
-                                            <label for="id_jenis_tpa" class="font-weight-bold fs-14">Jenis TPA<span class="text-danger fs-12">*</span></label>
-                                            <select class="select2 form-control light" name="id_jenis_tpa" id="id_jenis_tpa" autocomplete="off">
-                                                <option value="">Pilih</option>
-                                                @foreach($jenis_tpa as $i)
-                                                <option value="{{$i->id}}">{{$i->nama}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="form-group mt-2 ml-3">
-                                            <label for="id_status_tpa" class="font-weight-bold fs-14">Status TPA<span class="text-danger fs-12">*</span></label>
-                                            <select class="select2 form-control light" name="id_status_tpa" id="id_status_tpa" autocomplete="off">
-                                                <option value="">Pilih</option>
-                                                @foreach($status_tpa as $i)
-                                                <option value="{{$i->id}}">{{$i->nama}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="form-group mt-2 ml-3">
-                                            <label for="sampah_masuk" class="font-weight-bold fs-14">Sampah Masuk (thn/ton)<span
-                                                    class="text-danger fs-12"></span></label>
-                                            <input type="text" class="form-control light fs-14" onkeypress="return hanyaAngka(event)" name="sampah_masuk" id="sampah_masuk"
-                                                value="" required>
-                                        </div>
-                                        <div class="form-group mt-2 ml-3">
-                                            <label for="sampah_landfil" class="font-weight-bold fs-14">Sampah Masuk Landfil (thn/ton)<span
-                                                    class="text-danger fs-12"></span></label>
-                                            <input type="text" class="form-control light fs-14" onkeypress="return hanyaAngka(event)" name="sampah_landfil" id="sampah_landfil"
-                                                value="" required>
-                                        </div>
-                                        
 
-           
-                                                    
-                                    </div>
-                                </div>
-                                <!-- Data Sampah Terkelola -->
-                                <div class="mt-3">
-                                    <h6><b>Data Sampah Terkelola :</b> </h6>
-                                </div>
-                                <div class="row mt-3">
-                                    <div class="col-md-6">
-                                        <div class="form-group mt-2 ml-3">
-                                            <label for="sampah_organik" class="font-weight-bold fs-14">Sampah Organik terolah (ton/tahun)<span
-                                                        class="text-danger fs-12"></span></label>
-                                             <input type="text" class="form-control light fs-14" onkeypress="return hanyaAngka(event)" name="sampah_organik" id="sampah_organik"
-                                                    value="">
-                                        </div>
-                                        <div class="form-group mt-2 ml-3">
-                                            <label for="sampah_an_organik" class="font-weight-bold fs-14">Sampah An-Organik terolah (ton/tahun)<span
-                                                    class="text-danger fs-12"></span></label>
-                                            <input type="text" class="form-control light fs-14" onkeypress="return hanyaAngka(event)" name="sampah_an_organik" id="sampah_an_organik"
-                                                value="">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group mt-2 ml-3">
-                                            <label for="recovery_pemulung" class="font-weight-bold fs-14">Recovery Pemulung (ton/tahun)<span
-                                                    class="text-danger fs-12"></span></label>
-                                            <input type="text" class="form-control light fs-14" onkeypress="return hanyaAngka(event)" name="recovery_pemulung" id="recovery_pemulung"
-                                                value="">
-                                        </div>
-                                        <div class="form-group mt-2 ml-3">
-                                            <label for="energy" class="font-weight-bold fs-14">Energi yang dihasilkan (MW)<span
-                                                    class="text-danger fs-12"></span></label>
-                                            <input type="text" class="form-control light fs-14" onkeypress="return hanyaAngka(event)" name="energy" id="energy"
-                                                value="">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Data Oprasional -->
-                                <div class="mt-3">
-                                    <h6><b>Data Oprasional :</b> </h6>
-                                </div>
-                                <div class="row mt-3">
-                                    <div class="col-md-6">
                                         <div class="form-group mt-2 ml-3">
                                             <label for="awal_beroprasi " class="font-weight-bold fs-14">Awal Operasi<span
-                                                    class="text-danger fs-12"></span></label>
+                                                    class="text-danger fs-12">*</span></label>
                                                     <input type="date" class="form-control light fs-14" name="awal_beroprasi" id="awal_beroprasi"
-                                                value="">
+                                                value="" required>
                                         </div>
-                                        <div class="form-group mt-2 ml-3">
-                                            <label for="luas" class="font-weight-bold fs-14">Luas (m<sup>2</sup>)<span
-                                                    class="text-danger fs-12"></span></label>
-                                            <input type="text" class="form-control light fs-14" onkeypress="return hanyaAngka(event)" name="luas" id="luas"
-                                                value="">
-                                            <span style="font-size:10px;">*contoh : 1000</span>
-                                        </div>
+                                        
                                         <div class="form-group mt-2 ml-3">
                                             <label for="luas_landfil_aktif" class="font-weight-bold fs-14">Luas Landfill Aktif (m<sup>2</sup>)<span
                                                     class="text-danger fs-12"></span></label>
@@ -213,28 +116,9 @@
                                                 value="">
                                         </div>
                                         <div class="form-group mt-2 ml-3">
-                                            <label for="pencatatan" class="font-weight-bold fs-14">Pencatatan<span
-                                                    class="text-danger fs-12"></span></label>
-                                            <textarea name="pencatatan" id="pencatatan" class="form-control light" cols="5" rows="2"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group mt-2 ml-3">
                                             <label for="jumlah_sumur_pantau" class="font-weight-bold fs-14">Jumlah Sumur Pantau<span
                                                     class="text-danger fs-12"></span></label>
                                             <input type="text" class="form-control light fs-14" onkeypress="return hanyaAngka(event)" name="jumlah_sumur_pantau" id="jumlah_sumur_pantau"
-                                                value="">
-                                        </div>
-                                        <div class="form-group mt-2 ml-3">
-                                            <label for="ipl" class="font-weight-bold fs-14">IPL<span
-                                                    class="text-danger fs-12"></span></label>
-                                            <input type="text" class="form-control light fs-14" name="ipl" id="ipl"
-                                                value="">
-                                        </div>
-                                        <div class="form-group mt-2 ml-3">
-                                            <label for="uji_lindi" class="font-weight-bold fs-14">Uji Lindi (dalam 1 tahun)<span
-                                                    class="text-danger fs-12"></span></label>
-                                            <input type="text" class="form-control light fs-14" onkeypress="return hanyaAngka(event)" name="uji_lindi" id="uji_lindi"
                                                 value="">
                                         </div>
                                         <div class="form-group mt-2 ml-3">
@@ -247,19 +131,158 @@
                                             </select>
                                         </div>
                                         <div class="form-group mt-2 ml-3">
+                                            <label for="pencatatan" class="font-weight-bold fs-14">Pencatatan<span
+                                                    class="text-danger fs-12"></span></label>
+                                            <textarea name="pencatatan" id="pencatatan" class="form-control light" cols="5" rows="2"></textarea>
+                                        </div>
+                                        
+           
+                                                    
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group mt-2 ml-3">
+                                            <label for="foto" class="font-weight-bold fs-14">Foto<span
+                                                    class="text-danger fs-12">*</span></label>
+                                            <input type="file" class="form-control light fs-14" name="foto" id="foto"
+                                                value="" required>
+                                        </div>
+                                        <div class="form-group mt-2 ml-3">
+                                            <label for="nama_fasilitas" class="font-weight-bold fs-14">Nama Fasilitas<span
+                                                    class="text-danger fs-12">*</span></label>
+                                            <input type="text" class="form-control light fs-14" name="nama_fasilitas" id="nama_fasilitas"
+                                                value="" required>
+                                        </div>
+                                        <div class="form-group mt-2 ml-3">
+                                            <label for="luas" class="font-weight-bold fs-14">Luas (m<sup>2</sup>)<span
+                                                    class="text-danger fs-12">*</span></label>
+                                            <input type="text" class="form-control light fs-14" onkeypress="return hanyaAngka(event)" name="luas" id="luas"
+                                                value="" required>
+                                            <span style="font-size:10px;">*contoh : 1000</span>
+                                        </div>
+                                        
+                                        <div class="form-group mt-2 ml-3">
+                                            <label for="id_jenis_tpa" class="font-weight-bold fs-14">Jenis TPA<span class="text-danger fs-12">*</span></label>
+                                            <select class="select2 form-control light" name="id_jenis_tpa" id="id_jenis_tpa" autocomplete="off">
+                                                <option value="">Pilih</option>
+                                                <option value="1">TPA SWASTA</option>
+                                                <option value="2">TPA PEMDA</option>
+                                                
+                                            </select>
+                                        </div>
+                                        <div class="form-group mt-2 ml-3">
+                                            <label for="id_status_tpa" class="font-weight-bold fs-14">Status TPA<span class="text-danger fs-12">*</span></label>
+                                            <select class="select2 form-control light" name="id_status_tpa" id="id_status_tpa" autocomplete="off">
+                                                <option value="">Pilih</option>
+                                                @foreach($status_tpa as $i)
+                                                <option value="{{$i->id}}">{{$i->nama}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        
+                                        
+                                        <div class="form-group mt-2 ml-3">
+                                            <label for="ipl" class="font-weight-bold fs-14">IPL<span
+                                                    class="text-danger fs-12"></span></label>
+                                            <input type="text" class="form-control light fs-14" name="ipl" id="ipl"
+                                                value="">
+                                        </div>
+                                        <div class="form-group mt-2 ml-3">
+                                            <label for="uji_lindi" class="font-weight-bold fs-14">Uji Lindi (dalam 1 tahun)<span
+                                                    class="text-danger fs-12"></span></label>
+                                            <input type="text" class="form-control light fs-14" onkeypress="return hanyaAngka(event)" name="uji_lindi" id="uji_lindi"
+                                                value="">
+                                        </div>
+                                        
+                                        <div class="form-group mt-2 ml-3">
                                             <label for="gas_metana" class="font-weight-bold fs-14">Pemanfaatan gas Metana<span
                                                     class="text-danger fs-12"></span></label>
                                             <input type="text" class="form-control light fs-14" name="gas_metana" id="gas_metana"
                                                 value="">
                                         </div>
                                         <div class="form-group mt-2 ml-3">
-                                            <label for="jumlah_kk" class="font-weight-bold fs-14">Jumlah KK yang memanfaatkan gas Metana<span
+                                            <label for="jumlah_kk" class="font-weight-bold fs-14">Jumlah KK<span
                                                     class="text-danger fs-12"></span></label>
                                             <input type="text" class="form-control light fs-14" onkeypress="return hanyaAngka(event)" name="jumlah_kk" id="jumlah_kk"
                                                 value="">
                                         </div>
+                                        <div class="form-group mt-2 ml-3">
+                                            <label for="sampah_masuk" class="font-weight-bold fs-14">Sampah Masuk (ton)<span
+                                                    class="text-danger fs-12">*</span></label>
+                                            <input type="text" class="form-control light fs-14" onkeypress="return hanyaAngka(event)" name="sampah_masuk" id="sampah_masuk"
+                                                value="" required>
+                                        </div>
+                                        <div class="form-group mt-2 ml-3">
+                                            <label for="sampah_landfil" class="font-weight-bold fs-14">Sampah Masuk Landfil (ton)<span
+                                                    class="text-danger fs-12"></span></label>
+                                            <input type="text" class="form-control light fs-14" onkeypress="return hanyaAngka(event)" name="sampah_landfil" id="sampah_landfil"
+                                                value="">
+                                        </div>
+                                        <div class="form-group mt-2 ml-3">
+                                            <label for="kordinat" class="font-weight-bold fs-14">Kordinat<span
+                                                    class="text-danger fs-12">*</span></label>
+                                            <textarea name="kordinat" id="kordinat" class="form-control light" cols="5" rows="2" required></textarea>
+                                        </div>
+                                        
+                                        
+
+           
+                                                    
                                     </div>
                                 </div>
+                                <!-- Data Sampah Terkelola -->
+                                <!-- <div class="mt-3">
+                                    <h6><b>Data Sampah Terkelola :</b> </h6>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-md-6">
+                                        <div class="form-group mt-2 ml-3">
+                                            <label for="sampah_masuk" class="font-weight-bold fs-14">Sampah Masuk (thn/ton)<span
+                                                    class="text-danger fs-12"></span></label>
+                                            <input type="text" class="form-control light fs-14" onkeypress="return hanyaAngka(event)" name="sampah_masuk" id="sampah_masuk"
+                                                value="" required>
+                                        </div>
+                                        <div class="form-group mt-2 ml-3">
+                                            <label for="sampah_landfil" class="font-weight-bold fs-14">Sampah Masuk Landfil (thn/ton)<span
+                                                    class="text-danger fs-12"></span></label>
+                                            <input type="text" class="form-control light fs-14" onkeypress="return hanyaAngka(event)" name="sampah_landfil" id="sampah_landfil"
+                                                value="" required>
+                                        </div>
+                                        <div class="form-group mt-2 ml-3">
+                                            <label for="sampah_organik" class="font-weight-bold fs-14">Sampah Organik terolah (ton/tahun)<span
+                                                        class="text-danger fs-12"></span></label>
+                                             <input type="text" class="form-control light fs-14" onkeypress="return hanyaAngka(event)" name="sampah_organik" id="sampah_organik"
+                                                    value="">
+                                        </div>
+                                        <div class="form-group mt-2 ml-3">
+                                            <label for="sampah_an_organik" class="font-weight-bold fs-14">Sampah An-Organik terolah (ton/tahun)<span
+                                                    class="text-danger fs-12"></span></label>
+                                            <input type="text" class="form-control light fs-14" onkeypress="return hanyaAngka(event)" name="sampah_an_organik" id="sampah_an_organik"
+                                                value="">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group mt-2 ml-3">
+                                            <label for="tahun" class="font-weight-bold fs-14">Tahun<span
+                                                    class="text-danger fs-12">*</span></label>
+                                            <input type="text" class="form-control light fs-14" name="tahun" id="datepicker"
+                                                value="" required>
+                                        </div>
+                                        <div class="form-group mt-2 ml-3">
+                                            <label for="recovery_pemulung" class="font-weight-bold fs-14">Recovery Pemulung (ton/tahun)<span
+                                                    class="text-danger fs-12"></span></label>
+                                            <input type="text" class="form-control light fs-14" onkeypress="return hanyaAngka(event)" name="recovery_pemulung" id="recovery_pemulung"
+                                                value="">
+                                        </div>
+                                        <div class="form-group mt-2 ml-3">
+                                            <label for="energy" class="font-weight-bold fs-14">Energi yang dihasilkan (MW)<span
+                                                    class="text-danger fs-12"></span></label>
+                                            <input type="text" class="form-control light fs-14" onkeypress="return hanyaAngka(event)" name="energy" id="energy"
+                                                value="">
+                                        </div>
+                                    </div>
+                                </div> -->
+
+                               
                                 <div style="" class="ml-3 mt-3">
 
                                     <button type="submit" class="btn btn-primary btn-sm" id="action"><i

@@ -29,14 +29,14 @@
                             <table id="dataTable" class="table table-striped table-bordered" style="width:100%">
                                 <thead>
                                     <th width="30">No</th>
-                                    <th>Tahun</th>
+                                    <th>Kode</th>
                                     <th>Pengelola</th>
                                     <th>Alamat</th>
                                     <th>Nama Fasilitas</th>
                                     <th>Jenis</th>
                                     <th>Status</th>
-                                    <th>Sampah Masuk (ton/thn)</th>
-                                    <th>Sampah Masuk (ton/thn)</th>
+                                    <th>Luas (m<sup>2</sup>)</th>
+                                    <th>Sampah Masuk (Ton)</th>
                                     <th width="60">Aksi</th>
                                 </thead>
                                 <tbody></tbody>
@@ -66,14 +66,14 @@
             },
             columns: [
                 {data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false, align: 'center', className: 'text-center'},
-                {data: 'tahun', name: 'tahun',className: 'text-center'},
+                {data: 'kode', name: 'kode',className: 'text-center'},
                 {data: 'pengelola', name: 'pengelola'},
                 {data: 'alamat', name: 'alamat'},
                 {data: 'nama_fasilitas', name: 'nama_fasilitas'},
                 {data: 'id_jenis_tpa', name: 'id_jenis_tpa', className: 'text-center'},
                 {data: 'id_status_tpa', name: 'id_status_tpa', className: 'text-center'},
-                {data: 'sampah_masuk', name: 'sampah_masuk',className: 'text-center'},
-                {data: 'sampah_landfil', name: 'sampah_landfil', className: 'text-center'},
+                {data: 'luas', name: 'luas', className: 'text-center'},
+                {data: 'sampah_masuk', name: 'sampah_masuk', className: 'text-center'},
                 {data: 'action', name: 'action', orderable: false, searchable: false, className: 'text-center'}
             ]
         });

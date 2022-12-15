@@ -122,6 +122,10 @@ return [
     'key' => env('APP_KEY'),
 
     'cipher' => 'AES-256-CBC',
+    
+    // SFTP
+    'sftp_root' => env('SFTP_ROOT'),
+    'sftp_src' => env('SFTP_SRC'),
 
     /*
     |--------------------------------------------------------------------------

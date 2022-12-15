@@ -42,7 +42,12 @@ class TpaController extends Controller
             })
 
             ->editColumn('id_jenis_tpa', function($p){
-                return $p->jenis->nama;
+                if ($p->id_jenis_tpa == 1) {
+                    return "TPA SWASTA";
+                } else {
+                    return "TPA PEMDA";
+                }
+                
             })
 
             ->editColumn('id_status_tpa', function($p){
@@ -54,13 +59,15 @@ class TpaController extends Controller
                 return $p->alamat.','.$p->kelurahan->n_kelurahan.','.$p->kecamatan->n_kecamatan.','.$p->kabupaten->n_kabupaten.','.$p->provinsi->n_provinsi
                 ;
             })
+            ->editColumn('luas', function($p){
+                return number_format($p->luas, 2, '.', ',');
+            })
+
             ->editColumn('sampah_masuk', function($p){
                 return number_format($p->sampah_masuk, 2, '.', ',');
             })
 
-            ->editColumn('sampah_landfil', function($p){
-                return number_format($p->sampah_landfil, 2, '.', ',');
-            })
+            
 
 
             ->addIndexColumn()
@@ -119,16 +126,38 @@ class TpaController extends Controller
             'id_kelurahan' => 'required',
             'id_provinsi' => 'required',
             'id_kecamatan' => 'required',
-            'tahun' => 'required',
             'sampah_masuk' => 'required',
-            'sampah_landfil' => 'required',
             'pengelola' => 'required',
+            'luas' => 'required',
+            'awal_beroprasi' => 'required'
         
         ]);
+
+        //save foto
+        if($request->foto != null){
+            $image = $request->file('foto');
+            $nameFoto = rand() . '.' . $image->getClientOriginalExtension();
+            $image->storeAs('gambar_tpa', $nameFoto, 'sftp', 'public');
+        }
+
+        //kode urut
+        $data_tpa = Tpa::all()->max('kode');
+        // $kode_terbesar = $data_tpa->kode;
+        $urutan = substr($data_tpa, -3, 3);
+        $urutan++;
+        $no_urut =  sprintf("%04s", $urutan);
+
+        // dd('urutan='.$no_urut);
+        $id_jenis = sprintf("%02s", $request->id_jenis_tpa);
+        // dd($id_jenis)
+
+         $kode = "$id_jenis$request->id_provinsi$request->id_kabupaten$request->id_kecamatan$request->kelurahan$no_urut";
         
+        // dd($kode);
         //tpa
         $tpa = New Tpa();
         $tpa->nama_fasilitas = $request->nama_fasilitas;
+        $tpa->foto = $nameFoto;
         $tpa->id_jenis_tpa = $request->id_jenis_tpa; 
         $tpa->id_status_tpa = $request->id_status_tpa; 
         $tpa->alamat = $request->alamat; 
@@ -140,33 +169,37 @@ class TpaController extends Controller
         $tpa->sampah_masuk = $request->sampah_masuk; 
         $tpa->sampah_landfil = $request->sampah_landfil; 
         $tpa->pengelola = $request->pengelola; 
+        $tpa->awal_beroprasi = $request->awal_beroprasi;
+        $tpa->luas = $request->luas;
+        $tpa->luas_landfil_aktif = $request->luas_landfil_aktif;
+        $tpa->pencatatan = $request->pencatatan;
+        $tpa->jembatan_timbang = $request->jembatan_timbang;
+        $tpa->penutupan_sampah_aktif = $request->penutupan_sampah_aktif;
+        $tpa->jumlah_sumur_pantau = $request->jumlah_sumur_pantau;
+        $tpa->ipl = $request->ipl;
+        $tpa->uji_lindi = $request->uji_lindi;
+        $tpa->drainase = $request->drainase;
+        $tpa->gas_metana = $request->gas_metana;
+        $tpa->jumlah_kk = $request->jumlah_kk;
+        $tpa->kordinat = $request->kordinat;
+        $tpa->kode = $kode;
         $tpa->save();
 
-        //data sampah terkelola
-        $terkelola = New Sampah_terkelola();
-        $terkelola->id_tpa = $tpa->id;
-        $terkelola->sampah_organik = $request->sampah_organik;
-        $terkelola->sampah_an_organik = $request->sampah_an_organik;
-        $terkelola->recovery_pemulung = $request->recovery_pemulung;
-        $terkelola->energy = $request->energy;
-        $terkelola->save();
+        
 
-        //data Oprasional
-        $oprational = New Data_oprasional_tpa();
-        $oprational->id_tpa = $tpa->id;
-        $oprational->awal_beroprasi = $request->awal_beroprasi;
-        $oprational->luas = $request->luas;
-        $oprational->luas_landfil_aktif = $request->luas_landfil_aktif;
-        $oprational->pencatatan = $request->pencatatan;
-        $oprational->jembatan_timbang = $request->jembatan_timbang;
-        $oprational->penutupan_sampah_aktif = $request->penutupan_sampah_aktif;
-        $oprational->jumlah_sumur_pantau = $request->jumlah_sumur_pantau;
-        $oprational->ipl = $request->ipl;
-        $oprational->uji_lindi = $request->uji_lindi;
-        $oprational->drainase = $request->drainase;
-        $oprational->gas_metana = $request->gas_metana;
-        $oprational->jumlah_kk = $request->jumlah_kk;
-        $oprational->save();
+        // //data sampah terkelola
+        // $terkelola = New Sampah_terkelola();
+        // $terkelola->id_tpa = $tpa->id;
+        // $terkelola->sampah_organik = $request->sampah_organik;
+        // $terkelola->sampah_an_organik = $request->sampah_an_organik;
+        // $terkelola->recovery_pemulung = $request->recovery_pemulung;
+        // $terkelola->energy = $request->energy;
+        // $terkelola->save();
+
+       
+       
+        
+        
 
         // dd($oprational);
 
@@ -177,6 +210,85 @@ class TpaController extends Controller
         
     }
 
+    public function pengolahan(Request $request, $id){
+        
+        $pengolahan = Tpa::find($id);
+
+        return view('masterTpa.pengolahan', compact('pengolahan'));
+
+
+    }
+
+    public function pengolahan_store(Request $request){
+
+        
+        $request->validate([
+            'sampah_organik' => 'required',
+            'sampah_an_organik' => 'required',
+            'recovery_pemulung' => 'required',
+            'energy' => 'required',
+            'tahun' => 'required'
+
+        ]);
+
+        $terkelola = New Sampah_terkelola();
+        $terkelola->id_tpa = $request->id;
+        $terkelola->sampah_organik = $request->sampah_organik;
+        $terkelola->sampah_an_organik = $request->sampah_an_organik;
+        $terkelola->recovery_pemulung = $request->recovery_pemulung;
+        $terkelola->energy = $request->energy;
+        $terkelola->tahun = $request->tahun;
+        $terkelola->save();
+
+        
+
+        return response()->json([
+            'message' => 'Data Berhasil di Tambahkan!'
+        ]);
+
+
+    }
+
+
+    public function edit_pengolahan($id){
+        // dd($id)
+        $terkelola = Sampah_terkelola::where('id_tpa', $id)->first();
+        // dd($terkelola);
+
+        return view('masterTpa.edit_pengolahan', compact('terkelola'));
+    }
+
+    public function pengolahan_update(Request $request){
+
+        $request->validate([
+            'sampah_organik' => 'required',
+            'sampah_an_organik' => 'required',
+            'recovery_pemulung' => 'required',
+            'energy' => 'required',
+            'tahun' => 'required'
+
+        ]);
+
+        $terkelola = Sampah_terkelola::where('id_tpa', $request->id_tpa)->first();
+
+        $terkelola->update([
+            
+            'sampah_organik' => $request->sampah_organik,
+            'sampah_an_organik' => $request->sampah_an_organik,
+            'recovery_pemulung' => $request->recovery_pemulung,
+            'energy' => $request->energy,
+            'tahun' => $request->tahun,
+
+        ]);
+
+        return response()->json([
+            'message' => 'Data Berhasil di Rubah!'
+        ]);
+       
+    }
+
+
+
     /**
      * Display the specified resource.
      *
@@ -185,8 +297,12 @@ class TpaController extends Controller
      */
     public function show($id)
     {
+        // dd($id);
         $tpa = Tpa::findOrFail($id);
+        
 
+        // dd($terkelola);
+// 
         return view ('masterTpa.detail', compact('tpa'));
 
 
@@ -233,12 +349,49 @@ class TpaController extends Controller
             'id_kelurahan' => 'required',
             'id_provinsi' => 'required',
             'id_kecamatan' => 'required',
-            'tahun' => 'required',
             'sampah_masuk' => 'required',
-            'sampah_landfil' => 'required',
             'pengelola' => 'required',
+            'luas' => 'required',
+            'awal_beroprasi' => 'required'
         
         ]);
+
+         //save foto
+         if($request->foto != null){
+            $image = $request->file('foto');
+            $nameFoto = rand() . '.' . $image->getClientOriginalExtension();
+            $image->storeAs('gambar_tpa', $nameFoto, 'sftp', 'public');
+
+            $tpa->update([
+                'nama_fasilitas' => $request->nama_fasilitas,
+                'foto' => $nameFoto,
+                'id_jenis_tpa' => $request->id_jenis_tpa, 
+                'id_status_tpa' => $request->id_status_tpa, 
+                'alamat' => $request->alamat, 
+                'id_kabupaten' => $request->id_kabupaten, 
+                'id_kelurahan' => $request->id_kelurahan, 
+                'id_provinsi' => $request->id_provinsi, 
+                'id_kecamatan' => $request->id_kecamatan, 
+                'tahun' => $request->tahun, 
+                'sampah_masuk' => $request->sampah_masuk, 
+                'sampah_landfil' => $request->sampah_landfil, 
+                'pengelola' => $request->pengelola, 
+                'awal_beroprasi' => $request->awal_beroprasi,
+                'luas' => $request->luas,
+                'luas_landfil_aktif' => $request->luas_landfil_aktif,
+                'pencatatan' => $request->pencatatan,
+                'jembatan_timbang' => $request->jembatan_timbang,
+                'penutupan_sampah_aktif' => $request->penutupan_sampah_aktif,
+                'jumlah_sumur_pantau' => $request->jumlah_sumur_pantau,
+                'ipl' => $request->ipl,
+                'uji_lindi' => $request->uji_lindi,
+                'drainase' => $request->drainase,
+                'gas_metana' => $request->gas_metana,
+                'jumlah_kk' => $request->jumlah_kk,
+                'kordinat' => $request->kordinat,
+                'kode' => $request->kode,
+            ]);
+        }
 
         $tpa->update([
             'nama_fasilitas' => $request->nama_fasilitas,
@@ -253,22 +406,6 @@ class TpaController extends Controller
             'sampah_masuk' => $request->sampah_masuk, 
             'sampah_landfil' => $request->sampah_landfil, 
             'pengelola' => $request->pengelola, 
-
-        ]);
-
-        $terkelola = Sampah_terkelola::where('id_tpa', $id);
-        $terkelola->update([
-           'id_tpa' => $tpa->id,
-           'sampah_organik' => $request->sampah_organik,
-           'sampah_an_organik' => $request->sampah_an_organik,
-           'recovery_pemulung' => $request->recovery_pemulung,
-           'energy' => $request->energy,
-
-        ]);
-
-        $oprational = Data_oprasional_tpa::where('id_tpa', $id);
-        $oprational->update([
-            'id_tpa' => $tpa->id,
             'awal_beroprasi' => $request->awal_beroprasi,
             'luas' => $request->luas,
             'luas_landfil_aktif' => $request->luas_landfil_aktif,
@@ -281,7 +418,16 @@ class TpaController extends Controller
             'drainase' => $request->drainase,
             'gas_metana' => $request->gas_metana,
             'jumlah_kk' => $request->jumlah_kk,
+            'kordinat' => $request->kordinat,
+            'kode' => $request->kode,
         ]);
+
+
+
+
+        
+
+
 
         return response()->json([
             'message' => 'Data Berhasil Dirubah!'
@@ -298,8 +444,6 @@ class TpaController extends Controller
     public function destroy($id)
     {
         Tpa::destroy($id);
-
-        Data_oprasional_tpa::where('id_tpa', $id)->delete();
         Sampah_terkelola::where('id_tpa', $id)->delete();
 
         return response()->json([
