@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Kabupaten;
 use App\Models\Kecamatan;
+use App\Models\Kelola_tps3r;
 use App\Models\Kelurahan;
 use App\Models\Provinsi;
 use App\Models\Tps3r;
@@ -49,7 +50,7 @@ class Tps3rController extends Controller
             })
 
             ->editColumn('sumber_dana', function($p){
-                if ($p->id_status == 1) {
+                if ($p->sumber_dana == 1) {
                    return "APBD";
                 } else {
                     return "APBN";
@@ -183,7 +184,7 @@ class Tps3rController extends Controller
      */
     public function show($id)
     {
-        $tps = Tps3r::findOrFail($id)->get();
+        $tps = Tps3r::findOrFail($id);
 
         return view('masterTps3r.detail', compact('tps'));
     }
@@ -304,9 +305,96 @@ class Tps3rController extends Controller
     {
 
         Tps3r::destroy($id);
+        Kelola_tps3r::where('id_tps3r', $id)->delete();
 
         return response()->json([
             'message' => 'Data berhasil di hapus!'
         ]);
+    }
+
+
+    public function kelola($id){
+
+        $tps = Tps3r::findOrfail($id);
+        
+
+        return view('masterTps3r.kelola_tps3r', compact('tps'));
+
+    }
+
+    public function kelola_store(Request $request){
+
+        $request->validate([
+            'sampah_masuk'=>'required',
+            'tahun'=>'required',
+            'sampah_landfil'=>'required',
+            'pakan_ternak'=>'required',
+            'kompos'=>'required',
+            'sumber_energi'=>'required',
+            'up_cycle'=>'required',
+            'daur_ulang'=>'required',
+        ]);
+
+        $kelola = new Kelola_tps3r();
+        $kelola->id_tps3r = $request->id_tps3r;
+        $kelola->tahun = $request->tahun;
+        $kelola->sampah_masuk = $request->sampah_masuk;
+        $kelola->sampah_landfil = $request->sampah_landfil;
+        $kelola->pakan_ternak = $request->pakan_ternak;
+        $kelola->kompos = $request->kompos;
+        $kelola->sumber_energi = $request->sumber_energi;
+        $kelola->daur_ulang = $request->daur_ulang;
+        $kelola->up_cycle = $request->up_cycle;
+        $kelola->save();
+
+        return response()->json([
+            'message' => 'Data Berhasil di Tambahkan!'
+        ]);
+
+
+    }
+
+    public function kelola_edit($id){
+        $tps = Tps3r::find($id);
+
+        return view('masterTps3r.kelola_edit', compact('tps'));
+            
+    }
+
+    public function kelola_update(Request $request){
+
+        $tps = Kelola_tps3r::where('id_tps3r', $request->id_tps3r)->first();
+
+        $request->validate([
+            'sampah_masuk'=>'required',
+            'tahun'=>'required',
+            'sampah_landfil'=>'required',
+            'pakan_ternak'=>'required',
+            'kompos'=>'required',
+            'sumber_energi'=>'required',
+            'up_cycle'=>'required',
+            'daur_ulang'=>'required',
+        ]);
+
+        $tps->update([
+            'sampah_masuk'=>$request->sampah_masuk,
+            'tahun'=>$request->tahun,
+            'sampah_landfil'=>$request->sampah_landfil,
+            'pakan_ternak'=>$request->pakan_ternak,
+            'kompos'=>$request->kompos,
+            'sumber_energi'=>$request->sumber_energi,
+            'up_cycle'=>$request->up_cycle,
+            'daur_ulang'=>$request->daur_ulang,
+            'id_tps3r'=>$request->id_tps3r,
+
+        ]);
+
+        return response()->json([
+            'message' => 'Data Berhasil di Rubah!',
+        ]);
+
+        
+
+            
     }
 }

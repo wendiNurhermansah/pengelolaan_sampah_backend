@@ -94,6 +94,10 @@ Route::prefix('MasterTps3r')->namespace('masterTps3r')->name('MasterTps3r.')->gr
     //tps3r
     Route::resource('tps3r', 'Tps3rController');
     Route::post('tps3r/api', 'Tps3rController@api')->name('tps3r.api');
+    Route::get('tps3r/kelola_tps3r/{id}', 'Tps3rController@kelola')->name('tps3r.kelola_tps3r');
+    Route::post('tps3r/kelola_store', 'Tps3rController@kelola_store')->name('tps3r.kelola_store');
+    Route::get('tps3r/kelola_edit/{id}', 'Tps3rController@kelola_edit')->name('tps3r.kelola_edit');
+    Route::post('tps3r/kelola_update', 'Tps3rController@kelola_update')->name('tps3r.kelola_update');
 
     
 

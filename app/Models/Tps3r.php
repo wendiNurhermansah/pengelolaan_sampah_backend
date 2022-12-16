@@ -35,4 +35,9 @@ class Tps3r extends Model
     {
         return $this->belongsTo(Provinsi::class, 'id_provinsi');
     }
+
+    public function kelola()
+    {
+        return $this->belongsTo(Kelola_tps3r::class, 'id', 'id_tps3r');
+    }
 }

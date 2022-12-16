@@ -31,6 +31,51 @@
             <div class="col-md-12">
                 <div class="card no-b">
                     <div class="card-body">
+                    <div id="load" class="loader" style="display: none">
+                            <div class="plane-container">
+                                <div class="preloader-wrapper small active">
+                                    <div class="spinner-layer spinner-blue">
+                                        <div class="circle-clipper left">
+                                            <div class="circle"></div>
+                                        </div><div class="gap-patch">
+                                        <div class="circle"></div>
+                                    </div><div class="circle-clipper right">
+                                        <div class="circle"></div>
+                                    </div>
+                                    </div>
+
+                                    <div class="spinner-layer spinner-red">
+                                        <div class="circle-clipper left">
+                                            <div class="circle"></div>
+                                        </div><div class="gap-patch">
+                                        <div class="circle"></div>
+                                    </div><div class="circle-clipper right">
+                                        <div class="circle"></div>
+                                    </div>
+                                    </div>
+
+                                    <div class="spinner-layer spinner-yellow">
+                                        <div class="circle-clipper left">
+                                            <div class="circle"></div>
+                                        </div><div class="gap-patch">
+                                        <div class="circle"></div>
+                                    </div><div class="circle-clipper right">
+                                        <div class="circle"></div>
+                                    </div>
+                                    </div>
+
+                                    <div class="spinner-layer spinner-green">
+                                        <div class="circle-clipper left">
+                                            <div class="circle"></div>
+                                        </div><div class="gap-patch">
+                                        <div class="circle"></div>
+                                    </div><div class="circle-clipper right">
+                                        <div class="circle"></div>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div id="alert"></div>
                             <form class="needs-validation" id="form" method="POST"  enctype="multipart/form-data" novalidate>
                                 {{ method_field('POST') }}
@@ -229,58 +274,7 @@
                                                     
                                     </div>
                                 </div>
-                                <!-- Data Sampah Terkelola -->
-                                <!-- <div class="mt-3">
-                                    <h6><b>Data Sampah Terkelola :</b> </h6>
-                                </div>
-                                <div class="row mt-3">
-                                    <div class="col-md-6">
-                                        <div class="form-group mt-2 ml-3">
-                                            <label for="sampah_masuk" class="font-weight-bold fs-14">Sampah Masuk (thn/ton)<span
-                                                    class="text-danger fs-12"></span></label>
-                                            <input type="text" class="form-control light fs-14" onkeypress="return hanyaAngka(event)" name="sampah_masuk" id="sampah_masuk"
-                                                value="" required>
-                                        </div>
-                                        <div class="form-group mt-2 ml-3">
-                                            <label for="sampah_landfil" class="font-weight-bold fs-14">Sampah Masuk Landfil (thn/ton)<span
-                                                    class="text-danger fs-12"></span></label>
-                                            <input type="text" class="form-control light fs-14" onkeypress="return hanyaAngka(event)" name="sampah_landfil" id="sampah_landfil"
-                                                value="" required>
-                                        </div>
-                                        <div class="form-group mt-2 ml-3">
-                                            <label for="sampah_organik" class="font-weight-bold fs-14">Sampah Organik terolah (ton/tahun)<span
-                                                        class="text-danger fs-12"></span></label>
-                                             <input type="text" class="form-control light fs-14" onkeypress="return hanyaAngka(event)" name="sampah_organik" id="sampah_organik"
-                                                    value="">
-                                        </div>
-                                        <div class="form-group mt-2 ml-3">
-                                            <label for="sampah_an_organik" class="font-weight-bold fs-14">Sampah An-Organik terolah (ton/tahun)<span
-                                                    class="text-danger fs-12"></span></label>
-                                            <input type="text" class="form-control light fs-14" onkeypress="return hanyaAngka(event)" name="sampah_an_organik" id="sampah_an_organik"
-                                                value="">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group mt-2 ml-3">
-                                            <label for="tahun" class="font-weight-bold fs-14">Tahun<span
-                                                    class="text-danger fs-12">*</span></label>
-                                            <input type="text" class="form-control light fs-14" name="tahun" id="datepicker"
-                                                value="" required>
-                                        </div>
-                                        <div class="form-group mt-2 ml-3">
-                                            <label for="recovery_pemulung" class="font-weight-bold fs-14">Recovery Pemulung (ton/tahun)<span
-                                                    class="text-danger fs-12"></span></label>
-                                            <input type="text" class="form-control light fs-14" onkeypress="return hanyaAngka(event)" name="recovery_pemulung" id="recovery_pemulung"
-                                                value="">
-                                        </div>
-                                        <div class="form-group mt-2 ml-3">
-                                            <label for="energy" class="font-weight-bold fs-14">Energi yang dihasilkan (MW)<span
-                                                    class="text-danger fs-12"></span></label>
-                                            <input type="text" class="form-control light fs-14" onkeypress="return hanyaAngka(event)" name="energy" id="energy"
-                                                value="">
-                                        </div>
-                                    </div>
-                                </div> -->
+                                
 
                                
                                 <div style="" class="ml-3 mt-3">
