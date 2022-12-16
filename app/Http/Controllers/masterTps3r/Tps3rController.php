@@ -135,6 +135,21 @@ class Tps3rController extends Controller
             $image->storeAs('gambar_tps3r', $nameFoto, 'sftp', 'public');
         }
 
+        //kode
+        //kode urut
+        $data_tps3r = Tps3r::all()->max('kode');
+        // $kode_terbesar = $data_tpa->kode;
+        $urutan = substr($data_tps3r, -3, 3);
+        $urutan++;
+        $no_urut =  sprintf("%04s", $urutan);
+
+        // dd('urutan='.$no_urut);
+        $id_status = sprintf("%02s", $request->id_status);
+        // dd($id_jenis)
+
+         $kode = "$id_status$request->id_kecamatan$no_urut";
+        //  dd($kode);
+
         $tps = new Tps3r();
         $tps->nama_fasilitas = $request->nama_fasilitas;
         $tps->foto = $nameFoto;
@@ -152,7 +167,7 @@ class Tps3rController extends Controller
         $tps->sumber_dana = $request->sumber_dana;
         $tps->keaktifan_tps = $request->keaktifan_tps;
         $tps->luas = $request->luas;
-
+        $tps->kode = $kode;
         $tps->save();
 
         return response()->json([
@@ -181,8 +196,12 @@ class Tps3rController extends Controller
      */
     public function edit($id)
     {
-        $tps = Tps3r::findOrFail($id)->get();
-        return view('masterTps3r.edit', compact('tps'));
+        $tps = Tps3r::findOrFail($id);
+        $provinsi = Provinsi::where('kode', 36)->get();
+        $kabupaten = Kabupaten::where('provinsi_id', 3)->get();
+        $kecamatan = Kecamatan::where('kabupaten_id', $tps->id_kabupaten)->get();
+        $kelurahan = Kelurahan::where('kecamatan_id', $tps->id_kecamatan)->get();
+        return view('masterTps3r.edit', compact('tps','provinsi', 'kabupaten', 'kecamatan', 'kelurahan'));
     }
 
     /**
@@ -194,7 +213,85 @@ class Tps3rController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'nama_fasilitas' => 'required',
+            'alamat' => 'required',
+            'id_kelurahan' => 'required',
+            'id_kecamatan' => 'required',
+            'id_kabupaten' => 'required',
+            'id_provinsi' => 'required',
+            'telepon' => 'required',
+            'kordinat' => 'required',
+            'pengurus' => 'required',
+            'operator' => 'required',
+            'jumlah_kk' => 'required',
+            'id_status' => 'required',
+            'sumber_dana' => 'required',
+            'keaktifan_tps' => 'required',
+            'luas' => 'required',
+        ]);
+
+        $tps = Tps3r::findOrFail($id);
+
+        if($request->foto != null){
+            $image = $request->file('foto');
+            $nameFoto = rand() . '.' . $image->getClientOriginalExtension();
+            $image->storeAs('gambar_tps3r', $nameFoto, 'sftp', 'public');
+
+            $tps->update([
+
+                'nama_fasilitas' => $request->nama_fasilitas,
+                'foto' => $nameFoto,
+                'alamat' => $request->alamat,
+                'id_kelurahan' => $request->id_kelurahan,
+                'id_kecamatan' => $request->id_kecamatan,
+                'id_kabupaten' => $request->id_kabupaten,
+                'id_provinsi' => $request->id_provinsi,
+                'telepon' => $request->telepon,
+                'kordinat' => $request->kordinat,
+                'pengurus' => $request->pengurus,
+                'operator' => $request->operator,
+                'jumlah_kk' => $request->jumlah_kk,
+                'id_status' => $request->id_status,
+                'sumber_dana' => $request->sumber_dana,
+                'keaktifan_tps' => $request->keaktifan_tps,
+                'luas' => $request->luas,
+                'kode' => $request->kode,
+        
+            ]);
+        }
+
+        
+
+        $tps->update([
+
+        'nama_fasilitas' => $request->nama_fasilitas,
+        'alamat' => $request->alamat,
+        'id_kelurahan' => $request->id_kelurahan,
+        'id_kecamatan' => $request->id_kecamatan,
+        'id_kabupaten' => $request->id_kabupaten,
+        'id_provinsi' => $request->id_provinsi,
+        'telepon' => $request->telepon,
+        'kordinat' => $request->kordinat,
+        'pengurus' => $request->pengurus,
+        'operator' => $request->operator,
+        'jumlah_kk' => $request->jumlah_kk,
+        'id_status' => $request->id_status,
+        'sumber_dana' => $request->sumber_dana,
+        'keaktifan_tps' => $request->keaktifan_tps,
+        'luas' => $request->luas,
+        'kode' => $request->kode,
+
+        ]);
+        
+      
+
+        return response()->json([
+            'message' => 'Data Berhasil di Rubah!'
+        ]);
+
+
+
     }
 
     /**

@@ -151,9 +151,9 @@ class TpaController extends Controller
         $id_jenis = sprintf("%02s", $request->id_jenis_tpa);
         // dd($id_jenis)
 
-         $kode = "$id_jenis$request->id_provinsi$request->id_kabupaten$request->id_kecamatan$request->kelurahan$no_urut";
+         $kode = "$id_jenis$request->id_kecamatan$no_urut";
         
-        // dd($kode);
+        
         //tpa
         $tpa = New Tpa();
         $tpa->nama_fasilitas = $request->nama_fasilitas;
