@@ -118,28 +118,50 @@
     
 
     @can('masterHasil_pengolahan')
-    <li class="header light"><strong>MASTER HASIL PENGOLAHAN SAMPAH</strong></li>
+
+    <li class="header light"><strong>MASTER JENIS PENGOLAHAN SAMPAH</strong></li>
     <li>
         <a href="{{route('MasterPengolahan.komposisi_sampah.index')}}"><i class="icon icon-leaf green-text s-18"></i>
-        <span>Komposisi Sampah</span>
+        <span>Jenis Komposisi Sampah</span>
         <i class="icon icon-angle-right s-18 pull-right"></i>
         </a>
     </li>
 
     <li>
         <a href="{{route('MasterPengolahan.sumber_sampah.index')}}"><i class="icon icon-filter orange-text s-18"></i>
-        <span>Sumber Sampah</span>
+        <span> Jenis Sumber Sampah</span>
+        <i class="icon icon-angle-right s-18 pull-right"></i>
+        </a>
+    </li>
+ 
+    @endcan
+
+    <li class="header light"><strong>MASTER DATA PENGOLAHAN SAMPAH</strong></li>
+    <li>
+        <a href="{{route('MasterDataPengolahan.timbulan_sampah.index')}}"><i class="icon icon-asterisk blue-text s-18"></i>
+        <span>Timbulan Sampah</span>
+        <i class="icon icon-angle-right s-18 pull-right"></i>
+        </a>
+    </li>
+    <li>
+        <a href="{{route('MasterPengolahan.komposisi_sampah.index')}}"><i class="icon icon-tags green-text s-18"></i>
+        <span>Komposisi Sampah</span>
         <i class="icon icon-angle-right s-18 pull-right"></i>
         </a>
     </li>
 
     <li>
-        <a href="#"><i class="icon icon-retweet blue-text s-18"></i>
-        <span>Hasil Pengolahan Sampah</span>
+        <a href="{{route('MasterPengolahan.sumber_sampah.index')}}"><i class="icon icon-pause orange-text s-18"></i>
+        <span>Sumber Sampah</span>
         <i class="icon icon-angle-right s-18 pull-right"></i>
         </a>
     </li>
-    @endcan
+
+      
+
+
+
+
 
 
 

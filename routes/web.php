@@ -125,6 +125,16 @@ Route::prefix('MasterPengolahan')->namespace('masterPengolahan')->name('MasterPe
 
 });
 
+Route::prefix('MasterDataPengolahan')->namespace('masterDataPengolahan')->name('MasterDataPengolahan.')->group(function(){
+    //timbulan Sampah
+    Route::resource('timbulan_sampah', 'TimbulanSampahController');
+    Route::post('timbulan_sampah/api', 'TimbulanSampahController@api')->name('timbulan_sampah.api');
+
+   
+    
+
+});
+
 
 
 
