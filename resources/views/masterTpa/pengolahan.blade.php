@@ -42,9 +42,15 @@
                                
                                 <div class="row mt-3">
                                     <div class="col-md-6">
-                                        <input type="text" class="form-control light fs-14"  name="id" id="id"
+                                        <input type="text" class="form-control light fs-14"  name="id_tpa" id="id_tpa"
                                                     value="{{$pengolahan->id}}" hidden>
                                         
+                                        <div class="form-group mt-2 ml-3">
+                                            <label for="sampah_masuk" class="font-weight-bold fs-14">Sampah Masuk<span
+                                                        class="text-danger fs-12">*</span></label>
+                                             <input type="text" class="form-control light fs-14" onkeypress="return hanyaAngka(event)" name="sampah_masuk" id="sampah_masuk"
+                                                    value="" required>
+                                        </div>
                                         <div class="form-group mt-2 ml-3">
                                             <label for="sampah_organik" class="font-weight-bold fs-14">Sampah Organik terolah<span
                                                         class="text-danger fs-12">*</span></label>
@@ -65,6 +71,12 @@
                                         </div>
                                     </div>
                                     <div class="col-md-6">
+                                        <div class="form-group mt-2 ml-3">
+                                            <label for="sampah_landfil" class="font-weight-bold fs-14">Sampah Landfil<span
+                                                        class="text-danger fs-12">*</span></label>
+                                             <input type="text" class="form-control light fs-14" onkeypress="return hanyaAngka(event)" name="sampah_landfil" id="sampah_landfil"
+                                                    value="" required>
+                                        </div>
                                         <div class="form-group mt-2 ml-3">
                                             <label for="tahun" class="font-weight-bold fs-14">Tahun<span
                                                     class="text-danger fs-12">*</span></label>

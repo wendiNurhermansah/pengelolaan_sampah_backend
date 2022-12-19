@@ -42,21 +42,24 @@
     <li class="header light"><strong>MASTER PENGELOLAAN SAMPAH</strong></li>
     @can('masterTpa')
     
-    <li class="treeview"><a href="#"><i class="icon icon-refresh orange-text s-18"></i>TPA<i
+    <!-- <li class="treeview"><a href="#"><i class="icon icon-refresh orange-text s-18"></i>TPA<i
                     class="icon icon-chevron-down s-10 mr-2 pull-right"></i></a>
         <ul class="treeview-menu">
-            <!-- <li><a href="{{route('MasterTpa.jenis_tpa.index')}}"><i class="icon icon-circle-o"></i><span>Jenis TPA</span> </a>
+            <li><a href="{{route('MasterTpa.jenis_tpa.index')}}"><i class="icon icon-circle-o"></i><span>Jenis TPA</span> </a>
             </li> -->
-            <li><a href="{{route('MasterTpa.status_tpa.index')}}"><i class="icon icon-circle-o"></i><span>Status TPA</span> </a>
+            <!-- <li><a href="{{route('MasterTpa.status_tpa.index')}}"><i class="icon icon-circle-o"></i><span>Status TPA</span> </a>
             </li>
             <li><a href="{{route('MasterTpa.tpa.index')}}"><i class="icon icon-circle-o"></i><span>TPA</span></a>
                 </li>
             </ul>
-    </li> 
+    </li>  --> 
 
-    
-   
-    
+    <li>
+        <a href="{{route('MasterTpa.tpa.index')}}"><i class="icon icon-refresh orange-text s-18"></i>
+        <span>TPA</span>
+        <i class="icon icon-angle-right s-18 pull-right"></i>
+        </a>
+    </li>
 
     @endcan 
 

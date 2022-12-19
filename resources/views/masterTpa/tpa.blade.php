@@ -9,7 +9,7 @@
             <div class="row p-t-b-10 ">
                 <div class="col">
                     <h4>
-                        <i class="icon icon-retweet amber-text s-18"></i>
+                        <i class="icon icon-archive amber-text s-18"></i>
                         TPA
                     </h4>
                 </div>
@@ -23,20 +23,19 @@
                 <div class="card no-b">
                     <div class="card-body">
                         <div class="mt-2 mb-3" style="float: right;">
-                            <a href="{{route('MasterTpa.tpa.tambah_tpa')}}" class="btn btn-primary btn-sm"> <i class="icon icon-plus white-text s-18"></i>Tambah TPA</a>
+                            <a href="{{route('MasterTpa.tpa.tambah_tpa')}}" class="btn btn-primary btn-sm"> <i class="icon icon-plus white-text s-18"></i>TPA</a>
                         </div>
                         <div class="table-responsive">
                             <table id="dataTable" class="table table-striped table-bordered" style="width:100%">
                                 <thead>
                                     <th width="30">No</th>
                                     <th>Kode</th>
-                                    <th>Pengelola</th>
-                                    <th>Alamat</th>
                                     <th>Nama Fasilitas</th>
+                                    <th>Alamat</th>
+                                    <th>Pengurus</th>
                                     <th>Jenis</th>
                                     <th>Status</th>
                                     <th>Luas (m<sup>2</sup>)</th>
-                                    <th>Sampah Masuk (Ton)</th>
                                     <th width="60">Aksi</th>
                                 </thead>
                                 <tbody></tbody>
@@ -67,13 +66,12 @@
             columns: [
                 {data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false, align: 'center', className: 'text-center'},
                 {data: 'kode', name: 'kode',className: 'text-center'},
-                {data: 'pengelola', name: 'pengelola'},
-                {data: 'alamat', name: 'alamat'},
                 {data: 'nama_fasilitas', name: 'nama_fasilitas'},
-                {data: 'id_jenis_tpa', name: 'id_jenis_tpa', className: 'text-center'},
-                {data: 'id_status_tpa', name: 'id_status_tpa', className: 'text-center'},
+                {data: 'alamat', name: 'alamat'},
+                {data: 'pengurus', name: 'pengurus'},
+                {data: 'id_jenis', name: 'id_jenis', className: 'text-center'},
+                {data: 'id_status', name: 'id_status', className: 'text-center'},
                 {data: 'luas', name: 'luas', className: 'text-center'},
-                {data: 'sampah_masuk', name: 'sampah_masuk', className: 'text-center'},
                 {data: 'action', name: 'action', orderable: false, searchable: false, className: 'text-center'}
             ]
         });

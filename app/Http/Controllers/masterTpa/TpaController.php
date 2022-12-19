@@ -30,51 +30,65 @@ class TpaController extends Controller
 
 
     public function api(){
-        $tpa = Tpa::orderBy('id', 'DESC')->get();
+        $tpa = Tpa::all();
         return DataTables::of($tpa)
         
 
-            ->addColumn('action', function ($p) {
-                return "
-                    <a href='". route('MasterTpa.tpa.show', $p->id) ."'  title='Detail'><i class='icon-eye mr-1'></i></a>
-                    <a href='". route('MasterTpa.tpa.edit', $p->id) ."'  title='Edit'><i class='icon-pencil mr-1'></i></a>
-                    <a href='#' onclick='remove(" . $p->id . ")' class='text-danger' title='Hapus'><i class='icon-remove'></i></a>";
-            })
+        ->addColumn('action', function ($p) {
+            return "
+                <a href='". route('MasterTpa.tpa.show', $p->id) ."'  title='Detail'><i class='icon-eye mr-1'></i></a>
+                <a href='". route('MasterTpa.tpa.edit', $p->id) ."'  title='Edit'><i class='icon-pencil mr-1'></i></a>
+                <a href='#' onclick='remove(" . $p->id . ")' class='text-danger' title='Hapus'><i class='icon-remove'></i></a>";
+        })
 
-            ->editColumn('id_jenis_tpa', function($p){
-                if ($p->id_jenis_tpa == 1) {
-                    return "TPA SWASTA";
-                } else {
-                    return "TPA PEMDA";
-                }
-                
-            })
-
-            ->editColumn('id_status_tpa', function($p){
-                return $p->status->nama;
-            })
-
-            ->editColumn('alamat', function ($p){
-                
-                return $p->alamat.','.$p->kelurahan->n_kelurahan.','.$p->kecamatan->n_kecamatan.','.$p->kabupaten->n_kabupaten.','.$p->provinsi->n_provinsi
-                ;
-            })
-            ->editColumn('luas', function($p){
-                return number_format($p->luas, 2, '.', ',');
-            })
-
-            ->editColumn('sampah_masuk', function($p){
-                return number_format($p->sampah_masuk, 2, '.', ',');
-            })
-
+        
+        
+        ->editColumn('id_status', function($p){
+            if ($p->id_status == 1) {
+               return "Fasum";
+            } else {
+                return "Pinjam Pakai";
+            }
             
+        })
+
+        ->editColumn('id_jenis', function($p){
+            if ($p->id_status == 1) {
+               return "TPA Swasta";
+            } else {
+                return "TPA Pemda";
+            }
+            
+        })
+
+        ->editColumn('sumber_dana', function($p){
+            if ($p->sumber_dana == 1) {
+               return "APBD";
+            } else {
+                return "APBN";
+            }
+            
+        })
+
+        ->editColumn('alamat', function ($p){
+            
+            return $p->alamat.','.$p->kelurahan->n_kelurahan.','.$p->kecamatan->n_kecamatan.','.$p->kabupaten->n_kabupaten.','.$p->provinsi->n_provinsi
+            ;
+        })
+
+        ->editColumn('luas', function($p){
+            return number_format($p->luas, 2, '.', ',');
+        })
+
+        
+
+        
 
 
-            ->addIndexColumn()
-            ->rawColumns(['action'])
-            ->toJson();
+        ->addIndexColumn()
+        ->rawColumns(['action'])
+        ->toJson();
     }
-
      /**
      * Alamat
      *
@@ -103,10 +117,9 @@ class TpaController extends Controller
      */
     public function create()
     {
-        $jenis_tpa = Jenis_tpa::all();
-        $status_tpa = Status_tpa::all();
+        
         $provinsi = Provinsi::where('kode', 36)->get();
-        return view('masterTpa.tambah_tpa', compact('jenis_tpa', 'status_tpa', 'provinsi'));
+        return view('masterTpa.tambah_tpa', compact('provinsi'));
     }
 
     /**
@@ -119,92 +132,67 @@ class TpaController extends Controller
     {
         $request->validate([
             'nama_fasilitas' => 'required',
-            'id_jenis_tpa' => 'required',
-            'id_status_tpa' => 'required',
             'alamat' => 'required',
-            'id_kabupaten' => 'required',
             'id_kelurahan' => 'required',
-            'id_provinsi' => 'required',
             'id_kecamatan' => 'required',
-            'sampah_masuk' => 'required',
-            'pengelola' => 'required',
+            'id_kabupaten' => 'required',
+            'id_provinsi' => 'required',
+            'telepon' => 'required',
+            'kordinat' => 'required',
+            'pengurus' => 'required',
+            'operator' => 'required',
+            'jumlah_kk' => 'required',
+            'id_status' => 'required',
+            'id_jenis' => 'required',
+            'sumber_dana' => 'required',
+            'keaktifan' => 'required',
             'luas' => 'required',
-            'awal_beroprasi' => 'required'
-        
         ]);
 
-        //save foto
         if($request->foto != null){
             $image = $request->file('foto');
             $nameFoto = rand() . '.' . $image->getClientOriginalExtension();
             $image->storeAs('gambar_tpa', $nameFoto, 'sftp', 'public');
         }
 
+        //kode
         //kode urut
-        $data_tpa = Tpa::all()->max('kode');
+        $data = Tpa::all()->max('kode');
         // $kode_terbesar = $data_tpa->kode;
-        $urutan = substr($data_tpa, -3, 3);
+        $urutan = substr($data, -3, 3);
         $urutan++;
         $no_urut =  sprintf("%04s", $urutan);
 
         // dd('urutan='.$no_urut);
-        $id_jenis = sprintf("%02s", $request->id_jenis_tpa);
+        $id_jenis = sprintf("%02s", $request->id_jenis);
         // dd($id_jenis)
 
          $kode = "$id_jenis$request->id_kecamatan$no_urut";
-        
-        
-        //tpa
-        $tpa = New Tpa();
+        //  dd($kode);
+
+        $tpa = new Tpa();
         $tpa->nama_fasilitas = $request->nama_fasilitas;
         $tpa->foto = $nameFoto;
-        $tpa->id_jenis_tpa = $request->id_jenis_tpa; 
-        $tpa->id_status_tpa = $request->id_status_tpa; 
-        $tpa->alamat = $request->alamat; 
-        $tpa->id_kabupaten = $request->id_kabupaten; 
-        $tpa->id_kelurahan = $request->id_kelurahan; 
-        $tpa->id_provinsi = $request->id_provinsi; 
-        $tpa->id_kecamatan = $request->id_kecamatan; 
-        $tpa->tahun = $request->tahun; 
-        $tpa->sampah_masuk = $request->sampah_masuk; 
-        $tpa->sampah_landfil = $request->sampah_landfil; 
-        $tpa->pengelola = $request->pengelola; 
-        $tpa->awal_beroprasi = $request->awal_beroprasi;
-        $tpa->luas = $request->luas;
-        $tpa->luas_landfil_aktif = $request->luas_landfil_aktif;
-        $tpa->pencatatan = $request->pencatatan;
-        $tpa->jembatan_timbang = $request->jembatan_timbang;
-        $tpa->penutupan_sampah_aktif = $request->penutupan_sampah_aktif;
-        $tpa->jumlah_sumur_pantau = $request->jumlah_sumur_pantau;
-        $tpa->ipl = $request->ipl;
-        $tpa->uji_lindi = $request->uji_lindi;
-        $tpa->drainase = $request->drainase;
-        $tpa->gas_metana = $request->gas_metana;
-        $tpa->jumlah_kk = $request->jumlah_kk;
+        $tpa->alamat = $request->alamat;
+        $tpa->id_kelurahan = $request->id_kelurahan;
+        $tpa->id_kecamatan = $request->id_kecamatan;
+        $tpa->id_kabupaten = $request->id_kabupaten;
+        $tpa->id_provinsi = $request->id_provinsi;
+        $tpa->telepon = $request->telepon;
         $tpa->kordinat = $request->kordinat;
+        $tpa->pengurus = $request->pengurus;
+        $tpa->operator = $request->operator;
+        $tpa->jumlah_kk = $request->jumlah_kk;
+        $tpa->id_status = $request->id_status;
+        $tpa->id_jenis = $request->id_jenis;
+        $tpa->sumber_dana = $request->sumber_dana;
+        $tpa->keaktifan = $request->keaktifan;
+        $tpa->luas = $request->luas;
         $tpa->kode = $kode;
         $tpa->save();
 
-        
-
-        // //data sampah terkelola
-        // $terkelola = New Sampah_terkelola();
-        // $terkelola->id_tpa = $tpa->id;
-        // $terkelola->sampah_organik = $request->sampah_organik;
-        // $terkelola->sampah_an_organik = $request->sampah_an_organik;
-        // $terkelola->recovery_pemulung = $request->recovery_pemulung;
-        // $terkelola->energy = $request->energy;
-        // $terkelola->save();
-
-       
-       
-        
-        
-
-        // dd($oprational);
-
         return response()->json([
-            'message' => 'Data Berhasil Disimpan.'
+            'message' => 'Data Berhasil di Tambahkan!'
         ]);
 
         
@@ -227,17 +215,21 @@ class TpaController extends Controller
             'sampah_an_organik' => 'required',
             'recovery_pemulung' => 'required',
             'energy' => 'required',
-            'tahun' => 'required'
+            'tahun' => 'required',
+            'sampah_masuk' => 'required',
+            'sampah_landfil' => 'required'
 
         ]);
 
         $terkelola = New Sampah_terkelola();
-        $terkelola->id_tpa = $request->id;
+        $terkelola->id_tpa = $request->id_tpa;
         $terkelola->sampah_organik = $request->sampah_organik;
         $terkelola->sampah_an_organik = $request->sampah_an_organik;
         $terkelola->recovery_pemulung = $request->recovery_pemulung;
         $terkelola->energy = $request->energy;
         $terkelola->tahun = $request->tahun;
+        $terkelola->sampah_masuk = $request->sampah_masuk;
+        $terkelola->sampah_landfil = $request->sampah_landfil;
         $terkelola->save();
 
         
@@ -265,7 +257,9 @@ class TpaController extends Controller
             'sampah_an_organik' => 'required',
             'recovery_pemulung' => 'required',
             'energy' => 'required',
-            'tahun' => 'required'
+            'tahun' => 'required',
+            'sampah_masuk' => 'required',
+            'sampah_landfil' => 'required'
 
         ]);
 
@@ -278,6 +272,8 @@ class TpaController extends Controller
             'recovery_pemulung' => $request->recovery_pemulung,
             'energy' => $request->energy,
             'tahun' => $request->tahun,
+            'sampah_masuk' => $request->sampah_masuk,
+            'sampah_landfil' => $request->sampah_landfil
 
         ]);
 
@@ -339,98 +335,83 @@ class TpaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $tpa = Tpa::findOrFail($id);
         $request->validate([
             'nama_fasilitas' => 'required',
-            'id_jenis_tpa' => 'required',
-            'id_status_tpa' => 'required',
             'alamat' => 'required',
-            'id_kabupaten' => 'required',
             'id_kelurahan' => 'required',
-            'id_provinsi' => 'required',
             'id_kecamatan' => 'required',
-            'sampah_masuk' => 'required',
-            'pengelola' => 'required',
+            'id_kabupaten' => 'required',
+            'id_provinsi' => 'required',
+            'telepon' => 'required',
+            'kordinat' => 'required',
+            'pengurus' => 'required',
+            'operator' => 'required',
+            'jumlah_kk' => 'required',
+            'id_status' => 'required',
+            'id_jenis' => 'required',
+            'sumber_dana' => 'required',
+            'keaktifan' => 'required',
             'luas' => 'required',
-            'awal_beroprasi' => 'required'
-        
         ]);
 
-         //save foto
-         if($request->foto != null){
+        $tpa = Tpa::findOrFail($id);
+
+        if($request->foto != null){
             $image = $request->file('foto');
             $nameFoto = rand() . '.' . $image->getClientOriginalExtension();
             $image->storeAs('gambar_tpa', $nameFoto, 'sftp', 'public');
 
             $tpa->update([
+
                 'nama_fasilitas' => $request->nama_fasilitas,
                 'foto' => $nameFoto,
-                'id_jenis_tpa' => $request->id_jenis_tpa, 
-                'id_status_tpa' => $request->id_status_tpa, 
-                'alamat' => $request->alamat, 
-                'id_kabupaten' => $request->id_kabupaten, 
-                'id_kelurahan' => $request->id_kelurahan, 
-                'id_provinsi' => $request->id_provinsi, 
-                'id_kecamatan' => $request->id_kecamatan, 
-                'tahun' => $request->tahun, 
-                'sampah_masuk' => $request->sampah_masuk, 
-                'sampah_landfil' => $request->sampah_landfil, 
-                'pengelola' => $request->pengelola, 
-                'awal_beroprasi' => $request->awal_beroprasi,
-                'luas' => $request->luas,
-                'luas_landfil_aktif' => $request->luas_landfil_aktif,
-                'pencatatan' => $request->pencatatan,
-                'jembatan_timbang' => $request->jembatan_timbang,
-                'penutupan_sampah_aktif' => $request->penutupan_sampah_aktif,
-                'jumlah_sumur_pantau' => $request->jumlah_sumur_pantau,
-                'ipl' => $request->ipl,
-                'uji_lindi' => $request->uji_lindi,
-                'drainase' => $request->drainase,
-                'gas_metana' => $request->gas_metana,
-                'jumlah_kk' => $request->jumlah_kk,
+                'alamat' => $request->alamat,
+                'id_kelurahan' => $request->id_kelurahan,
+                'id_kecamatan' => $request->id_kecamatan,
+                'id_kabupaten' => $request->id_kabupaten,
+                'id_provinsi' => $request->id_provinsi,
+                'telepon' => $request->telepon,
                 'kordinat' => $request->kordinat,
+                'pengurus' => $request->pengurus,
+                'operator' => $request->operator,
+                'jumlah_kk' => $request->jumlah_kk,
+                'id_status' => $request->id_status,
+                'id_jenis' => $request->id_jenis,
+                'sumber_dana' => $request->sumber_dana,
+                'keaktifan' => $request->keaktifan,
+                'luas' => $request->luas,
                 'kode' => $request->kode,
+        
             ]);
         }
 
-        $tpa->update([
-            'nama_fasilitas' => $request->nama_fasilitas,
-            'id_jenis_tpa' => $request->id_jenis_tpa, 
-            'id_status_tpa' => $request->id_status_tpa, 
-            'alamat' => $request->alamat, 
-            'id_kabupaten' => $request->id_kabupaten, 
-            'id_kelurahan' => $request->id_kelurahan, 
-            'id_provinsi' => $request->id_provinsi, 
-            'id_kecamatan' => $request->id_kecamatan, 
-            'tahun' => $request->tahun, 
-            'sampah_masuk' => $request->sampah_masuk, 
-            'sampah_landfil' => $request->sampah_landfil, 
-            'pengelola' => $request->pengelola, 
-            'awal_beroprasi' => $request->awal_beroprasi,
-            'luas' => $request->luas,
-            'luas_landfil_aktif' => $request->luas_landfil_aktif,
-            'pencatatan' => $request->pencatatan,
-            'jembatan_timbang' => $request->jembatan_timbang,
-            'penutupan_sampah_aktif' => $request->penutupan_sampah_aktif,
-            'jumlah_sumur_pantau' => $request->jumlah_sumur_pantau,
-            'ipl' => $request->ipl,
-            'uji_lindi' => $request->uji_lindi,
-            'drainase' => $request->drainase,
-            'gas_metana' => $request->gas_metana,
-            'jumlah_kk' => $request->jumlah_kk,
-            'kordinat' => $request->kordinat,
-            'kode' => $request->kode,
-        ]);
-
-
-
-
         
 
+        $tpa->update([
 
+        'nama_fasilitas' => $request->nama_fasilitas,
+        'alamat' => $request->alamat,
+        'id_kelurahan' => $request->id_kelurahan,
+        'id_kecamatan' => $request->id_kecamatan,
+        'id_kabupaten' => $request->id_kabupaten,
+        'id_provinsi' => $request->id_provinsi,
+        'telepon' => $request->telepon,
+        'kordinat' => $request->kordinat,
+        'pengurus' => $request->pengurus,
+        'operator' => $request->operator,
+        'jumlah_kk' => $request->jumlah_kk,
+        'id_status' => $request->id_status,
+        'sumber_dana' => $request->sumber_dana,
+        'keaktifan' => $request->keaktifan,
+        'luas' => $request->luas,
+        'kode' => $request->kode,
+
+        ]);
+        
+      
 
         return response()->json([
-            'message' => 'Data Berhasil Dirubah!'
+            'message' => 'Data Berhasil di Rubah!'
         ]);
 
     }
