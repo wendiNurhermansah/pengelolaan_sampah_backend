@@ -1,20 +1,20 @@
 <?php
 
-namespace App\Http\Controllers\masterTps3r;
+namespace App\Http\Controllers\masterBankSampah;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Bank_sampah;
+use App\Models\Jenis_bank_sampah;
 use App\Models\Kabupaten;
 use App\Models\Kecamatan;
-use App\Models\Kelola_tps3r;
+use App\Models\Kelola_bank_sampah;
 use App\Models\Kelurahan;
 use App\Models\Provinsi;
-use App\Models\Tps3r;
+use App\Models\Status_bank_sampah;
 use Yajra\DataTables\Facades\DataTables;
 
-use function Ramsey\Uuid\v1;
-
-class Tps3rController extends Controller
+class BankSampahController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -23,74 +23,69 @@ class Tps3rController extends Controller
      */
     public function index()
     {
-        return view('masterTps3r.tps3r');
+        return view('bank_sampah.bank_sampah');
     }
+
 
     public function api(){
-        $tps3r = Tps3r::orderBy('id', 'DESC')->get();
-        return DataTables::of($tps3r)
+        $bank_sampah = Bank_sampah::all();
+        return DataTables::of($bank_sampah)
         
 
-            ->addColumn('action', function ($p) {
-                return "
-                    <a href='". route('MasterTps3r.tps3r.show', $p->id) ."'  title='Detail'><i class='icon-eye mr-1'></i></a>
-                    <a href='". route('MasterTps3r.tps3r.edit', $p->id) ."'  title='Edit'><i class='icon-pencil mr-1'></i></a>
-                    <a href='#' onclick='remove(" . $p->id . ")' class='text-danger' title='Hapus'><i class='icon-remove'></i></a>";
-            })
+        ->addColumn('action', function ($p) {
+            return "
+                <a href='". route('MasterBankSampah.bank_sampah.show', $p->id) ."'  title='Detail'><i class='icon-eye mr-1'></i></a>
+                <a href='". route('MasterBankSampah.bank_sampah.edit', $p->id) ."'  title='Edit'><i class='icon-pencil mr-1'></i></a>
+                <a href='#' onclick='remove(" . $p->id . ")' class='text-danger' title='Hapus'><i class='icon-remove'></i></a>";
+        })
 
+        
+        
+        ->editColumn('id_status', function($p){
+            if ($p->id_status == 1) {
+               return "Fasum";
+            } else {
+                return "Pinjam Pakai";
+            }
             
+        })
+
+        ->editColumn('id_jenis', function($p){
+            if ($p->id_status == 1) {
+               return "Bank Sampah Swasta";
+            } else {
+                return "Bank Sampah Pemda";
+            }
             
-            ->editColumn('id_status', function($p){
-                if ($p->id_status == 1) {
-                   return "Fasum";
-                } else {
-                    return "Pinjam Pakai";
-                }
-                
-            })
+        })
 
-            ->editColumn('sumber_dana', function($p){
-                if ($p->sumber_dana == 1) {
-                   return "APBD";
-                } else {
-                    return "APBN";
-                }
-                
-            })
-
-            ->editColumn('alamat', function ($p){
-                
-                return $p->alamat.','.$p->kelurahan->n_kelurahan.','.$p->kecamatan->n_kecamatan.','.$p->kabupaten->n_kabupaten.','.$p->provinsi->n_provinsi
-                ;
-            })
-
-            ->editColumn('luas', function($p){
-                return number_format($p->luas, 2, '.', ',');
-            })
-
+        ->editColumn('sumber_dana', function($p){
+            if ($p->sumber_dana == 1) {
+               return "APBD";
+            } else {
+                return "APBN";
+            }
             
+        })
 
+        ->editColumn('alamat', function ($p){
             
+            return $p->alamat.','.$p->kelurahan->n_kelurahan.','.$p->kecamatan->n_kecamatan.','.$p->kabupaten->n_kabupaten.','.$p->provinsi->n_provinsi
+            ;
+        })
+
+        ->editColumn('luas', function($p){
+            return number_format($p->luas, 2, '.', ',');
+        })
+
+        
+
+        
 
 
-            ->addIndexColumn()
-            ->rawColumns(['action'])
-            ->toJson();
-    }
-
-    public function kabupatenByProvinsi($provinsi_id)
-    {
-        return Kabupaten::select('id', 'n_kabupaten')->where('provinsi_id', $provinsi_id)->get();
-    }
-
-    public function kecamatanByKabupaten($kabupaten_id)
-    {
-        return Kecamatan::select('id', 'n_kecamatan')->where('kabupaten_id', $kabupaten_id)->get();
-    }
-
-    public function kelurahanByKecamatan($kecamatan_id)
-    {
-        return Kelurahan::select('id', 'n_kelurahan')->where('kecamatan_id', $kecamatan_id)->get();
+        ->addIndexColumn()
+        ->rawColumns(['action'])
+        ->toJson();
     }
 
     /**
@@ -101,7 +96,7 @@ class Tps3rController extends Controller
     public function create()
     {
         $provinsi = Provinsi::where('kode', 36)->get();
-        return view('masterTps3r.tambah_tps3r', compact('provinsi'));
+        return view ('bank_sampah.create', compact('provinsi'));
     }
 
     /**
@@ -127,21 +122,21 @@ class Tps3rController extends Controller
             'id_status' => 'required',
             'id_jenis' => 'required',
             'sumber_dana' => 'required',
-            'keaktifan_tps' => 'required',
+            'keaktifan' => 'required',
             'luas' => 'required',
         ]);
 
         if($request->foto != null){
             $image = $request->file('foto');
             $nameFoto = rand() . '.' . $image->getClientOriginalExtension();
-            $image->storeAs('gambar_tps3r', $nameFoto, 'sftp', 'public');
+            $image->storeAs('gambar_bank_sampah', $nameFoto, 'sftp', 'public');
         }
 
         //kode
         //kode urut
-        $data_tps3r = Tps3r::all()->max('kode');
+        $data = Bank_sampah::all()->max('kode');
         // $kode_terbesar = $data_tpa->kode;
-        $urutan = substr($data_tps3r, -3, 3);
+        $urutan = substr($data, -3, 3);
         $urutan++;
         $no_urut =  sprintf("%04s", $urutan);
 
@@ -152,26 +147,26 @@ class Tps3rController extends Controller
          $kode = "$id_jenis$request->id_kecamatan$no_urut";
         //  dd($kode);
 
-        $tps = new Tps3r();
-        $tps->nama_fasilitas = $request->nama_fasilitas;
-        $tps->foto = $nameFoto;
-        $tps->alamat = $request->alamat;
-        $tps->id_kelurahan = $request->id_kelurahan;
-        $tps->id_kecamatan = $request->id_kecamatan;
-        $tps->id_kabupaten = $request->id_kabupaten;
-        $tps->id_provinsi = $request->id_provinsi;
-        $tps->telepon = $request->telepon;
-        $tps->kordinat = $request->kordinat;
-        $tps->pengurus = $request->pengurus;
-        $tps->operator = $request->operator;
-        $tps->jumlah_kk = $request->jumlah_kk;
-        $tps->id_status = $request->id_status;
-        $tps->id_jenis = $request->id_jenis;
-        $tps->sumber_dana = $request->sumber_dana;
-        $tps->keaktifan_tps = $request->keaktifan_tps;
-        $tps->luas = $request->luas;
-        $tps->kode = $kode;
-        $tps->save();
+        $bank_smpah = new Bank_sampah();
+        $bank_smpah->nama_fasilitas = $request->nama_fasilitas;
+        $bank_smpah->foto = $nameFoto;
+        $bank_smpah->alamat = $request->alamat;
+        $bank_smpah->id_kelurahan = $request->id_kelurahan;
+        $bank_smpah->id_kecamatan = $request->id_kecamatan;
+        $bank_smpah->id_kabupaten = $request->id_kabupaten;
+        $bank_smpah->id_provinsi = $request->id_provinsi;
+        $bank_smpah->telepon = $request->telepon;
+        $bank_smpah->kordinat = $request->kordinat;
+        $bank_smpah->pengurus = $request->pengurus;
+        $bank_smpah->operator = $request->operator;
+        $bank_smpah->jumlah_kk = $request->jumlah_kk;
+        $bank_smpah->id_status = $request->id_status;
+        $bank_smpah->id_jenis = $request->id_jenis;
+        $bank_smpah->sumber_dana = $request->sumber_dana;
+        $bank_smpah->keaktifan = $request->keaktifan;
+        $bank_smpah->luas = $request->luas;
+        $bank_smpah->kode = $kode;
+        $bank_smpah->save();
 
         return response()->json([
             'message' => 'Data Berhasil di Tambahkan!'
@@ -186,9 +181,9 @@ class Tps3rController extends Controller
      */
     public function show($id)
     {
-        $tps = Tps3r::findOrFail($id);
+        $bank_sampah = Bank_sampah::findOrFail($id);
 
-        return view('masterTps3r.detail', compact('tps'));
+        return view('bank_sampah.detail', compact('bank_sampah'));
     }
 
     /**
@@ -199,12 +194,12 @@ class Tps3rController extends Controller
      */
     public function edit($id)
     {
-        $tps = Tps3r::findOrFail($id);
+        $bank_sampah = Bank_sampah::findOrFail($id);
         $provinsi = Provinsi::where('kode', 36)->get();
         $kabupaten = Kabupaten::where('provinsi_id', 3)->get();
-        $kecamatan = Kecamatan::where('kabupaten_id', $tps->id_kabupaten)->get();
-        $kelurahan = Kelurahan::where('kecamatan_id', $tps->id_kecamatan)->get();
-        return view('masterTps3r.edit', compact('tps','provinsi', 'kabupaten', 'kecamatan', 'kelurahan'));
+        $kecamatan = Kecamatan::where('kabupaten_id', $bank_sampah->id_kabupaten)->get();
+        $kelurahan = Kelurahan::where('kecamatan_id', $bank_sampah->id_kecamatan)->get();
+        return view('bank_sampah.edit', compact('bank_sampah','provinsi', 'kabupaten', 'kecamatan', 'kelurahan'));
     }
 
     /**
@@ -231,18 +226,18 @@ class Tps3rController extends Controller
             'id_status' => 'required',
             'id_jenis' => 'required',
             'sumber_dana' => 'required',
-            'keaktifan_tps' => 'required',
+            'keaktifan' => 'required',
             'luas' => 'required',
         ]);
 
-        $tps = Tps3r::findOrFail($id);
+        $bank_sampah = Bank_sampah::findOrFail($id);
 
         if($request->foto != null){
             $image = $request->file('foto');
             $nameFoto = rand() . '.' . $image->getClientOriginalExtension();
             $image->storeAs('gambar_tps3r', $nameFoto, 'sftp', 'public');
 
-            $tps->update([
+            $bank_sampah->update([
 
                 'nama_fasilitas' => $request->nama_fasilitas,
                 'foto' => $nameFoto,
@@ -259,7 +254,7 @@ class Tps3rController extends Controller
                 'id_status' => $request->id_status,
                 'id_jenis' => $request->id_jenis,
                 'sumber_dana' => $request->sumber_dana,
-                'keaktifan_tps' => $request->keaktifan_tps,
+                'keaktifan' => $request->keaktifan,
                 'luas' => $request->luas,
                 'kode' => $request->kode,
         
@@ -268,7 +263,7 @@ class Tps3rController extends Controller
 
         
 
-        $tps->update([
+        $bank_sampah->update([
 
         'nama_fasilitas' => $request->nama_fasilitas,
         'alamat' => $request->alamat,
@@ -283,7 +278,7 @@ class Tps3rController extends Controller
         'jumlah_kk' => $request->jumlah_kk,
         'id_status' => $request->id_status,
         'sumber_dana' => $request->sumber_dana,
-        'keaktifan_tps' => $request->keaktifan_tps,
+        'keaktifan' => $request->keaktifan,
         'luas' => $request->luas,
         'kode' => $request->kode,
 
@@ -294,9 +289,6 @@ class Tps3rController extends Controller
         return response()->json([
             'message' => 'Data Berhasil di Rubah!'
         ]);
-
-
-
     }
 
     /**
@@ -307,22 +299,20 @@ class Tps3rController extends Controller
      */
     public function destroy($id)
     {
-
-        Tps3r::destroy($id);
-        Kelola_tps3r::where('id_tps3r', $id)->delete();
+        Bank_sampah::destroy($id);
+        Kelola_bank_sampah::where('id_bank_sampah', $id)->delete();
 
         return response()->json([
-            'message' => 'Data berhasil di hapus!'
+            'message' => 'Data Berhasil di Hapus!'
         ]);
     }
 
-
     public function kelola($id){
 
-        $tps = Tps3r::findOrfail($id);
+        $bank_sampah = Bank_sampah::findOrfail($id);
         
 
-        return view('masterTps3r.kelola_tps3r', compact('tps'));
+        return view('bank_sampah.kelola', compact('bank_sampah'));
 
     }
 
@@ -339,8 +329,8 @@ class Tps3rController extends Controller
             'daur_ulang'=>'required',
         ]);
 
-        $kelola = new Kelola_tps3r();
-        $kelola->id_tps3r = $request->id_tps3r;
+        $kelola = new Kelola_bank_sampah();
+        $kelola->id_bank_sampah = $request->id_bank_sampah;
         $kelola->tahun = $request->tahun;
         $kelola->sampah_masuk = $request->sampah_masuk;
         $kelola->sampah_landfil = $request->sampah_landfil;
@@ -359,15 +349,15 @@ class Tps3rController extends Controller
     }
 
     public function kelola_edit($id){
-        $tps = Tps3r::find($id);
+        $bank_sampah = Bank_sampah::find($id);
 
-        return view('masterTps3r.kelola_edit', compact('tps'));
+        return view('bank_sampah.kelola_edit', compact('bank_sampah'));
             
     }
 
     public function kelola_update(Request $request){
 
-        $tps = Kelola_tps3r::where('id_tps3r', $request->id_tps3r)->first();
+        $bank_sampah = Kelola_bank_sampah::where('id_bank_sampah', $request->id_bank_sampah)->first();
 
         $request->validate([
             'sampah_masuk'=>'required',
@@ -380,7 +370,7 @@ class Tps3rController extends Controller
             'daur_ulang'=>'required',
         ]);
 
-        $tps->update([
+        $bank_sampah->update([
             'sampah_masuk'=>$request->sampah_masuk,
             'tahun'=>$request->tahun,
             'sampah_landfil'=>$request->sampah_landfil,
@@ -389,7 +379,7 @@ class Tps3rController extends Controller
             'sumber_energi'=>$request->sumber_energi,
             'up_cycle'=>$request->up_cycle,
             'daur_ulang'=>$request->daur_ulang,
-            'id_tps3r'=>$request->id_tps3r,
+            'id_bank_sampah'=>$request->id_bank_sampah,
 
         ]);
 

@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title', 'Edit TPS3R')
+@section('title', 'Edit BANK SAMPAH')
 
 @section('content')
 
@@ -9,8 +9,8 @@
             <div class="row p-t-b-10 ">
                 <div class="col">
                     <h4>
-                        <i class="icon icon-building amber-text s-18"></i>
-                        TPS3R
+                        <i class="icon icon-archive amber-text s-18"></i>
+                        BANK SAMPAH
                     </h4>
                 </div>
                 
@@ -18,7 +18,7 @@
             <div class="row justify-content-between">
                     <ul role="tablist" class="nav nav-material nav-material-white responsive-tab">
                         <li>
-                            <a class="nav-link" href="{{route('MasterTps3r.tps3r.index')}}"><i class="icon icon-arrow_back"></i>Semua Data</a>
+                            <a class="nav-link" href="{{route('MasterBankSampah.bank_sampah.index')}}"><i class="icon icon-arrow_back"></i>Semua Data</a>
                         </li>
                     
                     </ul>
@@ -79,26 +79,26 @@
                         <div id="alert"></div>
                             <form class="needs-validation" id="form" method="PATCH"  enctype="multipart/form-data" novalidate>
                                 {{ method_field('PATCH') }}
-                                <input type="hidden" id="id" name="id" value="{{$tps->id}}"/>
-                                <h4 id="formTitle">Edit TPS3R</h4><hr>
+                                <input type="hidden" id="id" name="id" value="{{$bank_sampah->id}}"/>
+                                <h4 id="formTitle">Edit Bank Sampah</h4><hr>
                                 
                                 <div class="row">
                                       
                                     <div class="col-md-6">
                                         <input type="hidden" class="form-control light fs-14" name="kode"
-                                                id="kode" value="{{$tps->kode}}">
+                                                id="kode" value="{{$bank_sampah->kode}}">
                                         <div class="form-group mt-2 ml-3">
                                             <label for="nama_fasilitas" class="font-weight-bold fs-14">Nama TPS3R<span
                                                     class="text-danger fs-12">*</span></label>
                                             <input type="text" class="form-control light fs-14" name="nama_fasilitas"
-                                                id="nama_fasilitas" value="{{$tps->nama_fasilitas}}" required>
+                                                id="nama_fasilitas" value="{{$bank_sampah->nama_fasilitas}}" required>
                                         </div>
 
                                         <div class="form-group mt-2 ml-3">
                                             <label for="pengurus" class="font-weight-bold fs-14">Pengurus<span
                                                     class="text-danger fs-12">*</span></label>
                                                     <input type="text" class="form-control light fs-14" name="pengurus" id="pengurus"
-                                                value="{{$tps->pengurus}}" required>
+                                                value="{{$bank_sampah->pengurus}}" required>
                                         </div>
                                         
                                         
@@ -107,7 +107,7 @@
                                             <select class="select2 form-control light" name="id_provinsi" id="provinsi" autocomplete="off">
                                                  <option value="">Pilih</option>
                                                  @foreach($provinsi as $i)
-                                                    <option value="{{$i->id}}" {{$tps->id_provinsi == $i->id ? 'selected' : ''}}>{{$i->n_provinsi}}</option>
+                                                    <option value="{{$i->id}}" {{$bank_sampah->id_provinsi == $i->id ? 'selected' : ''}}>{{$i->n_provinsi}}</option>
                                                  @endforeach
                                                 
                                             </select>
@@ -117,7 +117,7 @@
                                             <select class="select2 form-control light" name="id_kabupaten" id="kabupaten" autocomplete="off">
                                                 <option value="">Pilih</option>
                                                  @foreach($kabupaten as $i)
-                                                    <option value="{{$i->id}}" {{ $tps->id_kabupaten == $i->id ? 'selected' : '' }}>{{$i->n_kabupaten}}</option>
+                                                    <option value="{{$i->id}}" {{ $bank_sampah->id_kabupaten == $i->id ? 'selected' : '' }}>{{$i->n_kabupaten}}</option>
                                                  @endforeach
                                                 
                                             </select>
@@ -128,7 +128,7 @@
                                             <select class="select2 form-control light" name="id_kecamatan" id="kecamatan" autocomplete="off">
                                                 <option value="">Pilih</option>
                                                  @foreach($kecamatan as $i)
-                                                    <option value="{{$i->id}}" {{ $tps->id_kecamatan == $i->id ? 'selected' : '' }}>{{$i->n_kecamatan}}</option>
+                                                    <option value="{{$i->id}}" {{ $bank_sampah->id_kecamatan == $i->id ? 'selected' : '' }}>{{$i->n_kecamatan}}</option>
                                                  @endforeach
                                                 
                                             </select>
@@ -138,7 +138,7 @@
                                             <select class="select2 form-control light" name="id_kelurahan" id="kelurahan" autocomplete="off">
                                                 <option value="">Pilih</option>
                                                  @foreach($kelurahan as $i)
-                                                    <option value="{{$i->id}}" {{ $tps->id_kelurahan == $i->id ? 'selected' : '' }}>{{$i->n_kelurahan}}</option>
+                                                    <option value="{{$i->id}}" {{ $bank_sampah->id_kelurahan == $i->id ? 'selected' : '' }}>{{$i->n_kelurahan}}</option>
                                                  @endforeach
                                                 
                                             </select>
@@ -146,19 +146,19 @@
                                         <div class="form-group mt-2 ml-3">
                                             <label for="alamat" class="font-weight-bold fs-14">Alamat<span
                                                     class="text-danger fs-12">*</span></label>
-                                            <textarea name="alamat" id="alamat" class="form-control light" cols="5" rows="2" required>{{$tps->alamat}}</textarea>
+                                            <textarea name="alamat" id="alamat" class="form-control light" cols="5" rows="2" required>{{$bank_sampah->alamat}}</textarea>
                                         </div>
 
                                         <div class="form-group mt-2 ml-3">
                                             <label for="telepon" class="font-weight-bold fs-14">Telepon<span
                                                     class="text-danger fs-12">*</span></label>
                                                     <input type="text" class="form-control light fs-14" name="telepon" id="telepon"
-                                                value="{{$tps->telepon}}" onkeypress="return hanyaAngka(event)" maxlength="12" required>
+                                                value="{{$bank_sampah->telepon}}" onkeypress="return hanyaAngka(event)" maxlength="12" required>
                                         </div>
                                         <div class="form-group mt-2 ml-3">
                                             <label for="kordinat" class="font-weight-bold fs-14">Kordinat<span
                                                     class="text-danger fs-12">*</span></label>
-                                            <textarea name="kordinat" id="kordinat" class="form-control light" cols="5" rows="2" required>{{$tps->kordinat}}</textarea>
+                                            <textarea name="kordinat" id="kordinat" class="form-control light" cols="5" rows="2" required>{{$bank_sampah->kordinat}}</textarea>
                                         </div>
 
                                         
@@ -182,26 +182,26 @@
                                             <label for="luas" class="font-weight-bold fs-14">Luas Lahan (m<sup>2</sup> )<span
                                                     class="text-danger fs-12">*</span></label>
                                                     <input type="text" class="form-control light fs-14" name="luas" id="luas"
-                                                value="{{$tps->luas}}" onkeypress="return hanyaAngka(event)" required>
+                                                value="{{$bank_sampah->luas}}" onkeypress="return hanyaAngka(event)" required>
                                         </div>
                                         <div class="form-group mt-2 ml-3">
                                             <label for="operator" class="font-weight-bold fs-14">Operator<span
                                                     class="text-danger fs-12">*</span></label>
                                                     <input type="text" class="form-control light fs-14" name="operator" id="operator"
-                                                value="{{$tps->operator}}" onkeypress="return hanyaAngka(event)" required>
+                                                value="{{$bank_sampah->operator}}" onkeypress="return hanyaAngka(event)" required>
                                         </div>
                                         <div class="form-group mt-2 ml-3">
                                             <label for="jumlah_kk" class="font-weight-bold fs-14">Jumlah KK<span
                                                     class="text-danger fs-12">*</span></label>
                                                     <input type="text" class="form-control light fs-14" name="jumlah_kk" id="jumlah_kk"
-                                                value="{{$tps->jumlah_kk}}" onkeypress="return hanyaAngka(event)" required>
+                                                value="{{$bank_sampah->jumlah_kk}}" onkeypress="return hanyaAngka(event)" required>
                                         </div>
                                         <div class="form-group mt-2 ml-3">
                                             <label for="id_jenis" class="font-weight-bold fs-14">Jenis Bank Sampah<span class="text-danger fs-12">*</span></label>
                                             <select class="select2 form-control light" name="id_jenis" id="id_jenis" autocomplete="off">
                                                 <option value="">Pilih</option>
-                                                <option value="1" {{$tps->id_jenis == 1 ? 'selected' : ' '}}>TPS3R SWASTA</option>
-                                                <option value="2" {{$tps->id_jenis == 2 ? 'selected' : ' '}}>TPS3R PEMDA</option>
+                                                <option value="1" {{$bank_sampah->id_jenis == 1 ? 'selected' : ' '}}>Bank Sampah Swasta</option>
+                                                <option value="2" {{$bank_sampah->id_jenis == 2 ? 'selected' : ' '}}>Bank Sampah Pemda</option>
                                                 
                                             </select>
                                         </div>
@@ -209,8 +209,8 @@
                                             <label for="id_status" class="font-weight-bold fs-14">Status TPS3R<span class="text-danger fs-12">*</span></label>
                                             <select class="select2 form-control light" name="id_status" id="id_status" autocomplete="off">
                                                 <option value="">Pilih</option>
-                                                <option value="1" {{$tps->id_status == 1 ? 'selected' : ' '}}>Fasum</option>
-                                                <option value="2" {{$tps->id_status == 2 ? 'selected' : ' '}}>Pinjam Pakai</option>
+                                                <option value="1" {{$bank_sampah->id_status == 1 ? 'selected' : ' '}}>Fasum</option>
+                                                <option value="2" {{$bank_sampah->id_status == 2 ? 'selected' : ' '}}>Pinjam Pakai</option>
                                                 
                                             </select>
                                         </div>
@@ -219,18 +219,18 @@
                                             <label for="sumber_dana" class="font-weight-bold fs-14">Sumber Dana<span class="text-danger fs-12">*</span></label>
                                             <select class="select2 form-control light" name="sumber_dana" id="sumber_dana" autocomplete="off">
                                                 <option value="">Pilih</option>
-                                                <option value="1" {{$tps->sumber_dana == 1 ? 'selected' : ' '}}>APBD</option>
-                                                <option value="2" {{$tps->sumber_dana == 2 ? 'selected' : ' '}}>APBN</option>
+                                                <option value="1" {{$bank_sampah->sumber_dana == 1 ? 'selected' : ' '}}>APBD</option>
+                                                <option value="2" {{$bank_sampah->sumber_dana == 2 ? 'selected' : ' '}}>APBN</option>
                                                 
                                             </select>
                                         </div>
 
                                         <div class="form-group mt-2 ml-3">
-                                            <label for="keaktifan_tps" class="font-weight-bold fs-14">Keaktifan TPS<span class="text-danger fs-12">*</span></label>
-                                            <select class="select2 form-control light" name="keaktifan_tps" id="keaktifan_tps" autocomplete="off">
+                                            <label for="keaktifan" class="font-weight-bold fs-14">Keaktifan TPS<span class="text-danger fs-12">*</span></label>
+                                            <select class="select2 form-control light" name="keaktifan" id="keaktifan" autocomplete="off">
                                                 <option value="">Pilih</option>
-                                                <option value="1" {{$tps->keaktifan_tps == 1 ? 'selected' : ' '}}>Aktif 3R</option>
-                                                <option value="2" {{$tps->keaktifan_tps == 2 ? 'selected' : ' '}}>Aktif Tanpa Pengomposan</option>
+                                                <option value="1" {{$bank_sampah->keaktifan == 1 ? 'selected' : ' '}}>Aktif</option>
+                                                <option value="2" {{$bank_sampah->keaktifan == 2 ? 'selected' : ' '}}>Aktif Tanpa Pengomposan</option>
                                                 
                                             </select>
                                         </div>
@@ -370,7 +370,7 @@
         }
         else{
             $('#alert').html('');
-            url = "{{ route('MasterTps3r.tps3r.update', ':id') }}".replace(':id', $('#id').val());
+            url = "{{ route('MasterBankSampah.bank_sampah.update', ':id') }}".replace(':id', $('#id').val());
             $.ajax({
                 url : url,
                 type : 'POST',

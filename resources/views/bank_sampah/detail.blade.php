@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title', 'Detail TPS3R')
+@section('title', 'Detail Bank Sampah')
 
 @section('content')
 
@@ -10,7 +10,7 @@
                 <div class="col">
                     <h4>
                         <i class="icon icon-list amber-text s-18"></i>
-                        Detail || {{$tps->nama_fasilitas}}
+                        Detail || {{$bank_sampah->nama_fasilitas}}
                     </h4>
                 </div>
                 
@@ -18,7 +18,7 @@
             <div class="row justify-content-between">
                     <ul role="tablist" class="nav nav-material nav-material-white responsive-tab">
                         <li>
-                            <a class="nav-link" href="{{route('MasterTps3r.tps3r.index')}}"><i class="icon icon-arrow_back"></i>Semua Data</a>
+                            <a class="nav-link" href="{{route('MasterBankSampah.bank_sampah.index')}}"><i class="icon icon-arrow_back"></i>Semua Data</a>
                         </li>
                     
                     </ul>
@@ -34,14 +34,14 @@
                     <div class="card">
                             
 
-                                <h6 class="card-header">
-                                    <strong>Data TPS3R :</strong>
-                                    @if($tps->kelola == null)
-                                    <strong style="float: right;" class=""><a href="{{route('MasterTps3r.tps3r.kelola_tps3r', $tps->id)}}" class="btn btn-primary btn-sm">
-                                        <i class="icon icon-plus white-text s-12"></i>Kelola TPS3R</a>
+                            <h6 class="card-header">
+                                    <strong>Data Bank Sampah :</strong>
+                                    @if($bank_sampah->kelola == null)
+                                    <strong style="float: right;" class=""><a href="{{route('MasterBankSampah.bank_sampah.kelola_bank_sampah', $bank_sampah->id)}}" class="btn btn-primary btn-sm">
+                                        <i class="icon icon-plus white-text s-12"></i>Kelola Bank Sampah</a>
                                     </strong> 
                                     @endif
-                                </h6>
+                            </h6>
                                 
                            
                             <div class="card-body">
@@ -50,33 +50,33 @@
                                         <div class="row">
                                             <label class="col-md-4 text-left s-12"><strong>Kode</strong></label>
                                              <label class="">:</label>
-                                            <label class="col-md-6 s-12">{{$tps->kode}}</label>
+                                            <label class="col-md-6 s-12">{{$bank_sampah->kode}}</label>
                                         </div>
                                         <div class="row">
                                             <label class="col-md-4 text-left s-12"><strong>Nama Fasilitas</strong></label>
                                              <label class="">:</label>
-                                            <label class="col-md-6 s-12">{{$tps->nama_fasilitas}}</label>
+                                            <label class="col-md-6 s-12">{{$bank_sampah->nama_fasilitas}}</label>
                                         </div>
                                         <div class="row">
-                                            <label class="col-md-4 text-left s-12"><strong>Nama Fasilitas</strong></label>
+                                            <label class="col-md-4 text-left s-12"><strong>Telepon</strong></label>
                                              <label class="">:</label>
-                                            <label class="col-md-6 s-12">{{$tps->telepon}}</label>
+                                            <label class="col-md-6 s-12">{{$bank_sampah->telepon}}</label>
                                         </div>
                                         <div class="row">
                                             <label class="col-md-4 text-left s-12"><strong>Alamat</strong></label>
                                              <label class="">:</label>
-                                            <label class="col-md-6 s-12">{{$tps->alamat}}, {{$tps->kelurahan->n_kelurahan}},
-                                            {{$tps->kecamatan->n_kecamatan}},{{$tps->kabupaten->n_kabupaten}},{{$tps->provinsi->n_provinsi}}
+                                            <label class="col-md-6 s-12">{{$bank_sampah->alamat}}, {{$bank_sampah->kelurahan->n_kelurahan}},
+                                            {{$bank_sampah->kecamatan->n_kecamatan}},{{$bank_sampah->kabupaten->n_kabupaten}},{{$bank_sampah->provinsi->n_provinsi}}
                                             </label>
                                         </div>
                                         <div class="row">
-                                            <label class="col-md-4 text-left s-12"><strong>Jenis TPS3R</strong></label>
+                                            <label class="col-md-4 text-left s-12"><strong>Status Tps</strong></label>
                                              <label class="">:</label>
                                             <label class="col-md-6 s-12">
-                                                @if($tps->id_status == 1)
-                                                    TPS3R SWASTA
+                                                @if($bank_sampah->id_status == 1)
+                                                    Bank Sampah Swasta
                                                 @else
-                                                    TPS3R PEMDA
+                                                    Bank Sampah Pemda
                                                 @endif
                                             </label>
                                         </div>
@@ -84,7 +84,7 @@
                                             <label class="col-md-4 text-left s-12"><strong>Status Tps</strong></label>
                                              <label class="">:</label>
                                             <label class="col-md-6 s-12">
-                                                @if($tps->id_status == 1)
+                                                @if($bank_sampah->id_status == 1)
                                                     Fasum
                                                 @else
                                                     Pinjam Pakai
@@ -95,7 +95,7 @@
                                             <label class="col-md-4 text-left s-12"><strong>Keaktifan Tps</strong></label>
                                              <label class="">:</label>
                                             <label class="col-md-6 s-12">
-                                                @if($tps->keaktifan_tps == 1)
+                                                @if($bank_sampah->keaktifan_tps == 1)
                                                     Aktif 3R
                                                 @else
                                                     Aktif Tanpa Pengomposan
@@ -107,7 +107,7 @@
                                             <label class="col-md-4 text-left s-12"><strong>Gambar</strong></label>
                                             <label class="">:</label>
                                             <label class="col-md-6 s-12">
-                                                <img src="{{config('app.sftp_src').'/'.'gambar_tps3r'.'/'.$tps->foto}}" height="200" alt="">
+                                                <img src="{{config('app.sftp_src').'/'.'gambar_bank_sampah'.'/'.$bank_sampah->foto}}" height="200" alt="">
                                             </label>
                                         </div>
                                         
@@ -119,28 +119,28 @@
                                         <div class="row">
                                             <label class="col-md-4 text-left s-12"><strong>Pengurus</strong></label>
                                              <label class="">:</label>
-                                            <label class="col-md-6 s-12">{{$tps->pengurus}}</label>
+                                            <label class="col-md-6 s-12">{{$bank_sampah->pengurus}}</label>
                                         </div>
                                         <div class="row">
                                             <label class="col-md-4 text-left s-12"><strong>Luas (m<sup>2</sup>)</strong></label>
                                              <label class="">:</label>
-                                            <label class="col-md-6 s-12">{{number_format($tps->luas, 2, '.', ',')}}</label>
+                                            <label class="col-md-6 s-12">{{number_format($bank_sampah->luas, 2, '.', ',')}}</label>
                                         </div> 
                                         <div class="row">
                                             <label class="col-md-4 text-left s-12"><strong>Operator</strong></label>
                                              <label class="">:</label>
-                                            <label class="col-md-6 s-12">{{$tps->operator}}</label>
+                                            <label class="col-md-6 s-12">{{$bank_sampah->operator}}</label>
                                         </div>
                                         <div class="row">
                                             <label class="col-md-4 text-left s-12"><strong>Jumlah KK</strong></label>
                                              <label class="">:</label>
-                                            <label class="col-md-6 s-12">{{$tps->jumlah_kk}}</label>
+                                            <label class="col-md-6 s-12">{{$bank_sampah->jumlah_kk}}</label>
                                         </div> 
                                         <div class="row">
                                             <label class="col-md-4 text-left s-12"><strong>Sumber Dana</strong></label>
                                              <label class="">:</label>
                                             <label class="col-md-6 s-12">
-                                                @if($tps->sumber_dana == 1)
+                                                @if($bank_sampah->sumber_dana == 1)
                                                     APBD
                                                 @else
                                                     APBN
@@ -151,7 +151,7 @@
                                         <div class="row">
                                             <label class="col-md-4 text-left s-12"><strong>Kordinat</strong></label>
                                              <label class="">:</label>
-                                            <label class="col-md-6 s-12">{{$tps->kordinat}}</label>
+                                            <label class="col-md-6 s-12">{{$bank_sampah->kordinat}}</label>
                                         </div>
 
                                        
@@ -160,12 +160,12 @@
                                 
                             </div>
 
-                           @if($tps->kelola != null)
+                            @if($bank_sampah->kelola != null)
                             <h6 class="card-header">
-                                    <strong>Data TP3R Terkelola :</strong>
+                                    <strong>Data Bank Sampah Terkelola :</strong>
                                    
-                                    <strong style="float: right;" class=""><a href="{{route('MasterTps3r.tps3r.kelola_edit', $tps->id)}}" class="btn btn-success btn-sm">
-                                        <i class="icon icon-pencil white-text s-12"></i>Rubah Kelola TPS3R</a>
+                                    <strong style="float: right;" class=""><a href="{{route('MasterBankSampah.bank_sampah.kelola_edit_bank_sampah', $bank_sampah->id)}}" class="btn btn-success btn-sm">
+                                        <i class="icon icon-pencil white-text s-12"></i>Rubah Bank Sampah</a>
                                     </strong> 
                                     
                             </h6>
@@ -176,42 +176,42 @@
                                         <div class="row">
                                             <label class="col-md-4 text-left s-12"><strong>Tahun</strong></label>
                                              <label class="">:</label>
-                                            <label class="col-md-6 s-12">{{$tps->kelola->tahun}}</label>
+                                            <label class="col-md-6 s-12">{{$bank_sampah->kelola->tahun}}</label>
                                         </div>
                                         <div class="row">
                                             <label class="col-md-4 text-left s-12"><strong>Sampah Masuk (ton)</strong></label>
                                              <label class="">:</label>
-                                            <label class="col-md-6 s-12">{{number_format($tps->kelola->sampah_masuk, 2, '.', ',')}}</label>
+                                            <label class="col-md-6 s-12">{{number_format($bank_sampah->kelola->sampah_masuk, 2, '.', ',')}}</label>
                                         </div>
                                         <div class="row">
                                             <label class="col-md-4 text-left s-12"><strong>Sampah Landfil (ton)</strong></label>
                                              <label class="">:</label>
-                                            <label class="col-md-6 s-12">{{number_format($tps->kelola->sampah_landfil, 2, '.', ',')}}</label>
+                                            <label class="col-md-6 s-12">{{number_format($bank_sampah->kelola->sampah_landfil, 2, '.', ',')}}</label>
                                         </div>
                                         <div class="row">
                                             <label class="col-md-4 text-left s-12"><strong>Bahan baku Pakan Ternak (ton)</strong></label>
                                              <label class="">:</label>
-                                            <label class="col-md-6 s-12">{{number_format($tps->kelola->pakan_ternak, 2, '.', ',')}}</label>
+                                            <label class="col-md-6 s-12">{{number_format($bank_sampah->kelola->pakan_ternak, 2, '.', ',')}}</label>
                                         </div>
                                         <div class="row">
                                             <label class="col-md-4 text-left s-12"><strong>Bahan baku Kompos (ton)</strong></label>
                                              <label class="">:</label>
-                                            <label class="col-md-6 s-12">{{number_format($tps->kelola->kompos, 2, '.', ',')}}</label>
+                                            <label class="col-md-6 s-12">{{number_format($bank_sampah->kelola->kompos, 2, '.', ',')}}</label>
                                         </div>
                                         <div class="row">
                                             <label class="col-md-4 text-left s-12"><strong>Bahan baku Daur Ulang (ton)</strong></label>
                                              <label class="">:</label>
-                                            <label class="col-md-6 s-12">{{number_format($tps->kelola->daur_ulang, 2, '.', ',')}}</label>
+                                            <label class="col-md-6 s-12">{{number_format($bank_sampah->kelola->daur_ulang, 2, '.', ',')}}</label>
                                         </div>
                                         <div class="row">
                                             <label class="col-md-4 text-left s-12"><strong>Bahan baku Up-cycle (ton)</strong></label>
                                              <label class="">:</label>
-                                            <label class="col-md-6 s-12">{{number_format($tps->kelola->cycle, 2, '.', ',')}}</label>
+                                            <label class="col-md-6 s-12">{{number_format($bank_sampah->kelola->up_cycle, 2, '.', ',')}}</label>
                                         </div>
                                         <div class="row">
                                             <label class="col-md-4 text-left s-12"><strong>Bahan baku Sumber Energi (ton)</strong></label>
                                              <label class="">:</label>
-                                            <label class="col-md-6 s-12">{{number_format($tps->kelola->sumber_energi, 2, '.', ',')}}</label>
+                                            <label class="col-md-6 s-12">{{number_format($bank_sampah->kelola->sumber_energi, 2, '.', ',')}}</label>
 
                                         </div>
                                     
@@ -225,10 +225,10 @@
                                        
                                     </div>
                                 </div>
+                                @endif
                                 
                             </div>
-                            @endif
-                           
+
 
                            
                             </div>

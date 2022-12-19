@@ -78,6 +78,14 @@ Route::prefix('MasterBankSampah')->namespace('masterBankSampah')->name('MasterBa
     Route::resource('status_bank_sampah', 'StatusBankSampahController');
     Route::post('status_bank_sampah/api', 'StatusBankSampahController@api')->name('status_bank_sampah.api');
 
+    //bank sampah
+    Route::resource('bank_sampah', 'BankSampahController');
+    Route::post('bank_sampah/api', 'BankSampahController@api')->name('bank_sampah.api');
+    Route::get('bank_sampah/kelola_bank_sampah/{id}', 'BankSampahController@kelola')->name('bank_sampah.kelola_bank_sampah');
+    Route::post('bank_sampah/kelola_store', 'BankSampahController@kelola_store')->name('bank_sampah.kelola_store_bank_sampah');
+    Route::get('bank_sampah/kelola_edit/{id}', 'BankSampahController@kelola_edit')->name('bank_sampah.kelola_edit_bank_sampah');
+    Route::post('bank_sampah/kelola_update', 'BankSampahController@kelola_update')->name('bank_sampah.kelola_update_bank_sampah');
+
     
 
 });

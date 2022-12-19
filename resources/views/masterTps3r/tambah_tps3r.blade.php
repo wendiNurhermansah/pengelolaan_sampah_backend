@@ -94,6 +94,12 @@
                                             <input type="text" class="form-control light fs-14" name="nama_fasilitas"
                                                 id="nama_fasilitas" value="" required>
                                         </div>
+                                        <div class="form-group mt-2 ml-3">
+                                            <label for="pengurus" class="font-weight-bold fs-14">Pengurus<span
+                                                    class="text-danger fs-12">*</span></label>
+                                                    <input type="text" class="form-control light fs-14" name="pengurus" id="pengurus"
+                                                value="" required>
+                                        </div>
                                         
                                         
                                         <div class="form-group mt-2 ml-3">
@@ -150,12 +156,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         
-                                        <div class="form-group mt-2 ml-3">
-                                            <label for="pengurus" class="font-weight-bold fs-14">Pengurus<span
-                                                    class="text-danger fs-12">*</span></label>
-                                                    <input type="text" class="form-control light fs-14" name="pengurus" id="pengurus"
-                                                value="" required>
-                                        </div>
+                                        
                                         <div class="form-group mt-2 ml-3">
                                             <label for="foto" class="font-weight-bold fs-14">Foto<span
                                                     class="text-danger fs-12">*</span></label>
@@ -181,6 +182,15 @@
                                                     class="text-danger fs-12">*</span></label>
                                                     <input type="text" class="form-control light fs-14" name="jumlah_kk" id="jumlah_kk"
                                                 value="" onkeypress="return hanyaAngka(event)" required>
+                                        </div>
+                                        <div class="form-group mt-2 ml-3">
+                                            <label for="id_jenis" class="font-weight-bold fs-14">Jenis Bank Sampah<span class="text-danger fs-12">*</span></label>
+                                            <select class="select2 form-control light" name="id_jenis" id="id_jenis" autocomplete="off">
+                                                <option value="">Pilih</option>
+                                                <option value="1">TPS3R SWASTA</option>
+                                                <option value="2">TPS3R PEMDA</option>
+                                                
+                                            </select>
                                         </div>
                                         <div class="form-group mt-2 ml-3">
                                             <label for="id_status" class="font-weight-bold fs-14">Status TPS3R<span class="text-danger fs-12">*</span></label>

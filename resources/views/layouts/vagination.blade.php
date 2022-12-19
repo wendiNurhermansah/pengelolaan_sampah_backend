@@ -64,17 +64,23 @@
 
     
 
-    <li class="treeview"><a href="#"><i class="icon icon-archive blue-text s-18"></i>BANK SAMPAH<i
+    <!-- <li class="treeview"><a href="#"><i class="icon icon-archive blue-text s-18"></i>BANK SAMPAH<i
         class="icon icon-chevron-down s-10 mr-2 pull-right"></i></a>
         <ul class="treeview-menu">
             <li><a href="{{route('MasterBankSampah.jenis_bank_sampah.index')}}"><i class="icon icon-circle-o"></i><span>Jenis Bank Sampah</span>  </a>
             </li>
             <li><a href="{{route('MasterBankSampah.status_bank_sampah.index')}}"><i class="icon icon-circle-o"></i><span>Status Bank Sampah</span>  </a>
             </li>
-            <li><a href="#"><i class="icon icon-circle-o"></i><span>Bank Sampah</span></a>
+            <li><a href="{{route('MasterBankSampah.bank_sampah.index')}}""><i class="icon icon-circle-o"></i><span>Bank Sampah</span></a>
                 </li>
             </ul>
-    </li> 
+    </li>  -->
+    <li>
+        <a href="{{route('MasterBankSampah.bank_sampah.index')}}"><i class="icon icon-archive blue-text s-18"></i>
+        <span>BANK SAMPAH</span>
+        <i class="icon icon-angle-right s-18 pull-right"></i>
+        </a>
+    </li>
 
     @endcan
 
