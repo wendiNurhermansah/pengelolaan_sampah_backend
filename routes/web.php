@@ -112,23 +112,27 @@ Route::prefix('MasterTps3r')->namespace('masterTps3r')->name('MasterTps3r.')->gr
 });
 
 
-Route::prefix('MasterPengolahan')->namespace('masterPengolahan')->name('MasterPengolahan.')->group(function(){
-    //Komposisi Sampah
-    Route::resource('komposisi_sampah', 'KomposisiSampahController');
-    Route::post('komposisi_sampah/api', 'KomposisiSampahController@api')->name('komposisi_sampah.api');
+// Route::prefix('MasterPengolahan')->namespace('masterPengolahan')->name('MasterPengolahan.')->group(function(){
+//     //Komposisi Sampah
+//     Route::resource('komposisi_sampah', 'KomposisiSampahController');
+//     Route::post('komposisi_sampah/api', 'KomposisiSampahController@api')->name('komposisi_sampah.api');
 
-    //Sumber sampah
-    Route::resource('sumber_sampah', 'SumberSampahController');
-    Route::post('sumber_sampah/api', 'SumberSampahController@api')->name('sumber_sampah.api');
+//     //Sumber sampah
+//     Route::resource('sumber_sampah', 'SumberSampahController');
+//     Route::post('sumber_sampah/api', 'SumberSampahController@api')->name('sumber_sampah.api');
 
     
 
-});
+// });
 
 Route::prefix('MasterDataPengolahan')->namespace('masterDataPengolahan')->name('MasterDataPengolahan.')->group(function(){
     //timbulan Sampah
     Route::resource('timbulan_sampah', 'TimbulanSampahController');
     Route::post('timbulan_sampah/api', 'TimbulanSampahController@api')->name('timbulan_sampah.api');
+
+    //Komposisi Sampah
+    Route::resource('komposisi_sampah', 'KomposisiController');
+    Route::post('komposisi_sampah/api', 'KomposisiController@api')->name('komposisi_sampah.api');
 
    
     
