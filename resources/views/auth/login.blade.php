@@ -7,7 +7,7 @@
     <meta name="author" content="">
 
     <!-- Title -->
-    <link rel="icon" href="{{asset('images/icon_sampah.png')}}" type="image/x-icon">
+    <link rel="icon" href="{{asset('images/logo_bank_sampah.png')}}" type="image/x-icon">
     <title>{{ config('app.name') }} | Login</title>
 
     <!-- CSS -->
