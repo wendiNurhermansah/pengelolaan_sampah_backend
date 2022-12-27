@@ -18,7 +18,7 @@
 </head>
 <body class="light">
     <div class="page parallel">
-        <div class="d-flex row">
+        <div class="d-flex row" style="height: 750px;">
             <div class="col-md-9 blue css-selector d-flex align-content-center flex-wrap">
                 <div class="col-md-6">
                     <div class="text-white p-l-80">

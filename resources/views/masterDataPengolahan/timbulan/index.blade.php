@@ -10,7 +10,7 @@
                 <div class="col">
                     <h4>
                         <i class="icon icon-asterisk amber-text s-18"></i>
-                        TPA
+                        TIMBULAN SAMPAH
                     </h4>
                 </div>
             </div>

@@ -147,12 +147,7 @@
                                             <label for="kordinat" class="font-weight-bold fs-14">Kordinat<span
                                                     class="text-danger fs-12">*</span></label>
                                             <textarea name="kordinat" id="kordinat" class="form-control light" cols="5" rows="2" required></textarea>
-                                        </div>
-
-                                        
-                                        
-           
-                                                    
+                                        </div>               
                                     </div>
                                     <div class="col-md-6">
                                         
@@ -221,10 +216,7 @@
                                                 
                                             </select>
                                         </div>
-                                        
-
-           
-                                                    
+                                                         
                                     </div>
                                 </div>
                                 <div style="" class="ml-3 mt-3">
