@@ -18,7 +18,7 @@
             <div class="row justify-content-between">
                     <ul role="tablist" class="nav nav-material nav-material-white responsive-tab">
                         <li>
-                            <a class="nav-link" href="{{route('MasterTps3r.tps3r.index')}}"><i class="icon icon-arrow_back"></i>Semua Data</a>
+                            <a class="nav-link" href="{{route('MasterTps3r.tps3r.show', $tps->id_tps3r)}}"><i class="icon icon-arrow_back"></i>Semua Data</a>
                         </li>
                     
                     </ul>
@@ -92,31 +92,33 @@
                                 <div class="row mt-3">
                                     <div class="col-md-6">
                                         <input type="text" class="form-control light fs-14"  name="id_tps3r" id="id_tps3r"
+                                                    value="{{$tps->id_tps3r}}" hidden>
+                                        <input type="text" class="form-control light fs-14"  name="id" id="id"
                                                     value="{{$tps->id}}" hidden>
                                         <div class="form-group mt-2 ml-3">
                                             <label for="sampah_masuk" class="font-weight-bold fs-14">Sampah Masuk (ton)<span
                                                         class="text-danger fs-12">*</span></label>
                                              <input type="text" class="form-control light fs-14" onkeypress="return hanyaAngka(event)" name="sampah_masuk" id="sampah_masuk"
-                                                    value="{{$tps->kelola->sampah_masuk}}" required>
+                                                    value="{{$tps->sampah_masuk}}" required>
                                         </div>
                                         <div class="form-group mt-2 ml-3">
                                             <label for="sampah_landfil" class="font-weight-bold fs-14">Sampah Landfil (ton)<span
                                                         class="text-danger fs-12">*</span></label>
                                              <input type="text" class="form-control light fs-14" onkeypress="return hanyaAngka(event)" name="sampah_landfil" id="sampah_landfil"
-                                                    value="{{$tps->kelola->sampah_landfil}}" required>
+                                                    value="{{$tps->sampah_landfil}}" required>
                                         </div>
                                         
                                         <div class="form-group mt-2 ml-3">
                                             <label for="pakan_ternak" class="font-weight-bold fs-14">Bahan baku Pakan Ternak (ton)<span
                                                         class="text-danger fs-12">*</span></label>
                                              <input type="text" class="form-control light fs-14" onkeypress="return hanyaAngka(event)" name="pakan_ternak" id="pakan_ternak"
-                                                    value="{{$tps->kelola->pakan_ternak}}" required>
+                                                    value="{{$tps->pakan_ternak}}" required>
                                         </div>
                                         <div class="form-group mt-2 ml-3">
                                             <label for="kompos" class="font-weight-bold fs-14">Bahan baku Kompos (ton)<span
                                                     class="text-danger fs-12">*</span></label>
                                             <input type="text" class="form-control light fs-14" onkeypress="return hanyaAngka(event)" name="kompos" id="kompos"
-                                                value="{{$tps->kelola->kompos}}" required>
+                                                value="{{$tps->kompos}}" required>
                                         </div>
                                         
                                     </div>
@@ -125,25 +127,25 @@
                                             <label for="tahun" class="font-weight-bold fs-14">Tahun<span
                                                     class="text-danger fs-12">*</span></label>
                                             <input type="text" class="form-control light fs-14" name="tahun" id="datepicker"
-                                                value="{{$tps->kelola->tahun}}" required>
+                                                value="{{$tps->tahun}}" required>
                                         </div>
                                         <div class="form-group mt-2 ml-3">
                                             <label for="daur_ulang" class="font-weight-bold fs-14">Bahan baku Daur Ulang (ton)<span
                                                     class="text-danger fs-12">*</span></label>
                                             <input type="text" class="form-control light fs-14" onkeypress="return hanyaAngka(event)" name="daur_ulang" id="daur_ulang"
-                                                value="{{$tps->kelola->daur_ulang}}" required>
+                                                value="{{$tps->daur_ulang}}" required>
                                         </div>
                                         <div class="form-group mt-2 ml-3">
                                             <label for="up_cycle" class="font-weight-bold fs-14">Bahan baku Up-cycle (ton)<span
                                                     class="text-danger fs-12">*</span></label>
                                             <input type="text" class="form-control light fs-14" onkeypress="return hanyaAngka(event)" name="up_cycle" id="up_cycle"
-                                                value="{{$tps->kelola->up_cycle}}" required>
+                                                value="{{$tps->up_cycle}}" required>
                                         </div>
                                         <div class="form-group mt-2 ml-3">
                                             <label for="sumber_energi" class="font-weight-bold fs-14">Bahan baku Sumber Energi (ton)<span
                                                     class="text-danger fs-12">*</span></label>
                                             <input type="text" class="form-control light fs-14" onkeypress="return hanyaAngka(event)" name="sumber_energi" id="sumber_energi"
-                                                value="{{$tps->kelola->sumber_energi}}" required>
+                                                value="{{$tps->sumber_energi}}" required>
                                         </div>
                                     </div>
                                 </div>
@@ -216,7 +218,7 @@
                     console.log(data);
                     $('#alert').html("<div role='alert' class='alert alert-success alert-dismissible'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>×</span></button><strong>Success!</strong> " + data.message + "</div>");
                     $('#load').hide();
-                    // location.reload();
+                    location.reload();
                     
                 },
                 error : function(data){

@@ -198,90 +198,7 @@ class TpaController extends Controller
         
     }
 
-    public function pengolahan(Request $request, $id){
-        
-        $pengolahan = Tpa::find($id);
-
-        return view('masterTpa.pengolahan', compact('pengolahan'));
-
-
-    }
-
-    public function pengolahan_store(Request $request){
-
-        
-        $request->validate([
-            'sampah_organik' => 'required',
-            'sampah_an_organik' => 'required',
-            'recovery_pemulung' => 'required',
-            'energy' => 'required',
-            'tahun' => 'required',
-            'sampah_masuk' => 'required',
-            'sampah_landfil' => 'required'
-
-        ]);
-
-        $terkelola = New Sampah_terkelola();
-        $terkelola->id_tpa = $request->id_tpa;
-        $terkelola->sampah_organik = $request->sampah_organik;
-        $terkelola->sampah_an_organik = $request->sampah_an_organik;
-        $terkelola->recovery_pemulung = $request->recovery_pemulung;
-        $terkelola->energy = $request->energy;
-        $terkelola->tahun = $request->tahun;
-        $terkelola->sampah_masuk = $request->sampah_masuk;
-        $terkelola->sampah_landfil = $request->sampah_landfil;
-        $terkelola->save();
-
-        
-
-        return response()->json([
-            'message' => 'Data Berhasil di Tambahkan!'
-        ]);
-
-
-    }
-
-
-    public function edit_pengolahan($id){
-        // dd($id)
-        $terkelola = Sampah_terkelola::where('id_tpa', $id)->first();
-        // dd($terkelola);
-
-        return view('masterTpa.edit_pengolahan', compact('terkelola'));
-    }
-
-    public function pengolahan_update(Request $request){
-
-        $request->validate([
-            'sampah_organik' => 'required',
-            'sampah_an_organik' => 'required',
-            'recovery_pemulung' => 'required',
-            'energy' => 'required',
-            'tahun' => 'required',
-            'sampah_masuk' => 'required',
-            'sampah_landfil' => 'required'
-
-        ]);
-
-        $terkelola = Sampah_terkelola::where('id_tpa', $request->id_tpa)->first();
-
-        $terkelola->update([
-            
-            'sampah_organik' => $request->sampah_organik,
-            'sampah_an_organik' => $request->sampah_an_organik,
-            'recovery_pemulung' => $request->recovery_pemulung,
-            'energy' => $request->energy,
-            'tahun' => $request->tahun,
-            'sampah_masuk' => $request->sampah_masuk,
-            'sampah_landfil' => $request->sampah_landfil
-
-        ]);
-
-        return response()->json([
-            'message' => 'Data Berhasil di Rubah!'
-        ]);
-       
-    }
+    
 
 
 
@@ -426,9 +343,176 @@ class TpaController extends Controller
     {
         Tpa::destroy($id);
         Sampah_terkelola::where('id_tpa', $id)->delete();
+        
 
         return response()->json([
             'message' => 'Data TPA Berhasil di Hapus.'
         ]);
     }
+
+
+    public function api_detail(Request $request){
+
+        $id_tpa = $request->data_detail_id;
+
+        $tpa_detail = Sampah_terkelola::where('id_tpa', $id_tpa)
+        ->orderBy('tahun', 'DESC')
+        ->get();
+        // dd($tpa_detail);
+        return DataTables::of($tpa_detail)
+        
+
+        ->addColumn('action', function ($p) {
+            return "
+               
+                <a href='". route('MasterTpa.tpa.edit_detail', $p->id) ."'  title='Edit'><i class='icon-pencil mr-1'></i></a>
+                <a href='#' onclick='remove_detail(" . $p->id . ")' class='text-danger' title='Hapus'><i class='icon-remove'></i></a>";
+        })
+
+        
+        
+        ->editColumn('sampah_masuk', function($p){
+            return number_format($p->sampah_masuk, 2, '.', ',');
+        })
+
+        ->editColumn('sampah_landfil', function($p){
+            return number_format($p->sampah_landfil, 2, '.', ',');
+        })
+
+        ->editColumn('sampah_organik', function($p){
+            return number_format($p->sampah_organik, 2, '.', ',');
+        })
+
+        ->editColumn('sampah_an_organik', function($p){
+            return number_format($p->sampah_an_organik, 2, '.', ',');
+        })
+
+        ->editColumn('energy', function($p){
+            return number_format($p->energy, 2, '.', ',');
+        })
+
+        ->editColumn('recovery_pemulung', function($p){
+            return number_format($p->recovery_pemulung, 2, '.', ',');
+        })
+
+        
+
+        
+
+
+        ->addIndexColumn()
+        ->rawColumns(['action'])
+        ->toJson();
+    }
+
+    public function pengolahan(Request $request, $id){
+        
+        $pengolahan = Tpa::find($id);
+
+        return view('masterTpa.pengolahan', compact('pengolahan'));
+
+
+    }
+
+    public function pengolahan_store(Request $request){
+
+        
+        $request->validate([
+            'sampah_organik' => 'required',
+            'sampah_an_organik' => 'required',
+            'recovery_pemulung' => 'required',
+            'energy' => 'required',
+            'tahun' => 'required',
+            'sampah_masuk' => 'required',
+            'sampah_landfil' => 'required'
+
+        ]);
+
+        foreach($request->sampah_organik as $key => $terkelola){
+
+        
+
+        $terkelola = New Sampah_terkelola();
+        $terkelola->id_tpa = $request->id_tpa;
+        $terkelola->sampah_organik = $request->sampah_organik[$key];
+        $terkelola->sampah_an_organik = $request->sampah_an_organik[$key];
+        $terkelola->recovery_pemulung = $request->recovery_pemulung[$key];
+        $terkelola->energy = $request->energy[$key];
+        $terkelola->tahun = $request->tahun[$key];
+        $terkelola->sampah_masuk = $request->sampah_masuk[$key];
+        $terkelola->sampah_landfil = $request->sampah_landfil[$key];
+        $terkelola->save();
+
+    }
+
+        
+
+        return response()->json([
+            'message' => 'Data Berhasil di Tambahkan!'
+        ]);
+
+
+    }
+
+
+    
+
+    
+    public function edit_detail($id){
+        // dd($id);
+        $terkelola = Sampah_terkelola::find($id);
+        // dd($terkelola);
+
+        return view('masterTpa.edit_pengolahan', compact('terkelola'));
+    }
+
+
+    public function pengolahan_update(Request $request){
+
+        $request->validate([
+            'sampah_organik' => 'required',
+            'sampah_an_organik' => 'required',
+            'recovery_pemulung' => 'required',
+            'energy' => 'required',
+            'tahun' => 'required',
+            'sampah_masuk' => 'required',
+            'sampah_landfil' => 'required'
+
+        ]);
+
+        $terkelola = Sampah_terkelola::where('id', $request->id)->first();
+
+        $terkelola->update([
+            
+            'sampah_organik' => $request->sampah_organik,
+            'sampah_an_organik' => $request->sampah_an_organik,
+            'recovery_pemulung' => $request->recovery_pemulung,
+            'energy' => $request->energy,
+            'tahun' => $request->tahun,
+            'sampah_masuk' => $request->sampah_masuk,
+            'sampah_landfil' => $request->sampah_landfil
+
+        ]);
+
+        return response()->json([
+            'message' => 'Data Berhasil di Rubah!'
+        ]);
+       
+    }
+
+    public function destroy_detail($id)
+    {
+        // dd($id);
+        $kelola = Sampah_terkelola::find($id);
+        $kelola->delete();
+
+        return response()->json([
+            'message' => 'Data TPA Berhasil di Hapus.'
+        ]);
+    }
+
+
+
+  
+
 }

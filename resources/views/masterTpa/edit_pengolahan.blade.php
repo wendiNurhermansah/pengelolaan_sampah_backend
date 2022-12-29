@@ -18,7 +18,7 @@
             <div class="row justify-content-between">
                     <ul role="tablist" class="nav nav-material nav-material-white responsive-tab">
                         <li>
-                            <a class="nav-link" href="{{route('MasterTpa.tpa.index')}}"><i class="icon icon-arrow_back"></i>Semua Data</a>
+                            <a class="nav-link" href="{{route('MasterTpa.tpa.show', $terkelola->id_tpa)}}"><i class="icon icon-arrow_back"></i>Semua Data</a>
                         </li>
                     
                     </ul>
@@ -89,6 +89,8 @@
                                     <div class="col-md-6">
                                         <input type="text" class="form-control light fs-14"  name="id_tpa" id="id_tpa"
                                                     value="{{$terkelola->id_tpa}}" hidden>
+                                        <input type="text" class="form-control light fs-14"  name="id" id="id"
+                                                    value="{{$terkelola->id}}" hidden>
 
                                         <div class="form-group mt-2 ml-3">
                                             <label for="sampah_masuk" class="font-weight-bold fs-14">Sampah Masuk<span
@@ -207,6 +209,7 @@
                     console.log(data);
                     $('#alert').html("<div role='alert' class='alert alert-success alert-dismissible'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>×</span></button><strong>Success!</strong> " + data.message + "</div>");
                     $('#load').hide();
+                    location.reload();
                     add();
                 },
                 error : function(data){

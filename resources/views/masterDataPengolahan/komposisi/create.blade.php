@@ -129,13 +129,13 @@
                                             <textarea name="alamat" id="alamat" class="form-control light" cols="5" rows="2" required></textarea>
                                         </div>  
                                         <div class="form-group mt-2 ml-3">
-                                            <label for="sisa_makanan" class="font-weight-bold fs-14">Sisa Makanan (%)<span
+                                            <label for="sisa_makanan" class="font-weight-bold fs-14">Sisa Makanan (ton)<span
                                                     class="text-danger fs-12"></span></label>
                                                     <input type="text" class="form-control light fs-14" name="sisa_makanan" id="sisa_makanan"
                                                 value="" onkeypress="return hanyaAngka(event)">
                                         </div>
                                         <div class="form-group mt-2 ml-3">
-                                            <label for="kayu" class="font-weight-bold fs-14">Kayu / Ranting (%)<span
+                                            <label for="kayu" class="font-weight-bold fs-14">Kayu / Ranting (ton)<span
                                                     class="text-danger fs-12"></span></label>
                                                     <input type="text" class="form-control light fs-14" name="kayu" id="kayu"
                                                 value="" onkeypress="return hanyaAngka(event)">
@@ -144,44 +144,44 @@
                                     <div class="col-md-6">
                                         
                                         <div class="form-group mt-2 ml-3">
-                                            <label for="kertas" class="font-weight-bold fs-14">Kertas / Karton (%)<span
+                                            <label for="kertas" class="font-weight-bold fs-14">Kertas / Karton (ton)<span
                                                     class="text-danger fs-12"></span></label>
                                                     <input type="text" class="form-control light fs-14" name="kertas" id="kertas"
                                                 value="" onkeypress="return hanyaAngka(event)">
                                         </div>  
                                         <div class="form-group mt-2 ml-3">
-                                            <label for="plastik" class="font-weight-bold fs-14">Plastik (%)<span
+                                            <label for="plastik" class="font-weight-bold fs-14">Plastik (ton)<span
                                                     class="text-danger fs-12"></span></label>
                                                     <input type="text" class="form-control light fs-14" name="plastik" id="plastik"
                                                 value="" onkeypress="return hanyaAngka(event)">
                                         </div>   
 
                                         <div class="form-group mt-2 ml-3">
-                                            <label for="logam" class="font-weight-bold fs-14">Logam (%)<span
+                                            <label for="logam" class="font-weight-bold fs-14">Logam (ton)<span
                                                     class="text-danger fs-12"></span></label>
                                                     <input type="text" class="form-control light fs-14" name="logam" id="logam"
                                                 value="" onkeypress="return hanyaAngka(event)">
                                         </div>  
                                         <div class="form-group mt-2 ml-3">
-                                            <label for="kain" class="font-weight-bold fs-14">Kain (%)<span
+                                            <label for="kain" class="font-weight-bold fs-14">Kain (ton)<span
                                                     class="text-danger fs-12"></span></label>
                                                     <input type="text" class="form-control light fs-14" name="kain" id="kain"
                                                 value="" onkeypress="return hanyaAngka(event)">
                                         </div> 
                                         <div class="form-group mt-2 ml-3">
-                                            <label for="karet" class="font-weight-bold fs-14">Karet / Kulit (%)<span
+                                            <label for="karet" class="font-weight-bold fs-14">Karet / Kulit (ton)<span
                                                     class="text-danger fs-12"></span></label>
                                                     <input type="text" class="form-control light fs-14" name="karet" id="karet"
                                                 value="" onkeypress="return hanyaAngka(event)">
                                         </div>  
                                         <div class="form-group mt-2 ml-3">
-                                            <label for="kaca" class="font-weight-bold fs-14">Kaca (%)<span
+                                            <label for="kaca" class="font-weight-bold fs-14">Kaca (ton)<span
                                                     class="text-danger fs-12"></span></label>
                                                     <input type="text" class="form-control light fs-14" name="kaca" id="kaca"
                                                 value="" onkeypress="return hanyaAngka(event)">
                                         </div>  
                                         <div class="form-group mt-2 ml-3">
-                                            <label for="lainnya" class="font-weight-bold fs-14">Lainnya (%)<span
+                                            <label for="lainnya" class="font-weight-bold fs-14">Lainnya (ton)<span
                                                     class="text-danger fs-12"></span></label>
                                                     <input type="text" class="form-control light fs-14" name="lainnya" id="lainnya"
                                                 value="" onkeypress="return hanyaAngka(event)">

@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title', 'Detail Timbulan sampah')
+@section('title', 'Detail Sumber Sampah')
 
 @section('content')
 
@@ -10,7 +10,7 @@
                 <div class="col">
                     <h4>
                         <i class="icon icon-list amber-text s-18"></i>
-                        Detail Timbulan Sampah
+                        Detail Sumber Sampah
                     </h4>
                 </div>
                 
@@ -18,7 +18,7 @@
             <div class="row justify-content-between">
                     <ul role="tablist" class="nav nav-material nav-material-white responsive-tab">
                         <li>
-                            <a class="nav-link" href="{{route('MasterDataPengolahan.timbulan_sampah.index')}}"><i class="icon icon-arrow_back"></i>Semua Data</a>
+                            <a class="nav-link" href="{{route('MasterDataPengolahan.sumber_sampah.index')}}"><i class="icon icon-arrow_back"></i>Semua Data</a>
                         </li>
                     
                     </ul>
@@ -35,7 +35,7 @@
                             
                 
                             <h6 class="card-header">
-                                    <strong>Data Timbulan Sampah :</strong>
+                                    <strong>Data Sumber Sampah :</strong>
                                    
                             </h6>
                                 
@@ -47,41 +47,68 @@
                                         <div class="row">
                                             <label class="col-md-4 text-left s-12"><strong>Tahun</strong></label>
                                              <label class="">:</label>
-                                            <label class="col-md-6 s-12">{{$timbulan->tahun}}</label>
+                                            <label class="col-md-6 s-12">{{$sumber->tahun}}</label>
                                         </div>
                                         <div class="row">
                                             <label class="col-md-4 text-left s-12"><strong>Kabupaten / Kota</strong></label>
                                              <label class="">:</label>
-                                            <label class="col-md-6 s-12">{{$timbulan->kabupaten->n_kabupaten}}</label>
+                                            <label class="col-md-6 s-12">{{$sumber->kabupaten->n_kabupaten}}</label>
                                         </div>
+
                                         <div class="row">
                                             <label class="col-md-4 text-left s-12"><strong>Kecamatan</strong></label>
                                              <label class="">:</label>
-                                            <label class="col-md-6 s-12">{{$timbulan->kecamatan->n_kecamatan}}</label>
+                                            <label class="col-md-6 s-12">{{$sumber->kecamatan->n_kecamatan}}</label>
                                         </div>
+
                                         <div class="row">
                                             <label class="col-md-4 text-left s-12"><strong>Alamat Lengkap</strong></label>
                                              <label class="">:</label>
-                                            <label class="col-md-6 s-12">{{$timbulan->alamat}}, {{$timbulan->kelurahan->n_kelurahan}},
-                                            {{$timbulan->kecamatan->n_kecamatan}},{{$timbulan->kabupaten->n_kabupaten}},{{$timbulan->provinsi->n_provinsi}}
-                                            </label>
+                                            <label class="col-md-6 s-12">{{$sumber->alamat}}, {{$sumber->kelurahan->n_kelurahan}}, {{$sumber->kecamatan->n_kecamatan}}, {{$sumber->kabupaten->n_kabupaten}}</label>
                                         </div>
                                         <div class="row">
-                                            <label class="col-md-4 text-left s-12"><strong>Timbulan Harian (ton)</strong></label>
+                                            <label class="col-md-4 text-left s-12"><strong>Rumah Tangga (Ton)</strong></label>
                                              <label class="">:</label>
-                                            <label class="col-md-6 s-12">{{number_format($timbulan->timbul_harian, 2, '.', ',')}}</label>
-                                        </div> 
+                                            <label class="col-md-6 s-12">{{number_format($sumber->rumah_tangga, 2, '.', ',')}}</label>
+                                        </div>
                                         <div class="row">
-                                            <label class="col-md-4 text-left s-12"><strong>Timbulan Tahunan (ton)</strong></label>
+                                            <label class="col-md-4 text-left s-12"><strong>Perkantoran (Ton)</strong></label>
                                              <label class="">:</label>
-                                            <label class="col-md-6 s-12">{{number_format($timbulan->timbul_tahunan, 2, '.', ',')}}</label>
-                                        </div> 
+                                            <label class="col-md-6 s-12">{{number_format($sumber->perkantoran, 2, '.', ',')}}</label>
+                                        </div>
                                         
 
                                         
 
                                     </div>
                                     <div class="col-md-6">
+                                        <div class="row">
+                                            <label class="col-md-4 text-left s-12"><strong>Pasar Tradisional (Ton)</strong></label>
+                                             <label class="">:</label>
+                                            <label class="col-md-6 s-12">{{number_format($sumber->pasar, 2, '.', ',')}}</label>
+                                        </div>
+                                        <div class="row">
+                                            <label class="col-md-4 text-left s-12"><strong>Pusat Perniagaan (Ton)</strong></label>
+                                             <label class="">:</label>
+                                            <label class="col-md-6 s-12">{{number_format($sumber->perniagaan, 2, '.', ',')}}</label>
+                                        </div>
+                                        <div class="row">
+                                            <label class="col-md-4 text-left s-12"><strong>Kawasan Publik (Ton)</strong></label>
+                                             <label class="">:</label>
+                                            <label class="col-md-6 s-12">{{number_format($sumber->publik, 2, '.', ',')}}</label>
+                                        </div>
+                                        <div class="row">
+                                            <label class="col-md-4 text-left s-12"><strong>Kawasan (Ton)</strong></label>
+                                             <label class="">:</label>
+                                            <label class="col-md-6 s-12">{{number_format($sumber->kawasan, 2, '.', ',')}}</label>
+                                        </div>
+                                        
+                                        <div class="row">
+                                            <label class="col-md-4 text-left s-12"><strong>Lainnya (Ton)</strong></label>
+                                             <label class="">:</label>
+                                            <label class="col-md-6 s-12">{{number_format($sumber->lainnya, 2, '.', ',')}}s</label>
+                                        </div>
+
                                         
 
                                        

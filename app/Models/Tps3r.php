@@ -9,15 +9,7 @@ class Tps3r extends Model
     protected $table = 'tm_tps3r';
     protected $guarded = [];
 
-    public function jenis()
-    {
-        return $this->belongsTo(Jenis_tps3r::class, 'id_jenis');
-    }
-
-    public function status()
-    {
-        return $this->belongsTo(Status_tps3r::class, 'id_status');
-    }
+   
 
     public function kelurahan()
     {
@@ -36,8 +28,13 @@ class Tps3r extends Model
         return $this->belongsTo(Provinsi::class, 'id_provinsi');
     }
 
-    public function kelola()
+    public function terkelola()
     {
         return $this->belongsTo(Kelola_tps3r::class, 'id', 'id_tps3r');
     }
+
+    
+
+
+
 }

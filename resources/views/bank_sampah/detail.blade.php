@@ -36,11 +36,9 @@
 
                             <h6 class="card-header">
                                     <strong>Data Bank Sampah :</strong>
-                                    @if($bank_sampah->kelola == null)
-                                    <strong style="float: right;" class=""><a href="{{route('MasterBankSampah.bank_sampah.kelola_bank_sampah', $bank_sampah->id)}}" class="btn btn-primary btn-sm">
-                                        <i class="icon icon-plus white-text s-12"></i>Kelola Bank Sampah</a>
-                                    </strong> 
-                                    @endif
+                                   
+                                     
+                                  
                             </h6>
                                 
                            
@@ -160,74 +158,52 @@
                                 
                             </div>
 
-                            @if($bank_sampah->kelola != null)
+                        
+                            
+                            
+                        </div>
+                      
+                    </div>
+                    
+                </div>
+
+                <div class="card no-b">
+                    <div class="card-body">
+                        <div class="card">
+                            
+                           
                             <h6 class="card-header">
                                     <strong>Data Bank Sampah Terkelola :</strong>
                                    
-                                    <strong style="float: right;" class=""><a href="{{route('MasterBankSampah.bank_sampah.kelola_edit_bank_sampah', $bank_sampah->id)}}" class="btn btn-success btn-sm">
-                                        <i class="icon icon-pencil white-text s-12"></i>Rubah Bank Sampah</a>
-                                    </strong> 
+                                    <strong style="float: right;" class=""><a href="{{route('MasterBankSampah.bank_sampah.kelola_bank_sampah', $bank_sampah->id)}}" class="btn btn-primary btn-sm">
+                                        <i class="icon icon-plus white-text s-12"></i>Kelola Bank Sampah</a>
+                                    </strong>
                                     
                             </h6>
+                            <input type="hidden" value="{{$bank_sampah->id}}" id="data_detail_id">
 
                             <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="row">
-                                            <label class="col-md-4 text-left s-12"><strong>Tahun</strong></label>
-                                             <label class="">:</label>
-                                            <label class="col-md-6 s-12">{{$bank_sampah->kelola->tahun}}</label>
-                                        </div>
-                                        <div class="row">
-                                            <label class="col-md-4 text-left s-12"><strong>Sampah Masuk (ton)</strong></label>
-                                             <label class="">:</label>
-                                            <label class="col-md-6 s-12">{{number_format($bank_sampah->kelola->sampah_masuk, 2, '.', ',')}}</label>
-                                        </div>
-                                        <div class="row">
-                                            <label class="col-md-4 text-left s-12"><strong>Sampah Landfil (ton)</strong></label>
-                                             <label class="">:</label>
-                                            <label class="col-md-6 s-12">{{number_format($bank_sampah->kelola->sampah_landfil, 2, '.', ',')}}</label>
-                                        </div>
-                                        <div class="row">
-                                            <label class="col-md-4 text-left s-12"><strong>Bahan baku Pakan Ternak (ton)</strong></label>
-                                             <label class="">:</label>
-                                            <label class="col-md-6 s-12">{{number_format($bank_sampah->kelola->pakan_ternak, 2, '.', ',')}}</label>
-                                        </div>
-                                        <div class="row">
-                                            <label class="col-md-4 text-left s-12"><strong>Bahan baku Kompos (ton)</strong></label>
-                                             <label class="">:</label>
-                                            <label class="col-md-6 s-12">{{number_format($bank_sampah->kelola->kompos, 2, '.', ',')}}</label>
-                                        </div>
-                                        <div class="row">
-                                            <label class="col-md-4 text-left s-12"><strong>Bahan baku Daur Ulang (ton)</strong></label>
-                                             <label class="">:</label>
-                                            <label class="col-md-6 s-12">{{number_format($bank_sampah->kelola->daur_ulang, 2, '.', ',')}}</label>
-                                        </div>
-                                        <div class="row">
-                                            <label class="col-md-4 text-left s-12"><strong>Bahan baku Up-cycle (ton)</strong></label>
-                                             <label class="">:</label>
-                                            <label class="col-md-6 s-12">{{number_format($bank_sampah->kelola->up_cycle, 2, '.', ',')}}</label>
-                                        </div>
-                                        <div class="row">
-                                            <label class="col-md-4 text-left s-12"><strong>Bahan baku Sumber Energi (ton)</strong></label>
-                                             <label class="">:</label>
-                                            <label class="col-md-6 s-12">{{number_format($bank_sampah->kelola->sumber_energi, 2, '.', ',')}}</label>
-
-                                        </div>
-                                    
-
-                                        
-
-                                    </div>
-                                    <div class="col-md-6">
-                                       
-
-                                       
-                                    </div>
+                                <div class="table-responsive mt-3">
+                                    <table id="dataTable2" class="table table-striped table-bordered" style="width:100%">
+                                        <thead>
+                                            <th width="30">No</th>
+                                            <th>Tahun</th>
+                                            <th>Sampah Masuk (ton)</th>
+                                            <th>Sampah Landfil (ton)</th>
+                                            <th>Bahan baku Pakan Ternak (ton)</th>
+                                            <th>Bahan baku Kompos (ton)</th>
+                                            <th>Bahan baku Daur Ulang (ton)</th>
+                                            <th>Bahan baku Up-cycle (ton)</th>
+                                            <th>Bahan baku Sumber Energi (ton)</th>
+                                            <th width="60">Aksi</th>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
                                 </div>
-                                @endif
+                               
                                 
                             </div>
+
 
 
                            
@@ -239,6 +215,7 @@
                     </div>
                     
                 </div>
+
             </div>
             
         </div>
@@ -248,6 +225,63 @@
 @endsection
 
 @section('script')
+
+<script type="text/javascript">
+    var table = $('#dataTable2').dataTable({
+            processing: true,
+            serverSide: true,
+            order: [],
+            ajax: {
+                url: "{{ route('MasterBankSampah.bank_sampah.api_detail') }}",
+                method: 'POST',
+                data: function(data){
+                    data.data_detail_id = $('#data_detail_id').val();
+                }
+            },
+            columns: [
+                {data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false, align: 'center', className: 'text-center'},
+                {data: 'tahun', name: 'tahun',className: 'text-center'},
+                {data: 'sampah_masuk', name: 'sampah_masuk',className: 'text-center'},
+                {data: 'sampah_landfil', name: 'sampah_landfil', className: 'text-center'},
+                {data: 'pakan_ternak', name: 'pakan_ternak', className: 'text-center'},
+                {data: 'kompos', name: 'kompos', className: 'text-center'},
+                {data: 'daur_ulang', name: 'daur_ulang', className: 'text-center', className: 'text-center'},
+                {data: 'up_cycle', name: 'up_cycle', className: 'text-center'},
+                {data: 'sumber_energi', name: 'sumber_energi', className: 'text-center'},
+                {data: 'action', name: 'action', orderable: false, searchable: false, className: 'text-center'}
+            ]
+        });
+
+        function remove_detail(id){
+        $.confirm({
+            title: '',
+            content: 'Apakah Anda yakin akan menghapus data ini ?',
+            icon: 'icon icon-question amber-text',
+            theme: 'modern',
+            closeIcon: true,
+            animation: 'scale',
+            type: 'red',
+            buttons: {
+                ok: {
+                    text: "ok!",
+                    btnClass: 'btn-primary',
+                    keys: ['enter'],
+                    action: function(){
+                        $.post("{{ route('MasterBankSampah.bank_sampah.destroy_detail', ':id') }}".replace(':id', id), {'_method' : 'DELETE'}, function(data) {
+                            table.api().ajax.reload();
+                            if(id == $('#id').val()) add();
+                        }, "JSON").fail(function(){
+                            location.reload();
+                        });
+                    }
+                },
+                cancel: function(){}
+            }
+        });
+    }
+
+
+</script>
 
     
 

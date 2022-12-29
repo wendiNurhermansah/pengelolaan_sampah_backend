@@ -54,8 +54,12 @@ Route::prefix('MasterTpa')->namespace('masterTpa')->name('MasterTpa.')->group(fu
     //TPA
     Route::resource('tpa', 'TpaController');
     Route::post('tpa/api', 'TpaController@api')->name('tpa.api');
+    Route::post('tpa/api_detail', 'TpaController@api_detail')->name('tpa.api_detail');
     Route::get('tambah_pengolahan/{id}', 'TpaController@pengolahan')->name('tambah_pengolahan.pengolahan');
     Route::post('tambah_pengolahan', 'TpaController@pengolahan_store')->name('tambah_pengolahan.pengolahan_store');
+    Route::delete('tpa/destroy_detail/{id}', 'TpaController@destroy_detail')->name('tpa.destroy_detail');
+    Route::get('tpa/edit_detail/{id}', 'TpaController@edit_detail')->name('tpa.edit_detail');
+    
 
     Route::get('edit_pengolahan/{id}', 'TpaController@edit_pengolahan')->name('edit_pengolahan.edit_pengolahan');
     Route::post('edit_pengolahan', 'TpaController@pengolahan_update')->name('edit_pengolahan.pengolahan_update');
@@ -81,10 +85,12 @@ Route::prefix('MasterBankSampah')->namespace('masterBankSampah')->name('MasterBa
     //bank sampah
     Route::resource('bank_sampah', 'BankSampahController');
     Route::post('bank_sampah/api', 'BankSampahController@api')->name('bank_sampah.api');
+    Route::post('bank_sampah/api_detail', 'BankSampahController@api_detail')->name('bank_sampah.api_detail');
     Route::get('bank_sampah/kelola_bank_sampah/{id}', 'BankSampahController@kelola')->name('bank_sampah.kelola_bank_sampah');
     Route::post('bank_sampah/kelola_store', 'BankSampahController@kelola_store')->name('bank_sampah.kelola_store_bank_sampah');
     Route::get('bank_sampah/kelola_edit/{id}', 'BankSampahController@kelola_edit')->name('bank_sampah.kelola_edit_bank_sampah');
     Route::post('bank_sampah/kelola_update', 'BankSampahController@kelola_update')->name('bank_sampah.kelola_update_bank_sampah');
+    Route::delete('bank_sampah/destroy_detail/{id}', 'BankSampahController@destroy_detail')->name('bank_sampah.destroy_detail');
 
     
 
@@ -102,10 +108,12 @@ Route::prefix('MasterTps3r')->namespace('masterTps3r')->name('MasterTps3r.')->gr
     //tps3r
     Route::resource('tps3r', 'Tps3rController');
     Route::post('tps3r/api', 'Tps3rController@api')->name('tps3r.api');
+    Route::post('tps3r/api_detail', 'Tps3rController@api_detail')->name('tps3r.api_detail');
     Route::get('tps3r/kelola_tps3r/{id}', 'Tps3rController@kelola')->name('tps3r.kelola_tps3r');
     Route::post('tps3r/kelola_store', 'Tps3rController@kelola_store')->name('tps3r.kelola_store');
     Route::get('tps3r/kelola_edit/{id}', 'Tps3rController@kelola_edit')->name('tps3r.kelola_edit');
     Route::post('tps3r/kelola_update', 'Tps3rController@kelola_update')->name('tps3r.kelola_update');
+    Route::delete('tps3r/destroy_detail/{id}', 'Tps3rController@destroy_detail')->name('tps3r.destroy_detail');
 
     
 
@@ -133,6 +141,12 @@ Route::prefix('MasterDataPengolahan')->namespace('masterDataPengolahan')->name('
     //Komposisi Sampah
     Route::resource('komposisi_sampah', 'KomposisiController');
     Route::post('komposisi_sampah/api', 'KomposisiController@api')->name('komposisi_sampah.api');
+
+    //sumber Sampah
+
+    Route::resource('sumber_sampah', 'SumbersampahController');
+    Route::post('sumber_sampah/api', 'SumbersampahController@api')->name('sumber_sampah.api');
+
 
    
     

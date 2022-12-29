@@ -105,7 +105,7 @@
     </li>
 
     <li>
-        <a href=""><i class="icon icon-pause orange-text s-18"></i>
+        <a href="{{route('MasterDataPengolahan.sumber_sampah.index')}}"><i class="icon icon-pause orange-text s-18"></i>
         <span>Sumber Sampah</span>
         <i class="icon icon-angle-right s-18 pull-right"></i>
         </a>

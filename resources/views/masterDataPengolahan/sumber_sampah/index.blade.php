@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title', 'Komposisi Makanan')
+@section('title', 'Sumber Sampah')
 
 @section('content')
 
@@ -9,8 +9,8 @@
             <div class="row p-t-b-10 ">
                 <div class="col">
                     <h4>
-                        <i class="icon icon-tags amber-text s-18"></i>
-                        Komposisi Makanan
+                        <i class="icon icon-pause amber-text s-18"></i>
+                        Sumber Makanan
                     </h4>
                 </div>
             </div>
@@ -23,7 +23,7 @@
                 <div class="card no-b">
                     <div class="card-body">
                         <div class="mt-2 mb-3" style="float: right;">
-                            <a href="{{route('MasterDataPengolahan.komposisi_sampah.create')}}" class="btn btn-primary btn-sm"> <i class="icon icon-plus white-text s-18"></i>Komposisi Sampah</a>
+                            <a href="{{route('MasterDataPengolahan.sumber_sampah.create')}}" class="btn btn-primary btn-sm"> <i class="icon icon-plus white-text s-18"></i>Sumber Sampah</a>
                         </div>
                         <div class="table-responsive">
                             <table id="dataTable" class="table table-striped table-bordered" style="width:100%">
@@ -32,14 +32,12 @@
                                     <th>Tahun</th>
                                     <th>Kabupaten/Kota</th>
                                     <th>Kecamatan</th>
-                                    <th>Sisa Makanan (ton)</th>
-                                    <th>Kayu/Ranting (ton)</th>
-                                    <th>Kertas/Karton (ton)</th>
-                                    <th>Plastik (ton)</th>
-                                    <th>Logam (ton)</th>
-                                    <th>Kain (ton)</th>
-                                    <th>Karet/Kulit (ton)</th>
-                                    <th>Kaca (ton)</th>
+                                    <th>Rumah Tangga (ton)</th>
+                                    <th>Perkantoran (ton)</th>
+                                    <th>Pasar Tradisional (ton)</th>
+                                    <th>Pusat Perniagaan (ton)</th>
+                                    <th>Fasilitas Publik (ton)</th>
+                                    <th>Kawasan (ton)</th>
                                     <th>Lainnya (ton)</th>
                                     
                                     <th width="60">Aksi</th>
@@ -66,7 +64,7 @@
             serverSide: true,
             order: [],
             ajax: {
-                url: "{{ route('MasterDataPengolahan.komposisi_sampah.api') }}",
+                url: "{{ route('MasterDataPengolahan.sumber_sampah.api') }}",
                 method: 'POST'
             },
             columns: [
@@ -74,15 +72,14 @@
                 {data: 'tahun', name: 'tahun',className: 'text-center'},
                 {data: 'id_kabupaten', name: 'id_kabupaten'},
                 {data: 'id_kecamatan', name: 'id_kecamatan'},
-                {data: 'sisa_makanan', name: 'sisa_makanan', className: 'text-center'},
-                {data: 'kayu', name: 'kayu', className: 'text-center'},
-                {data: 'kertas', name: 'kertas', className: 'text-center'},
-                {data: 'plastik', name: 'plastik', className: 'text-center'},
-                {data: 'logam', name: 'logam', className: 'text-center'},
-                {data: 'kain', name: 'kain', className: 'text-center'},
-                {data: 'karet', name: 'karet', className: 'text-center'},
-                {data: 'kaca', name: 'kaca', className: 'text-center'},
+                {data: 'rumah_tangga', name: 'rumah_tangga', className: 'text-center'},
+                {data: 'perkantoran', name: 'perkantoran', className: 'text-center'},
+                {data: 'pasar', name: 'pasar', className: 'text-center'},
+                {data: 'perniagaan', name: 'perniagaan', className: 'text-center'},
+                {data: 'publik', name: 'publik', className: 'text-center'},
+                {data: 'kawasan', name: 'kawasan', className: 'text-center'},
                 {data: 'lainnya', name: 'lainnya', className: 'text-center'},
+               
                 
                 {data: 'action', name: 'action', orderable: false, searchable: false, className: 'text-center'}
             ]

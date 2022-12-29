@@ -48,25 +48,25 @@
                                         <div class="form-group mt-2 ml-3">
                                             <label for="sampah_masuk" class="font-weight-bold fs-14">Sampah Masuk<span
                                                         class="text-danger fs-12">*</span></label>
-                                             <input type="text" class="form-control light fs-14" onkeypress="return hanyaAngka(event)" name="sampah_masuk" id="sampah_masuk"
+                                             <input type="text" class="form-control light fs-14" onkeypress="return hanyaAngka(event)" name="sampah_masuk[]" id="sampah_masuk"
                                                     value="" required>
                                         </div>
                                         <div class="form-group mt-2 ml-3">
                                             <label for="sampah_organik" class="font-weight-bold fs-14">Sampah Organik terolah<span
                                                         class="text-danger fs-12">*</span></label>
-                                             <input type="text" class="form-control light fs-14" onkeypress="return hanyaAngka(event)" name="sampah_organik" id="sampah_organik"
+                                             <input type="text" class="form-control light fs-14" onkeypress="return hanyaAngka(event)" name="sampah_organik[]" id="sampah_organik"
                                                     value="" required>
                                         </div>
                                         <div class="form-group mt-2 ml-3">
                                             <label for="sampah_an_organik" class="font-weight-bold fs-14">Sampah An-Organik terolah<span
                                                     class="text-danger fs-12">*</span></label>
-                                            <input type="text" class="form-control light fs-14" onkeypress="return hanyaAngka(event)" name="sampah_an_organik" id="sampah_an_organik"
+                                            <input type="text" class="form-control light fs-14" onkeypress="return hanyaAngka(event)" name="sampah_an_organik[]" id="sampah_an_organik"
                                                 value="" required>
                                         </div>
                                         <div class="form-group mt-2 ml-3">
                                             <label for="energy" class="font-weight-bold fs-14">Energi yang dihasilkan (MW)<span
                                                     class="text-danger fs-12">*</span></label>
-                                            <input type="text" class="form-control light fs-14" onkeypress="return hanyaAngka(event)" name="energy" id="energy"
+                                            <input type="text" class="form-control light fs-14" onkeypress="return hanyaAngka(event)" name="energy[]" id="energy"
                                                 value="" required>
                                         </div>
                                     </div>
@@ -74,19 +74,19 @@
                                         <div class="form-group mt-2 ml-3">
                                             <label for="sampah_landfil" class="font-weight-bold fs-14">Sampah Landfil<span
                                                         class="text-danger fs-12">*</span></label>
-                                             <input type="text" class="form-control light fs-14" onkeypress="return hanyaAngka(event)" name="sampah_landfil" id="sampah_landfil"
+                                             <input type="text" class="form-control light fs-14" onkeypress="return hanyaAngka(event)" name="sampah_landfil[]" id="sampah_landfil"
                                                     value="" required>
                                         </div>
                                         <div class="form-group mt-2 ml-3">
                                             <label for="tahun" class="font-weight-bold fs-14">Tahun<span
                                                     class="text-danger fs-12">*</span></label>
-                                            <input type="text" class="form-control light fs-14" name="tahun" id="datepicker"
+                                            <input type="text" class="form-control light fs-14" name="tahun[]" id="datepicker"
                                                 value="" required>
                                         </div>
                                         <div class="form-group mt-2 ml-3">
                                             <label for="recovery_pemulung" class="font-weight-bold fs-14">Recovery Pemulung<span
                                                     class="text-danger fs-12">*</span></label>
-                                            <input type="text" class="form-control light fs-14" onkeypress="return hanyaAngka(event)" name="recovery_pemulung" id="recovery_pemulung"
+                                            <input type="text" class="form-control light fs-14" onkeypress="return hanyaAngka(event)" name="recovery_pemulung[]" id="recovery_pemulung"
                                                 value="" required>
                                         </div>
                                         

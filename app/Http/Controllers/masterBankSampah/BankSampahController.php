@@ -301,10 +301,69 @@ class BankSampahController extends Controller
     {
         Bank_sampah::destroy($id);
         Kelola_bank_sampah::where('id_bank_sampah', $id)->delete();
+        
 
         return response()->json([
             'message' => 'Data Berhasil di Hapus!'
         ]);
+    }
+
+    public function api_detail(Request $request){
+
+        $id_bank_sampah = $request->data_detail_id;
+
+        $bank_detail = Kelola_bank_sampah::where('id_bank_sampah', $id_bank_sampah)
+        ->orderBy('tahun', 'DESC')
+        ->get();
+        // dd($tpa_detail);
+        return DataTables::of($bank_detail)
+        
+
+        ->addColumn('action', function ($p) {
+            return "
+               
+                <a href='". route('MasterBankSampah.bank_sampah.kelola_edit_bank_sampah', $p->id) ."'  title='Edit'><i class='icon-pencil mr-1'></i></a>
+                <a href='#' onclick='remove_detail(" . $p->id . ")' class='text-danger' title='Hapus'><i class='icon-remove'></i></a>";
+        })
+
+        
+        
+        ->editColumn('sampah_masuk', function($p){
+            return number_format($p->sampah_masuk, 2, '.', ',');
+        })
+
+        ->editColumn('sampah_landfil', function($p){
+            return number_format($p->sampah_landfil, 2, '.', ',');
+        })
+
+        ->editColumn('pakan_ternak', function($p){
+            return number_format($p->pakan_ternak, 2, '.', ',');
+        })
+
+        ->editColumn('kompos', function($p){
+            return number_format($p->kompos, 2, '.', ',');
+        })
+
+        ->editColumn('up_cycle', function($p){
+            return number_format($p->up_cycle, 2, '.', ',');
+        })
+
+        ->editColumn('daur_ulang', function($p){
+            return number_format($p->daur_ulang, 2, '.', ',');
+        })
+
+        ->editColumn('sumber_energi', function($p){
+            return number_format($p->sumber_energi, 2, '.', ',');
+        })
+
+        
+
+        
+
+
+        ->addIndexColumn()
+        ->rawColumns(['action'])
+        ->toJson();
     }
 
     public function kelola($id){
@@ -329,17 +388,23 @@ class BankSampahController extends Controller
             'daur_ulang'=>'required',
         ]);
 
+        foreach($request->tahun as $key => $kelola){
+
+       
+
         $kelola = new Kelola_bank_sampah();
         $kelola->id_bank_sampah = $request->id_bank_sampah;
-        $kelola->tahun = $request->tahun;
-        $kelola->sampah_masuk = $request->sampah_masuk;
-        $kelola->sampah_landfil = $request->sampah_landfil;
-        $kelola->pakan_ternak = $request->pakan_ternak;
-        $kelola->kompos = $request->kompos;
-        $kelola->sumber_energi = $request->sumber_energi;
-        $kelola->daur_ulang = $request->daur_ulang;
-        $kelola->up_cycle = $request->up_cycle;
+        $kelola->tahun = $request->tahun[$key];
+        $kelola->sampah_masuk = $request->sampah_masuk[$key];
+        $kelola->sampah_landfil = $request->sampah_landfil[$key];
+        $kelola->pakan_ternak = $request->pakan_ternak[$key];
+        $kelola->kompos = $request->kompos[$key];
+        $kelola->sumber_energi = $request->sumber_energi[$key];
+        $kelola->daur_ulang = $request->daur_ulang[$key];
+        $kelola->up_cycle = $request->up_cycle[$key];
         $kelola->save();
+
+        }
 
         return response()->json([
             'message' => 'Data Berhasil di Tambahkan!'
@@ -349,7 +414,8 @@ class BankSampahController extends Controller
     }
 
     public function kelola_edit($id){
-        $bank_sampah = Bank_sampah::find($id);
+
+        $bank_sampah = Kelola_bank_sampah::find($id);
 
         return view('bank_sampah.kelola_edit', compact('bank_sampah'));
             
@@ -357,8 +423,7 @@ class BankSampahController extends Controller
 
     public function kelola_update(Request $request){
 
-        $bank_sampah = Kelola_bank_sampah::where('id_bank_sampah', $request->id_bank_sampah)->first();
-
+        $bank_sampah = Kelola_bank_sampah::whereId($request->id)->first();
         $request->validate([
             'sampah_masuk'=>'required',
             'tahun'=>'required',
@@ -390,5 +455,16 @@ class BankSampahController extends Controller
         
 
             
+    }
+
+    public function destroy_detail($id)
+    {
+        // dd($id);
+        $kelola = Kelola_bank_sampah::find($id);
+        $kelola->delete();
+
+        return response()->json([
+            'message' => 'Data TPA Berhasil di Hapus.'
+        ]);
     }
 }

@@ -370,6 +370,7 @@
         }
         else{
             $('#alert').html('');
+            $('#load').show();
             url = "{{ route('MasterTpa.tpa.update', ':id') }}".replace(':id', $('#id').val());
             $.ajax({
                 url : url,

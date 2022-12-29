@@ -12,7 +12,6 @@ use App\Models\Provinsi;
 use App\Models\Tps3r;
 use Yajra\DataTables\Facades\DataTables;
 
-use function Ramsey\Uuid\v1;
 
 class Tps3rController extends Controller
 {
@@ -317,6 +316,65 @@ class Tps3rController extends Controller
     }
 
 
+    public function api_detail(Request $request){
+
+        $tps3r = $request->data_detail_id;
+
+        $tps3r = Kelola_tps3r::where('id_tps3r', $tps3r)
+        ->orderBy('tahun', 'DESC')
+        ->get();
+        // dd($tpa_detail);
+        return DataTables::of($tps3r)
+        
+
+        ->addColumn('action', function ($p) {
+            return "
+               
+                <a href='". route('MasterTps3r.tps3r.kelola_edit', $p->id) ."'  title='Edit'><i class='icon-pencil mr-1'></i></a>
+                <a href='#' onclick='remove_detail(" . $p->id . ")' class='text-danger' title='Hapus'><i class='icon-remove'></i></a>";
+        })
+
+        
+        
+        ->editColumn('sampah_masuk', function($p){
+            return number_format($p->sampah_masuk, 2, '.', ',');
+        })
+
+        ->editColumn('sampah_landfil', function($p){
+            return number_format($p->sampah_landfil, 2, '.', ',');
+        })
+
+        ->editColumn('pakan_ternak', function($p){
+            return number_format($p->pakan_ternak, 2, '.', ',');
+        })
+
+        ->editColumn('kompos', function($p){
+            return number_format($p->kompos, 2, '.', ',');
+        })
+
+        ->editColumn('up_cycle', function($p){
+            return number_format($p->up_cycle, 2, '.', ',');
+        })
+
+        ->editColumn('daur_ulang', function($p){
+            return number_format($p->daur_ulang, 2, '.', ',');
+        })
+
+        ->editColumn('sumber_energi', function($p){
+            return number_format($p->sumber_energi, 2, '.', ',');
+        })
+
+        
+
+        
+
+
+        ->addIndexColumn()
+        ->rawColumns(['action'])
+        ->toJson();
+    }
+
+
     public function kelola($id){
 
         $tps = Tps3r::findOrfail($id);
@@ -339,17 +397,21 @@ class Tps3rController extends Controller
             'daur_ulang'=>'required',
         ]);
 
-        $kelola = new Kelola_tps3r();
-        $kelola->id_tps3r = $request->id_tps3r;
-        $kelola->tahun = $request->tahun;
-        $kelola->sampah_masuk = $request->sampah_masuk;
-        $kelola->sampah_landfil = $request->sampah_landfil;
-        $kelola->pakan_ternak = $request->pakan_ternak;
-        $kelola->kompos = $request->kompos;
-        $kelola->sumber_energi = $request->sumber_energi;
-        $kelola->daur_ulang = $request->daur_ulang;
-        $kelola->up_cycle = $request->up_cycle;
-        $kelola->save();
+        foreach($request->tahun as $key => $kelola){
+
+            $kelola = new Kelola_tps3r();
+            $kelola->id_tps3r = $request->id_tps3r;
+            $kelola->tahun = $request->tahun[$key];
+            $kelola->sampah_masuk = $request->sampah_masuk[$key];
+            $kelola->sampah_landfil = $request->sampah_landfil[$key];
+            $kelola->pakan_ternak = $request->pakan_ternak[$key];
+            $kelola->kompos = $request->kompos[$key];
+            $kelola->sumber_energi = $request->sumber_energi[$key];
+            $kelola->daur_ulang = $request->daur_ulang[$key];
+            $kelola->up_cycle = $request->up_cycle[$key];
+            $kelola->save();
+        }
+
 
         return response()->json([
             'message' => 'Data Berhasil di Tambahkan!'
@@ -359,7 +421,7 @@ class Tps3rController extends Controller
     }
 
     public function kelola_edit($id){
-        $tps = Tps3r::find($id);
+        $tps = Kelola_tps3r::find($id);
 
         return view('masterTps3r.kelola_edit', compact('tps'));
             
@@ -367,7 +429,7 @@ class Tps3rController extends Controller
 
     public function kelola_update(Request $request){
 
-        $tps = Kelola_tps3r::where('id_tps3r', $request->id_tps3r)->first();
+        $tps = Kelola_tps3r::where('id', $request->id)->first();
 
         $request->validate([
             'sampah_masuk'=>'required',
@@ -400,5 +462,16 @@ class Tps3rController extends Controller
         
 
             
+    }
+
+    public function destroy_detail($id)
+    {
+        // dd($id);
+        $kelola = Kelola_tps3r::find($id);
+        $kelola->delete();
+
+        return response()->json([
+            'message' => 'Data TPA Berhasil di Hapus.'
+        ]);
     }
 }

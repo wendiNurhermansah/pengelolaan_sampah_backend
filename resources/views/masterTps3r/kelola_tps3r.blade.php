@@ -47,26 +47,26 @@
                                         <div class="form-group mt-2 ml-3">
                                             <label for="sampah_masuk" class="font-weight-bold fs-14">Sampah Masuk (ton)<span
                                                         class="text-danger fs-12">*</span></label>
-                                             <input type="text" class="form-control light fs-14" onkeypress="return hanyaAngka(event)" name="sampah_masuk" id="sampah_masuk"
+                                             <input type="text" class="form-control light fs-14" onkeypress="return hanyaAngka(event)" name="sampah_masuk[]" id="sampah_masuk"
                                                     value="" required>
                                         </div>
                                         <div class="form-group mt-2 ml-3">
                                             <label for="sampah_landfil" class="font-weight-bold fs-14">Sampah Landfil (ton)<span
                                                         class="text-danger fs-12">*</span></label>
-                                             <input type="text" class="form-control light fs-14" onkeypress="return hanyaAngka(event)" name="sampah_landfil" id="sampah_landfil"
+                                             <input type="text" class="form-control light fs-14" onkeypress="return hanyaAngka(event)" name="sampah_landfil[]" id="sampah_landfil"
                                                     value="" required>
                                         </div>
                                         
                                         <div class="form-group mt-2 ml-3">
                                             <label for="pakan_ternak" class="font-weight-bold fs-14">Bahan baku Pakan Ternak (ton)<span
                                                         class="text-danger fs-12">*</span></label>
-                                             <input type="text" class="form-control light fs-14" onkeypress="return hanyaAngka(event)" name="pakan_ternak" id="pakan_ternak"
+                                             <input type="text" class="form-control light fs-14" onkeypress="return hanyaAngka(event)" name="pakan_ternak[]" id="pakan_ternak"
                                                     value="" required>
                                         </div>
                                         <div class="form-group mt-2 ml-3">
                                             <label for="kompos" class="font-weight-bold fs-14">Bahan baku Kompos (ton)<span
                                                     class="text-danger fs-12">*</span></label>
-                                            <input type="text" class="form-control light fs-14" onkeypress="return hanyaAngka(event)" name="kompos" id="kompos"
+                                            <input type="text" class="form-control light fs-14" onkeypress="return hanyaAngka(event)" name="kompos[]" id="kompos"
                                                 value="" required>
                                         </div>
                                         
@@ -75,25 +75,25 @@
                                         <div class="form-group mt-2 ml-3">
                                             <label for="tahun" class="font-weight-bold fs-14">Tahun<span
                                                     class="text-danger fs-12">*</span></label>
-                                            <input type="text" class="form-control light fs-14" name="tahun" id="datepicker"
+                                            <input type="text" class="form-control light fs-14" name="tahun[]" id="datepicker"
                                                 value="" required>
                                         </div>
                                         <div class="form-group mt-2 ml-3">
                                             <label for="daur_ulang" class="font-weight-bold fs-14">Bahan baku Daur Ulang (ton)<span
                                                     class="text-danger fs-12">*</span></label>
-                                            <input type="text" class="form-control light fs-14" onkeypress="return hanyaAngka(event)" name="daur_ulang" id="daur_ulang"
+                                            <input type="text" class="form-control light fs-14" onkeypress="return hanyaAngka(event)" name="daur_ulang[]" id="daur_ulang"
                                                 value="" required>
                                         </div>
                                         <div class="form-group mt-2 ml-3">
                                             <label for="up_cycle" class="font-weight-bold fs-14">Bahan baku Up-cycle (ton)<span
                                                     class="text-danger fs-12">*</span></label>
-                                            <input type="text" class="form-control light fs-14" onkeypress="return hanyaAngka(event)" name="up_cycle" id="up_cycle"
+                                            <input type="text" class="form-control light fs-14" onkeypress="return hanyaAngka(event)" name="up_cycle[]" id="up_cycle"
                                                 value="" required>
                                         </div>
                                         <div class="form-group mt-2 ml-3">
                                             <label for="sumber_energi" class="font-weight-bold fs-14">Bahan baku Sumber Energi (ton)<span
                                                     class="text-danger fs-12">*</span></label>
-                                            <input type="text" class="form-control light fs-14" onkeypress="return hanyaAngka(event)" name="sumber_energi" id="sumber_energi"
+                                            <input type="text" class="form-control light fs-14" onkeypress="return hanyaAngka(event)" name="sumber_energi[]" id="sumber_energi"
                                                 value="" required>
                                         </div>
                                     </div>
