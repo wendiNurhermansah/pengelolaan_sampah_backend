@@ -22,11 +22,27 @@ class KomposisiController extends Controller
      */
     public function index()
     {
-        return view('masterDataPengolahan.komposisi.index');
+        $kabupaten = Kabupaten::where('provinsi_id', 3)->get();
+        return view('masterDataPengolahan.komposisi.index', compact('kabupaten'));
     }
 
-    public function api(){
-        $komposisi = Komposisi::all();
+    public function api(Request $request){
+
+        $tahun = $request->tahun;
+        $kabupaten = $request->kabupaten;
+        $kecamatan = $request->kecamatan;
+
+        if($tahun != null){
+         $komposisi = Komposisi::where('tahun', 'like', "%". $tahun ."%")->get();
+        }elseif($kabupaten != null){
+         $komposisi = Komposisi::where('id_kabupaten',$kabupaten)->get();
+        }elseif($kecamatan != null){
+           $komposisi = Komposisi::where('id_kecamatan',$kecamatan)->get();
+        }else{
+           $komposisi = Komposisi::orderBy('id', 'DESC')->get();
+        }
+
+       
         return DataTables::of($komposisi)
         
 

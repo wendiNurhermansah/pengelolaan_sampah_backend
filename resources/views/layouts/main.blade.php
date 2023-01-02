@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/buttons.dataTables.min.css') }}">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.css">
+    
 
     <style>
         .loader {
@@ -134,6 +135,7 @@
     <script type="text/javascript">
         var APP_URL = {!! json_encode(url('/').'/') !!}
     </script>
+
     <script src="{{asset('assets/js/app.js')}}"></script>
 
     <script src="{{ asset('assets/js/jquery-confirm.min.js') }}"></script>
@@ -146,7 +148,9 @@ src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootst
     <script type="text/javascript">
         $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
     </script>
+    
     @yield('script')
+    
 
 
 

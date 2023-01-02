@@ -20,7 +20,46 @@
     <div class="container-fluid my-3">
         <div class="row">
             <div class="col-md-12">
-                <div class="card no-b">
+                <div class="card no-b m-2">
+                    <div class="card-body">
+                        <div class="form-row form-inline">
+                            <div class="col-md-8">
+                                <div class="form-group mt-2">
+                                    <label for="tahun" class="font-weight-bold fs-14 col-md-4">Tahun</label>
+                                    <input type="text" name="tahun" id="datepicker" placeholder="masukan Tahun" class="form-control r-0 light s-12 col-md-6" autocomplete="off" required/>
+                                </div>
+                                <div class="form-group mt-2">
+                                                <label class="font-weight-bold fs-14 col-md-4">Kabupaten / Kota</label>
+                                                <div class="col-md-6 p-0 bg-light">
+                                                    <select class="select2 form-control r-0 light s-12" name="kabupaten" id="kabupaten" autocomplete="off">
+                                                        <option value="">Semua</option>
+                                                        @foreach($kabupaten as $i)
+                                                        <option value="{{$i->id}}">{{$i->n_kabupaten}}</option>
+                                                        @endforeach
+                                                        
+                                                    </select>
+                                                </div>
+                                </div>
+                                <div class="form-group mt-2">
+                                                <label class="font-weight-bold fs-14 col-md-4">Kecamatan</label>
+                                                <div class="col-md-6 p-0 bg-light">
+                                                    <select class="select2 form-control r-0 light s-12" name="kecamatan" id="kecamatan" autocomplete="off">
+                                                        <option value="">Semua</option>
+                                                        
+                                                    </select>
+                                                </div>
+                                </div>
+                                <div class="mt-2" style="margin-left: 33%">
+                                    <button type="submit" onclick="fillter()" class="btn btn-primary btn-sm" id="action"><i class="icon-search mr-2"></i>Cari<span id="txtAction"></span></button>
+                                </div>
+                            </div>
+
+                        
+                        </div>
+
+                    </div>
+                </div>
+                <div class="card no-b m-2">
                     <div class="card-body">
                         <div class="mt-2 mb-3" style="float: right;">
                             <a href="{{route('MasterDataPengolahan.sumber_sampah.create')}}" class="btn btn-primary btn-sm"> <i class="icon icon-plus white-text s-18"></i>Sumber Sampah</a>
@@ -59,13 +98,32 @@
 @section('script')
 
     <script type="text/javascript">
+
+         //search 
+
+         function fillter(){
+            table.api().ajax.reload();
+        }
+
+        //tahun 
+        $("#datepicker").datepicker({
+            format: " yyyy",
+            viewMode: "years",
+            minViewMode: "years"
+        });
+
         var table = $('#dataTable').dataTable({
             processing: true,
             serverSide: true,
             order: [],
             ajax: {
                 url: "{{ route('MasterDataPengolahan.sumber_sampah.api') }}",
-                method: 'POST'
+                method: 'POST',
+                data: function(data){
+                    data.tahun = $('#tahun').val();
+                    data.kabupaten = $('#kabupaten').val();
+                    data.kecamatan = $('#kecamatan').val();
+                }
             },
             columns: [
                 {data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false, align: 'center', className: 'text-center'},
@@ -112,6 +170,33 @@
             }
         });
     }
+
+
+    $('#kabupaten').on('change', function(){
+        val = $(this).val();
+        option = "<option value=''>&nbsp;</option>";
+        if(val == ""){
+            $('#kecamatan').html(option);
+            $('#kelurahan').html(option);
+            selectOnChange();
+        }else{
+            $('#kecamatan').html("<option value=''>Loading...</option>");
+            url = "{{ route('MasterTpa.kecamatanByKabupaten', ':id') }}".replace(':id', val);
+            $.get(url, function(data){
+                if(data){
+                    $.each(data, function(index, value){
+                        option += "<option value='" + value.id + "'>" + value.n_kecamatan +"</li>";
+                    });
+                    $('#kecamatan').empty().html(option);
+                    $("#kecamatan").val($("#kecamatan option:first").val()).trigger("change.select2");
+                }else{
+                    $('#kecamatan').html(option);
+                    $('#kelurahan').html(option);
+                    selectOnChange();
+                }
+            }, 'JSON');
+        }
+    });
 
     </script>
 

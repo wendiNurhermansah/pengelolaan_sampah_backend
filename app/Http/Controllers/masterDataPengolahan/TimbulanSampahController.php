@@ -21,11 +21,28 @@ class TimbulanSampahController extends Controller
      */
     public function index()
     {
-        return view('masterDataPengolahan.timbulan.index');
+        $kabupaten = Kabupaten::where('provinsi_id', 3)->get();
+
+        return view('masterDataPengolahan.timbulan.index', compact('kabupaten'));
     }
 
-    public function api(){
-        $timbulan = Timbulan_sampah::all();
+    public function api(Request $request){
+
+        $tahun = $request->tahun;
+        $kabupaten = $request->kabupaten;
+        $kecamatan = $request->kecamatan;
+
+        if($tahun != null){
+          $timbulan = Timbulan_sampah::where('tahun', 'like', "%". $tahun ."%")->get();
+        }elseif($kabupaten != null){
+          $timbulan = Timbulan_sampah::where('id_kabupaten',$kabupaten)->get();
+        }elseif($kecamatan != null){
+            $timbulan = Timbulan_sampah::where('id_kecamatan',$kecamatan)->get();
+        }else{
+            $timbulan = Timbulan_sampah::orderBy('id', 'DESC')->get();
+        }
+       
+       
         return DataTables::of($timbulan)
         
 

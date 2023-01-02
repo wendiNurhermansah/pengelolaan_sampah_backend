@@ -27,8 +27,19 @@ class BankSampahController extends Controller
     }
 
 
-    public function api(){
-        $bank_sampah = Bank_sampah::all();
+    public function api(Request $request){
+
+        $kode = $request->kode;
+        $nama_fasilitas = $request->nama;
+
+        if($kode != null){
+            $bank_sampah = Bank_sampah::where('kode', 'like', "%". $kode ."%")->get();
+        }elseif($nama_fasilitas != null){
+            $bank_sampah = Bank_sampah::where('nama_fasilitas','like',"%".$nama_fasilitas."%")->get();
+        }else{
+            $bank_sampah = Bank_sampah::orderBy('id', 'DESC')->get();;
+        }
+        
         return DataTables::of($bank_sampah)
         
 

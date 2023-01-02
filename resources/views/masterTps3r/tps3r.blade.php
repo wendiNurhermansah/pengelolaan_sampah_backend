@@ -20,7 +20,29 @@
     <div class="container-fluid my-3">
         <div class="row">
             <div class="col-md-12">
-                <div class="card no-b">
+            <div class="card no-b m-2">
+                    <div class="card-body">
+                        <div class="form-row form-inline">
+                            <div class="col-md-8">
+                                <div class="form-group mt-2">
+                                    <label for="kode" class="font-weight-bold fs-14 col-md-4">Kode</label>
+                                    <input type="text" name="kode" id="kode" placeholder="masukan kode" class="form-control r-0 light s-12 col-md-6" autocomplete="off" required/>
+                                </div>
+                                <div class="form-group mt-2">
+                                    <label for="nama" class="font-weight-bold fs-14 col-md-4">Nama Fasilitas</label>
+                                    <input type="text" name="nama" id="nama" placeholder="masukan nama fasilitas" class="form-control r-0 light s-12 col-md-6" autocomplete="off" required/>
+                                </div>
+                                <div class="mt-2" style="margin-left: 33%">
+                                    <button type="submit" onclick="fillter()" class="btn btn-primary btn-sm" id="action"><i class="icon-search mr-2"></i>Cari<span id="txtAction"></span></button>
+                                </div>
+                            </div>
+
+                        
+                        </div>
+
+                    </div>
+                </div>
+                <div class="card no-b m-2">
                     <div class="card-body">
                         <div class="mt-2 mb-3" style="float: right;">
                             <a href="{{route('MasterTps3r.tps3r.create')}}" class="btn btn-primary btn-sm"> <i class="icon icon-plus white-text s-18"></i>TPS3R</a>
@@ -55,13 +77,24 @@
 @section('script')
 
     <script type="text/javascript">
+
+          //search 
+
+        function fillter(){
+            table.api().ajax.reload();
+        }
+
         var table = $('#dataTable').dataTable({
             processing: true,
             serverSide: true,
             order: [],
             ajax: {
                 url: "{{ route('MasterTps3r.tps3r.api') }}",
-                method: 'POST'
+                method: 'POST',
+                data: function(data){
+                    data.kode = $('#kode').val();
+                    data.nama = $('#nama').val();
+                }
             },
             columns: [
                 {data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false, align: 'center', className: 'text-center'},

@@ -25,8 +25,19 @@ class Tps3rController extends Controller
         return view('masterTps3r.tps3r');
     }
 
-    public function api(){
-        $tps3r = Tps3r::orderBy('id', 'DESC')->get();
+    public function api(Request $request){
+
+        $kode = $request->kode;
+        $nama_fasilitas = $request->nama;
+
+        if($kode != null){
+          $tps3r = Tps3r::where('kode', 'like', "%". $kode ."%")->get();
+        }elseif($nama_fasilitas != null){
+          $tps3r = Tps3r::where('nama_fasilitas','like',"%".$nama_fasilitas."%")->get();
+        }else{
+            $tps3r = Tps3r::orderBy('id', 'DESC')->get();
+        }
+        
         return DataTables::of($tps3r)
         
 

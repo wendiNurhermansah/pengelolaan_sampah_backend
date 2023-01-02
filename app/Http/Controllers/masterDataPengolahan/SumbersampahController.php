@@ -21,11 +21,28 @@ class SumbersampahController extends Controller
      */
     public function index()
     {
-        return view('masterDataPengolahan.sumber_sampah.index');
+        $kabupaten = Kabupaten::where('provinsi_id', 3)->get();
+        return view('masterDataPengolahan.sumber_sampah.index', compact('kabupaten'));
     }
 
-    public function api(){
-        $sumber = Sumber_sampah::all();
+    public function api(Request $request){
+
+        
+        $tahun = $request->tahun;
+        $kabupaten = $request->kabupaten;
+        $kecamatan = $request->kecamatan;
+
+        if($tahun != null){
+          $sumber = Sumber_sampah::where('tahun', 'like', "%". $tahun ."%")->get();
+        }elseif($kabupaten != null){
+          $sumber = Sumber_sampah::where('id_kabupaten',$kabupaten)->get();
+        }elseif($kecamatan != null){
+            $sumber = Sumber_sampah::where('id_kecamatan',$kecamatan)->get();
+        }else{
+            $sumber = Sumber_sampah::orderBy('id', 'DESC')->get();
+        }
+       
+       
         return DataTables::of($sumber)
         
 

@@ -29,8 +29,22 @@ class TpaController extends Controller
     }
 
 
-    public function api(){
-        $tpa = Tpa::all();
+    public function api(Request $request)
+    {
+
+        $kode = $request->kode;
+        $nama_fasilitas = $request->nama;
+
+        if($kode != null){
+            $tpa = Tpa::where('kode', 'like', "%". $kode ."%")->get();
+        }elseif($nama_fasilitas != null){
+            $tpa = Tpa::where('nama_fasilitas','like',"%".$nama_fasilitas."%")->get();
+        }else{
+            $tpa = Tpa::orderBy('id', 'DESC')->get();
+        }
+
+
+        
         return DataTables::of($tpa)
         
 
