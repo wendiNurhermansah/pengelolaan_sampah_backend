@@ -94,7 +94,31 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row mt-3">
+                    <div class="col-md-12">
+                        <div class="white p-5 r-5">
+
+                            <div style="text-align:center">
+
+                                <h4>
+                                GRAFIK KOMPOSISI SAMPAH 
+                                </h4>
+                                <p style="font-size: small;">Grafik Komposisi Sampah terbagi 2 yaitu Grafik Komposisi Sampah berdasarkan Jenis Sampah dan Grafik Komposisi Sampah  berdasarkan Sumber Sampah. <br> Grafik Komposisi Sampah dibawah ini adalah Tahun Saat ini.</p>
+                            </div> <hr>`
+
+                            <div class="row text-center">
+                                <div class="col-md-6">
+                                    <div id="chart1"></div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div id="chart2"></div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-3">
                     <div class="col-md-12">
                         <div class="white p-4 r-5">
                             <div style="text-align:center">
@@ -117,21 +141,9 @@
                     </div>
                 </div>
 
-                <div class="row mt-3">
-                    <div class="col-md-12">
-                        <div class="white p-5 r-5">
+                
 
-                            <div style="text-align:center">
-
-                                <h4>
-                                GRAFIK KOMPOSISI SAMPAH 
-                                </h4>
-                                <p style="font-size: small;">Grafik Komposisi Sampah terbagi 2 yaitu Grafik Komposisi Sampah berdasarkan Jenis Sampah dan Grafik Komposisi Sampah  berdasarkan Sumber Sampah. <br> Grafik Komposisi Sampah dibawah ini adalah Tahun Saat ini.</p>
-                            </div> <hr>
-                            
-                        </div>
-                    </div>
-                </div>
+               
                
             </div>
             <!--Today Tab End-->
@@ -144,6 +156,135 @@
 
 @endsection
 @section('script')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/10.3.2/highcharts.js"></script>
+
+<script type="text/javascript">
+    // Data retrieved from https://netmarketshare.com
+        Highcharts.chart('chart1', {
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie'
+            },
+            title: {
+                text: 'Komposisi Sampah Berdasarkan Jenis Sampah'
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            accessibility: {
+                point: {
+                    valueSuffix: '%'
+                }
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        format: '<b>{point.name}</b>:<br> {point.percentage:.1f} Ton/thn'
+                    }
+                }
+            },
+            series: [{
+                name: 'Total',
+                colorByPoint: true,
+                data: [{
+                    name: 'Sisa Makanan',
+                    y: 20.67,
+                    sliced: true,
+                    selected: true
+                }, {
+                    name: 'Kayu/Danting/Daun',
+                    y: 14.77
+                },  {
+                    name: 'Kertas/Karton',
+                    y: 4.86
+                }, {
+                    name: 'Plastik',
+                    y: 2.63
+                }, {
+                    name: 'Karet/Kulit',
+                    y: 1.53
+                },  {
+                    name: 'Kain',
+                    y: 1.40
+                }, {
+                    name: 'Kaca',
+                    y: 2.84
+                }, {
+                    name: 'Logam',
+                    y: 3.51
+                }, {
+                    name: 'Lainnya',
+                    y: 2.6
+                }]
+            }]
+        });
+
+
+        //chart2
+        Highcharts.chart('chart2', {
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie'
+            },
+            title: {
+                text: 'Komposisi Sampah Berdasarkan Sumber Sampah'
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            accessibility: {
+                point: {
+                    valueSuffix: '%'
+                }
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        format: '<b>{point.name}</b>: <br> {point.percentage:.1f} Ton/thn'
+                    }
+                }
+            },
+            series: [{
+                name: 'Total',
+                colorByPoint: true,
+                data: [{
+                    name: 'Rumah Tangga',
+                    y: 30.67,
+                    sliced: true,
+                    selected: true
+                }, {
+                    name: 'Perkantoran',
+                    y: 14.77
+                },  {
+                    name: 'Pasar Tradisional',
+                    y: 4.86
+                }, {
+                    name: 'Pusat Perniagaan',
+                    y: 2.63
+                }, {
+                    name: 'Fasilitas Publik',
+                    y: 1.53
+                },  {
+                    name: 'Kawasan',
+                    y: 1.40
+                }, {
+                    name: 'Lainnya',
+                    y: 2.6
+                }]
+            }]
+        });
+
+</script>
 
     
 
