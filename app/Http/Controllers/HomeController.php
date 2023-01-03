@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kelola_bank_sampah;
+use App\Models\Kelola_tps3r;
 use App\Models\Komposisi;
+use App\Models\Sampah_terkelola;
 use App\Models\Sumber_sampah;
+use App\Models\Timbulan_sampah;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Date;
 
@@ -31,6 +35,19 @@ class HomeController extends Controller
 
         $tahun = date('Y'); 
         // dd($tahun);
+
+        //timbulan sampah 
+        $timbulan = Timbulan_sampah::sum('timbul_tahunan');
+
+        //sampah masuk TPA
+        $tpa = Sampah_terkelola::sum('sampah_masuk');
+
+        // sampah masuk Bank Sampah
+
+        $bank_sampah = Kelola_bank_sampah::sum('sampah_masuk');
+
+        // sampah masuk tps3r
+        $tps3r = Kelola_tps3r::sum('sampah_masuk');
         
         //komposisi sampah
 
@@ -63,9 +80,9 @@ class HomeController extends Controller
             'logam','publik',
             'kain','kawasan',
             'karet','lainnya2',
-            'kaca',
-            'lainnya',
-            'tahun'
+            'kaca', 'timbulan',
+            'lainnya','tpa',
+            'tahun', 'bank_sampah', 'tps3r'
         ));
     }
 }

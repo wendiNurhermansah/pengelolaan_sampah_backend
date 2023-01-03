@@ -33,14 +33,14 @@
                         <div class="counter-box white r-5 p-3">
                             <div class="p-4">
                                 <div class="float-right">
-                                    <span class="icon icon-note-list text-light-blue s-48"></span>
+                                    <span class="icon icon-asterisk text-light-blue s-48"></span>
                                 </div>
-                                <div class="counter-title">Pengurangan Sampah</div>
-                                <h5 class="sc-counter mt-3">1228 </h5>
+                                <div class="counter-title">Timbulan <br> Sampah</div>
+                                <h5 class="sc-counter mt-3">{{$timbulan}} </h5>
                                 <h5>Ton/Thn</h5>
                             </div>
                             <div class="progress progress-xs r-0">
-                                <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25"
+                                <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="25"
                                      aria-valuemin="0" aria-valuemax="128"></div>
                             </div>
                         </div>
@@ -49,14 +49,14 @@
                         <div class="counter-box white r-5 p-3">
                             <div class="p-4">
                                 <div class="float-right">
-                                    <span class="icon icon-mail-envelope-open s-48"></span>
+                                    <span class="icon icon-refresh text-light-blue s-48"></span>
                                 </div>
-                                <div class="counter-title ">Penanganan Sampah</div>
-                                <h5 class="sc-counter mt-3">1228 </h5>
+                                <div class="counter-title ">Sampah Masuk <br> TPA</div>
+                                <h5 class="sc-counter mt-3">{{$tpa}} </h5>
                                 <h5>Ton/Thn</h5>
                             </div>
                             <div class="progress progress-xs r-0">
-                                <div class="progress-bar" role="progressbar" style="width: 50%;" aria-valuenow="25"
+                                <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="25"
                                      aria-valuemin="0" aria-valuemax="128"></div>
                             </div>
                         </div>
@@ -65,14 +65,14 @@
                         <div class="counter-box white r-5 p-3">
                             <div class="p-4">
                                 <div class="float-right">
-                                    <span class="icon icon-stop-watch3 s-48"></span>
+                                    <span class="icon icon-archive text-light-blue s-48"></span>
                                 </div>
-                                <div class="counter-title">Sampah Terkelola</div>
-                                <h5 class="sc-counter mt-3">1228 </h5>
+                                <div class="counter-title">Sampah Masuk <br> Bank Sampah</div>
+                                <h5 class="sc-counter mt-3">{{$bank_sampah}} </h5>
                                 <h5>Ton/Thn</h5>
                             </div>
                             <div class="progress progress-xs r-0">
-                                <div class="progress-bar" role="progressbar" style="width: 75%;" aria-valuenow="25"
+                                <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="25"
                                      aria-valuemin="0" aria-valuemax="128"></div>
                             </div>
                         </div>
@@ -81,14 +81,14 @@
                         <div class="counter-box white r-5 p-3">
                             <div class="p-4">
                                 <div class="float-right">
-                                    <span class="icon icon-inbox-document-text s-48"></span>
+                                    <span class="icon icon-factory text-light-blue s-48"></span>
                                 </div>
-                                <div class="counter-title">Sampah Tidak Terkelola</div>
-                                <h5 class="sc-counter mt-3">550 </h5>
+                                <div class="counter-title">Sampah Masuk <br> TPS3R</div>
+                                <h5 class="sc-counter mt-3">{{$tps3r}} </h5>
                                 <h5>Ton/Thn</h5>
                             </div>
                             <div class="progress progress-xs r-0">
-                                <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25"
+                                <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="25"
                                      aria-valuemin="0" aria-valuemax="128"></div>
                             </div>
                         </div>
