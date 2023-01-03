@@ -37,17 +37,17 @@ class HomeController extends Controller
         // dd($tahun);
 
         //timbulan sampah 
-        $timbulan = Timbulan_sampah::sum('timbul_tahunan');
+        $timbulan = Timbulan_sampah::where('tahun', $tahun)->sum('timbul_tahunan');
 
         //sampah masuk TPA
-        $tpa = Sampah_terkelola::sum('sampah_masuk');
+        $tpa = Sampah_terkelola::where('tahun', $tahun)->sum('sampah_masuk');
 
         // sampah masuk Bank Sampah
 
-        $bank_sampah = Kelola_bank_sampah::sum('sampah_masuk');
+        $bank_sampah = Kelola_bank_sampah::where('tahun', $tahun)->sum('sampah_masuk');
 
         // sampah masuk tps3r
-        $tps3r = Kelola_tps3r::sum('sampah_masuk');
+        $tps3r = Kelola_tps3r::where('tahun', $tahun)->sum('sampah_masuk');
         
         //komposisi sampah
 
