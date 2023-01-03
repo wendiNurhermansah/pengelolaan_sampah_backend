@@ -103,7 +103,7 @@
                                 <h4>
                                 GRAFIK KOMPOSISI SAMPAH 
                                 </h4>
-                                <p style="font-size: small;">Grafik Komposisi Sampah terbagi 2 yaitu Grafik Komposisi Sampah berdasarkan Jenis Sampah dan Grafik Komposisi Sampah  berdasarkan Sumber Sampah. <br> Grafik Komposisi Sampah dibawah ini adalah Tahun Saat ini.</p>
+                                <p style="font-size: small;">Grafik Komposisi Sampah terbagi 2 yaitu Grafik Komposisi Sampah berdasarkan Jenis Sampah dan Grafik Komposisi Sampah  berdasarkan Sumber Sampah. <br> Grafik Komposisi Sampah dibawah ini adalah Tahun {{$tahun}}.</p>
                             </div> <hr>`
 
                             <div class="row text-center">
@@ -184,7 +184,7 @@
                     cursor: 'pointer',
                     dataLabels: {
                         enabled: true,
-                        format: '<b>{point.name}</b>:<br> {point.percentage:.1f} Ton/thn'
+                        format: '<b>{point.name}</b>:<br> {point.percentage:.1f} %'
                     }
                 }
             },
@@ -193,33 +193,34 @@
                 colorByPoint: true,
                 data: [{
                     name: 'Sisa Makanan',
-                    y: 20.67,
+                    y: {!!$sisa_makanan!!},
                     sliced: true,
                     selected: true
+                    
                 }, {
                     name: 'Kayu/Danting/Daun',
-                    y: 14.77
+                    y: {!!$kayu!!}
                 },  {
                     name: 'Kertas/Karton',
-                    y: 4.86
+                    y: {!!$kertas!!}
                 }, {
                     name: 'Plastik',
-                    y: 2.63
+                    y: {!!$plastik!!}
                 }, {
                     name: 'Karet/Kulit',
-                    y: 1.53
+                    y: {!!$karet!!}
                 },  {
                     name: 'Kain',
-                    y: 1.40
+                    y: {!!$kain!!}
                 }, {
                     name: 'Kaca',
-                    y: 2.84
+                    y: {!!$kaca!!}
                 }, {
                     name: 'Logam',
-                    y: 3.51
+                    y: {!!$logam!!}
                 }, {
                     name: 'Lainnya',
-                    y: 2.6
+                    y: {!!$lainnya!!}
                 }]
             }]
         });
@@ -250,7 +251,7 @@
                     cursor: 'pointer',
                     dataLabels: {
                         enabled: true,
-                        format: '<b>{point.name}</b>: <br> {point.percentage:.1f} Ton/thn'
+                        format: '<b>{point.name}</b>: <br> {point.percentage:.1f} %'
                     }
                 }
             },
@@ -259,27 +260,27 @@
                 colorByPoint: true,
                 data: [{
                     name: 'Rumah Tangga',
-                    y: 30.67,
+                    y: {!! $rumah_tangga !!},
                     sliced: true,
                     selected: true
                 }, {
                     name: 'Perkantoran',
-                    y: 14.77
+                    y:{!! $perkantoran !!}
                 },  {
                     name: 'Pasar Tradisional',
-                    y: 4.86
+                    y: {!! $pasar !!}
                 }, {
                     name: 'Pusat Perniagaan',
-                    y: 2.63
+                    y: {!! $perniagaan !!}
                 }, {
                     name: 'Fasilitas Publik',
-                    y: 1.53
+                    y: {!! $publik !!}
                 },  {
                     name: 'Kawasan',
-                    y: 1.40
+                    y: {!! $kawasan !!}
                 }, {
                     name: 'Lainnya',
-                    y: 2.6
+                    y: {!! $lainnya2 !!}
                 }]
             }]
         });
