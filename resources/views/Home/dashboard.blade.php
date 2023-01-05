@@ -5,6 +5,12 @@
 
 
 
+<link href='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css' rel='stylesheet' />
+
+
+
+
+
 @endsection
 
 @section('content')
@@ -96,6 +102,33 @@
                 </div>
                 <div class="row mt-3">
                     <div class="col-md-12">
+                        <div class="white p-4 r-5">
+                            <div style="text-align:center">
+
+                                <h4>
+                                SEBARAN FASILITAS PENGELOLAAN SAMPAH 
+                                </h4>
+                                <p style="font-size: small;">Sebaran Fasilitas Pengelolaan Sampah adalah Sebaran fasilitas pengelolaan sampah <br> untuk mengetahui lokasi TPA, TPS 3R, Bank Sampah, dan lain-lain.</p>
+                            </div> <hr>
+
+                            <div style="text-align:center; height: 500px;"> 
+                                <div id='map' style="height: 450px;"></div>
+
+                            </div>
+
+
+
+
+                            
+                            
+                            
+                            
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-12">
                         <div class="white p-5 r-5">
 
                             <div style="text-align:center">
@@ -118,28 +151,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row mt-3">
-                    <div class="col-md-12">
-                        <div class="white p-4 r-5">
-                            <div style="text-align:center">
-
-                                <h4>
-                                SEBARAN FASILITAS PENGELOLAAN SAMPAH 
-                                </h4>
-                                <p style="font-size: small;">Sebaran Fasilitas Pengelolaan Sampah adalah Sebaran fasilitas pengelolaan sampah <br> untuk mengetahui lokasi TPA, TPS 3R, Bank Sampah, dan lain-lain.</p>
-                            </div> <hr>
-
-                            <div id="maps">
-                            </div>
-
-                            
-                            
-                            
-                            
-                        </div>
-                        
-                    </div>
-                </div>
+                
 
                 
 
@@ -157,8 +169,25 @@
 @endsection
 @section('script')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/10.3.2/highcharts.js"></script>
+<script src='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js'></script>
+
+<script>
+    const defaultLocation = [106.69285988221327, -6.290379573167988]
+
+    mapboxgl.accessToken = '{{env("MAPBOX_KEY")}}';
+    var map = new mapboxgl.Map({
+        container: 'map',
+        center: defaultLocation,
+        zoom: 12.15,
+        style: 'mapbox://styles/mapbox/streets-v11'
+    });
+
+   map.addControl(new mapboxgl.NavigationControl())
+</script>
 
 <script type="text/javascript">
+    
+
     // Data retrieved from https://netmarketshare.com
         Highcharts.chart('chart1', {
             chart: {
