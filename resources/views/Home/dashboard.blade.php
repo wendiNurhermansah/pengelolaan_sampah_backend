@@ -182,7 +182,7 @@
         style: 'mapbox://styles/mapbox/streets-v11'
     });
 
-   map.addControl(new mapboxgl.NavigationControl())
+   
 </script>
 
 <script type="text/javascript">

@@ -67,7 +67,7 @@ class TpaController extends Controller
         })
 
         ->editColumn('id_jenis', function($p){
-            if ($p->id_status == 1) {
+            if ($p->id_jenis == 1) {
                return "TPA Swasta";
             } else {
                 return "TPA Pemda";
@@ -184,6 +184,14 @@ class TpaController extends Controller
          $kode = "$id_jenis$request->id_kecamatan$no_urut";
         //  dd($kode);
 
+        //latitude
+        // -6.289255871795722, 106.67470784783791
+        $latitude = explode(",", $request->kordinat);
+        // dd($latitude);
+       
+       
+        // dd($longitude);
+
         $tpa = new Tpa();
         $tpa->nama_fasilitas = $request->nama_fasilitas;
         $tpa->foto = $nameFoto;
@@ -203,6 +211,8 @@ class TpaController extends Controller
         $tpa->keaktifan = $request->keaktifan;
         $tpa->luas = $request->luas;
         $tpa->kode = $kode;
+        $tpa->latitude = $latitude[0];
+        $tpa->longitude = $latitude[1];
         $tpa->save();
 
         return response()->json([
@@ -287,6 +297,11 @@ class TpaController extends Controller
 
         $tpa = Tpa::findOrFail($id);
 
+        //latitude
+        // -6.289255871795722, 106.67470784783791
+        $latitude = explode(",", $request->kordinat);
+        // dd($latitude);
+
         if($request->foto != null){
             $image = $request->file('foto');
             $nameFoto = rand() . '.' . $image->getClientOriginalExtension();
@@ -312,6 +327,8 @@ class TpaController extends Controller
                 'keaktifan' => $request->keaktifan,
                 'luas' => $request->luas,
                 'kode' => $request->kode,
+                'latitude' => $latitude[0],
+                'longitude' => $latitude[1],
         
             ]);
         }
@@ -332,10 +349,13 @@ class TpaController extends Controller
         'operator' => $request->operator,
         'jumlah_kk' => $request->jumlah_kk,
         'id_status' => $request->id_status,
+        'id_jenis' => $request->id_jenis,
         'sumber_dana' => $request->sumber_dana,
         'keaktifan' => $request->keaktifan,
         'luas' => $request->luas,
         'kode' => $request->kode,
+        'latitude' => $latitude[0],
+        'longitude' => $latitude[1],
 
         ]);
         

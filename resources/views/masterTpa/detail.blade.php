@@ -69,10 +69,10 @@
                                                 </label>
                                             </div>
                                             <div class="row">
-                                                <label class="col-md-4 text-left s-12"><strong>Status Tps</strong></label>
+                                                <label class="col-md-4 text-left s-12"><strong>Jenis Tps</strong></label>
                                                 <label class="">:</label>
                                                 <label class="col-md-6 s-12">
-                                                    @if($tpa->id_status == 1)
+                                                    @if($tpa->id_jenis == 1)
                                                         TPA Swasta
                                                     @else
                                                         TPA Pemda

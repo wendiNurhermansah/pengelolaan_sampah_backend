@@ -159,6 +159,9 @@
                                             <label for="kordinat" class="font-weight-bold fs-14">Kordinat<span
                                                     class="text-danger fs-12">*</span></label>
                                             <textarea name="kordinat" id="kordinat" class="form-control light" cols="5" rows="2" required>{{$bank_sampah->kordinat}}</textarea>
+                                            <div class="mt-1">
+                                                <span>contoh : -6.2927683577999405, 106.7089962988124</span>
+                                            </div>
                                         </div>
 
                                         

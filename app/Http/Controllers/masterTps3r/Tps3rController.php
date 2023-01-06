@@ -162,6 +162,11 @@ class Tps3rController extends Controller
          $kode = "$id_jenis$request->id_kecamatan$no_urut";
         //  dd($kode);
 
+        //latitude
+        // -6.289255871795722, 106.67470784783791
+        $latitude = explode(",", $request->kordinat);
+        // dd($latitude);
+
         $tps = new Tps3r();
         $tps->nama_fasilitas = $request->nama_fasilitas;
         $tps->foto = $nameFoto;
@@ -181,6 +186,8 @@ class Tps3rController extends Controller
         $tps->keaktifan_tps = $request->keaktifan_tps;
         $tps->luas = $request->luas;
         $tps->kode = $kode;
+        $tps->latitude = $latitude[0];
+        $tps->longitude = $latitude[1];
         $tps->save();
 
         return response()->json([
@@ -247,6 +254,11 @@ class Tps3rController extends Controller
 
         $tps = Tps3r::findOrFail($id);
 
+        //latitude
+        // -6.289255871795722, 106.67470784783791
+        $latitude = explode(",", $request->kordinat);
+        // dd($latitude);
+
         if($request->foto != null){
             $image = $request->file('foto');
             $nameFoto = rand() . '.' . $image->getClientOriginalExtension();
@@ -272,6 +284,8 @@ class Tps3rController extends Controller
                 'keaktifan_tps' => $request->keaktifan_tps,
                 'luas' => $request->luas,
                 'kode' => $request->kode,
+                'latitude' => $latitude[0],
+                'longitude' => $latitude[1],
         
             ]);
         }
@@ -296,6 +310,8 @@ class Tps3rController extends Controller
         'keaktifan_tps' => $request->keaktifan_tps,
         'luas' => $request->luas,
         'kode' => $request->kode,
+       'latitude' => $latitude[0],
+       'longitude' => $latitude[1],
 
         ]);
         

@@ -158,6 +158,11 @@ class BankSampahController extends Controller
          $kode = "$id_jenis$request->id_kecamatan$no_urut";
         //  dd($kode);
 
+        //latitude
+        // -6.289255871795722, 106.67470784783791
+        $latitude = explode(",", $request->kordinat);
+        // dd($latitude);
+
         $bank_smpah = new Bank_sampah();
         $bank_smpah->nama_fasilitas = $request->nama_fasilitas;
         $bank_smpah->foto = $nameFoto;
@@ -177,6 +182,8 @@ class BankSampahController extends Controller
         $bank_smpah->keaktifan = $request->keaktifan;
         $bank_smpah->luas = $request->luas;
         $bank_smpah->kode = $kode;
+        $bank_smpah->latitud = $latitude[0];
+        $bank_smpah->longitude = $latitude[1];
         $bank_smpah->save();
 
         return response()->json([
@@ -243,6 +250,13 @@ class BankSampahController extends Controller
 
         $bank_sampah = Bank_sampah::findOrFail($id);
 
+         //latitude
+        // -6.289255871795722, 106.67470784783791
+        $latitude = explode(",", $request->kordinat);
+        // dd($latitude);
+
+        
+
         if($request->foto != null){
             $image = $request->file('foto');
             $nameFoto = rand() . '.' . $image->getClientOriginalExtension();
@@ -268,6 +282,8 @@ class BankSampahController extends Controller
                 'keaktifan' => $request->keaktifan,
                 'luas' => $request->luas,
                 'kode' => $request->kode,
+                'latitude' => $latitude[0],
+                'longitude' => $latitude[1],
         
             ]);
         }
@@ -292,7 +308,8 @@ class BankSampahController extends Controller
         'keaktifan' => $request->keaktifan,
         'luas' => $request->luas,
         'kode' => $request->kode,
-
+        'latitude' => $latitude[0],
+        'longitude' => $latitude[1],
         ]);
         
       

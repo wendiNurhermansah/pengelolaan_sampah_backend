@@ -80,7 +80,7 @@
                             <form class="needs-validation" id="form" method="PATCH"  enctype="multipart/form-data" novalidate>
                                 {{ method_field('PATCH') }}
                                 <input type="hidden" id="id" name="id" value="{{$tpa->id}}"/>
-                                <h4 id="formTitle">Edit Bank Sampah</h4><hr>
+                                <h4 id="formTitle">Edit TPA</h4><hr>
                                 
                                 <div class="row">
                                       
@@ -88,7 +88,7 @@
                                         <input type="hidden" class="form-control light fs-14" name="kode"
                                                 id="kode" value="{{$tpa->kode}}">
                                         <div class="form-group mt-2 ml-3">
-                                            <label for="nama_fasilitas" class="font-weight-bold fs-14">Nama TPS3R<span
+                                            <label for="nama_fasilitas" class="font-weight-bold fs-14">Nama TPA<span
                                                     class="text-danger fs-12">*</span></label>
                                             <input type="text" class="form-control light fs-14" name="nama_fasilitas"
                                                 id="nama_fasilitas" value="{{$tpa->nama_fasilitas}}" required>
@@ -159,6 +159,9 @@
                                             <label for="kordinat" class="font-weight-bold fs-14">Kordinat<span
                                                     class="text-danger fs-12">*</span></label>
                                             <textarea name="kordinat" id="kordinat" class="form-control light" cols="5" rows="2" required>{{$tpa->kordinat}}</textarea>
+                                            <div class="mt-1">
+                                                <span>contoh : -6.2927683577999405, 106.7089962988124</span>
+                                            </div>
                                         </div>
 
                                         
@@ -200,8 +203,8 @@
                                             <label for="id_jenis" class="font-weight-bold fs-14">Jenis Bank Sampah<span class="text-danger fs-12">*</span></label>
                                             <select class="select2 form-control light" name="id_jenis" id="id_jenis" autocomplete="off">
                                                 <option value="">Pilih</option>
-                                                <option value="1" {{$tpa->id_jenis == 1 ? 'selected' : ' '}}>Bank Sampah Swasta</option>
-                                                <option value="2" {{$tpa->id_jenis == 2 ? 'selected' : ' '}}>Bank Sampah Pemda</option>
+                                                <option value="1" {{$tpa->id_jenis == 1 ? 'selected' : ' '}}>TPA Swasta</option>
+                                                <option value="2" {{$tpa->id_jenis == 2 ? 'selected' : ' '}}>TPA Pemda</option>
                                                 
                                             </select>
                                         </div>
@@ -226,7 +229,7 @@
                                         </div>
 
                                         <div class="form-group mt-2 ml-3">
-                                            <label for="keaktifan" class="font-weight-bold fs-14">Keaktifan TPS<span class="text-danger fs-12">*</span></label>
+                                            <label for="keaktifan" class="font-weight-bold fs-14">Keaktifan TPA<span class="text-danger fs-12">*</span></label>
                                             <select class="select2 form-control light" name="keaktifan" id="keaktifan" autocomplete="off">
                                                 <option value="">Pilih</option>
                                                 <option value="1" {{$tpa->keaktifan == 1 ? 'selected' : ' '}}>Aktif</option>
