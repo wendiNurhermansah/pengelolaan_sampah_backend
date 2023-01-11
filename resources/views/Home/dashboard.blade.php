@@ -5,10 +5,7 @@
 
 
 
-<link href='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css' rel='stylesheet' />
-
-
-
+<link href="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.css" rel="stylesheet">
 
 
 @endsection
@@ -110,19 +107,53 @@
                                 </h4>
                                 <p style="font-size: small;">Sebaran Fasilitas Pengelolaan Sampah adalah Sebaran fasilitas pengelolaan sampah <br> untuk mengetahui lokasi TPA, TPS 3R, Bank Sampah, dan lain-lain.</p>
                             </div> <hr>
-
-                            <div style="text-align:center; height: 500px;"> 
-                                <div id='map' style="height: 450px;"></div>
-
+                            @foreach ($tps3r_maps as $item)
+                                <table id="tableData" style="display: none;">
+                                    <tr>
+                                        <td><input type="text" id="kode" value="{{ $item->kode }}" class="lokasi"></td>
+                                        <td><input type="text" id="nama_fasilitas" value="{{ $item->nama_fasilitas }}"  class="nama_fasilitas"></td>
+                                        <td><input type="text" id="luas" value="{{ $item->luas }}" class="luas"></td>
+                                        <td><input type="text" id="latitude" value="{{ $item->latitude }}" class="latitude"></td>
+                                        <td><input type="text" id="longitude" value="{{ $item->longitude }}" class="longitude"></td>
+                                        <td><input type="text" id="alamat" value="{{ $item->alamat }}" class="alamat"></td>
+                                    </tr>
+                                </table>
+                            @endforeach
+                            @foreach ($bank_sampah_maps as $item)
+                                <table id="tableData" style="display: none;">
+                                    <tr>
+                                        <td><input type="text" id="kode_bank_sampah" value="{{ $item->kode }}" class="lokasi_bank_sampah"></td>
+                                        <td><input type="text" id="nama_fasilitas_bank_sampah" value="{{ $item->nama_fasilitas }}"  class="nama_fasilitas_bank_sampah"></td>
+                                        <td><input type="text" id="luas_bank_sampah" value="{{ $item->luas }}" class="luas_bank_sampah"></td>
+                                        <td><input type="text" id="latitude_bank_sampah" value="{{ $item->latitude }}" class="latitude_bank_sampah"></td>
+                                        <td><input type="text" id="longitude_bank_sampah" value="{{ $item->longitude }}" class="longitude_bank_sampah"></td>
+                                        <td><input type="text" id="alamat_bank_sampah" value="{{ $item->alamat }}" class="alamat_bank_sampah"></td>
+                                    </tr>
+                                </table>
+                            @endforeach
+                            @foreach ($tpa_maps as $item)
+                                <table id="tableData" style="display: none;">
+                                    <tr>
+                                        <td><input type="text" id="kode_tpa" value="{{ $item->kode }}" class="lokasi_tpa"></td>
+                                        <td><input type="text" id="nama_fasilitas_tpa" value="{{ $item->nama_fasilitas }}"  class="nama_fasilitas_tpa"></td>
+                                        <td><input type="text" id="luas_tpa" value="{{ $item->luas }}" class="luas_tpa"></td>
+                                        <td><input type="text" id="latitude_tpa" value="{{ $item->latitude }}" class="latitude_tpa"></td>
+                                        <td><input type="text" id="longitude_tpa" value="{{ $item->longitude }}" class="longitude_tpa"></td>
+                                        <td><input type="text" id="alamat_tpa" value="{{ $item->alamat }}" class="alamat_tpa"></td>
+                                    </tr>
+                                </table>
+                            @endforeach
+                            <div style="text-align: center; " class="mb-3">
+                                <button class="btn btn-primary btn-sm" onclick="semua()">All</button>
+                                <button class="btn btn-primary btn-sm" onclick="tpa()">TPA</button>
+                                <button class="btn btn-primary btn-sm" onclick="tps3r()">TPS3R</button>
+                                <button class="btn btn-primary btn-sm" onclick="banksampah()">BANK SAMPAH</button>
                             </div>
 
+                            <div style="text-align:center; height: 500px;"> 
+                                @include('Home.maps')
 
-
-
-                            
-                            
-                            
-                            
+                            </div>    
                         </div>
                         
                     </div>
@@ -169,23 +200,283 @@
 @endsection
 @section('script')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/10.3.2/highcharts.js"></script>
-<script src='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js'></script>
-
-<script>
-    const defaultLocation = [106.69285988221327, -6.290379573167988]
-
-    mapboxgl.accessToken = '{{env("MAPBOX_KEY")}}';
-    var map = new mapboxgl.Map({
-        container: 'map',
-        center: defaultLocation,
-        zoom: 12.15,
-        style: 'mapbox://styles/mapbox/streets-v11'
-    });
-
-   
-</script>
 
 <script type="text/javascript">
+
+    //mapss
+
+
+    function semua(){
+       $('#map').show();
+       $('#map2').hide();
+       $('#map1').hide();
+       $('#map3').hide();
+    }
+
+    function tpa(){
+       $('#map').hide();
+       $('#map2').show();
+       $('#map1').hide();
+       $('#map3').hide();
+    }
+    function tps3r(){
+       $('#map').hide();
+       $('#map1').show();
+       $('#map2').hide();
+       $('#map3').hide();
+    }
+    function banksampah(){
+       $('#map').hide();
+       $('#map3').show();
+       $('#map2').hide();
+       $('#map1').hide();
+      
+    }
+
+            var greenIcon = L.icon({
+                iconUrl: 'images/marker_green.png',
+                iconSize:     [30], // size of the icon
+                iconAnchor:   [12, 12], // point of the icon which will correspond to marker's location
+                popupAnchor:  [0, -12] // point from which the popup should open relative to the iconAnchor
+            });
+            var redIcon = L.icon({
+                iconUrl: 'images/marker_red.png',
+                iconSize:     [30],
+                iconAnchor:   [12, 12],
+                popupAnchor:  [0, -12]
+            });
+            var yellowIcon = L.icon({
+                iconUrl: 'images/marker_yellow.png',
+                iconSize:     [30],
+                iconAnchor:   [12, 12],
+                popupAnchor:  [0, -12]
+            });
+            var blueIcon = L.icon({
+                iconUrl: 'images/marker_blue.png',
+                iconSize:     [30],
+                iconAnchor:   [12, 12],
+                popupAnchor:  [0, -12]
+            });
+            var greyIcon = L.icon({
+                iconUrl: 'images/marker_grey.png',
+                iconSize:     [30],
+                iconAnchor:   [12, 12],
+                popupAnchor:  [0, -12]
+            });
+
+            
+        //MARKER MAPS TPS3R
+
+        var kode,nama_fasilitas, luas, latitude, longitude, alamat;
+            var locations = [];
+            const lokasi        = document.querySelectorAll(".lokasi");
+            const Jnama_fasilitas   = document.querySelectorAll(".nama_fasilitas");
+            
+            const Jluas        = document.querySelectorAll(".luas");
+            const Jlatitude            = document.querySelectorAll(".latitude");
+            const Jlongitude          = document.querySelectorAll(".longitude");
+            const Jalamat          = document.querySelectorAll(".alamat");
+
+            for (let i = 0; i < lokasi.length; i++) {
+                console.log(locations);
+                kode           = lokasi[i].value;
+                nama_fasilitas = Jnama_fasilitas[i].value;
+                luas           = formatRupiah(Jluas[i].value);
+                latitude       = Jlatitude[i].value;
+                longitude      = Jlongitude[i].value;
+                alamat         = Jalamat[i].value;
+
+                var icon = greenIcon;
+
+                locations[i]    = ["<b>TPS3R</b><br><table border='1'><tr><td>Kode</td><td>"+kode+"</td></tr><tr><td>Nama Fasilitas</td><td>"+nama_fasilitas+"</td></tr><tr><td>Luas</td><td>"+luas+"</td></tr><tr><td>Latitude</td><td>"+latitude+"</td></tr><tr><td>Longitude</td><td>"+longitude+"</td></tr><tr><td>Alamat</td><td>"+alamat+"</td></tr></table>", latitude, longitude, icon];
+        }
+
+        //MARKER MAPS BANK SAMPAH
+
+        var kode_bank_sampah,nama_fasilitas_bank_sampah, luas_bank_sampah, latitude_bank_sampah, longitude_bank_sampah, alamat_bank_sampah;
+            var locations2 = [];
+            const lokasi2        = document.querySelectorAll(".lokasi_bank_sampah");
+            const Jnama_fasilitas2   = document.querySelectorAll(".nama_fasilitas_bank_sampah");
+            
+            const Jluas2        = document.querySelectorAll(".luas_bank_sampah");
+            const Jlatitude2           = document.querySelectorAll(".latitude_bank_sampah");
+            const Jlongitude2         = document.querySelectorAll(".longitude_bank_sampah");
+            const Jalamat2         = document.querySelectorAll(".alamat_bank_sampah");
+
+            for (let i = 0; i < lokasi2.length; i++) {
+               
+                kode_bank_sampah           = lokasi2[i].value;
+                nama_fasilitas_bank_sampah = Jnama_fasilitas2[i].value;
+                luas_bank_sampah           = formatRupiah(Jluas2[i].value);
+                latitude_bank_sampah       = Jlatitude2[i].value;
+                longitude_bank_sampah      = Jlongitude2[i].value;
+                alamat_bank_sampah         = Jalamat2[i].value;
+
+                var icon = blueIcon;
+
+                locations2[i]    = ["<b>BANK SAMPAH</b><br><table border='1'><tr><td>Kode</td><td>"+kode_bank_sampah+"</td></tr><tr><td>Nama Fasilitas</td><td>"+nama_fasilitas_bank_sampah+"</td></tr><tr><td>Luas</td><td>"+luas_bank_sampah+"</td></tr><tr><td>Latitude</td><td>"+latitude_bank_sampah+"</td></tr><tr><td>Longitude</td><td>"+longitude_bank_sampah+"</td></tr><tr><td>Alamat</td><td>"+alamat_bank_sampah+"</td></tr></table>", latitude_bank_sampah, longitude_bank_sampah, icon];
+        }
+
+
+        //MARKER TPA
+
+        var kode_tpa,nama_fasilitas_tpa, luas_tpa, latitude_tpa, longitude_tpa, alamat_tpa;
+            var locations3 = [];
+            const lokasi3        = document.querySelectorAll(".lokasi_tpa");
+            const Jnama_fasilitas3   = document.querySelectorAll(".nama_fasilitas_tpa");
+            
+            const Jluas3        = document.querySelectorAll(".luas_tpa");
+            const Jlatitude3           = document.querySelectorAll(".latitude_tpa");
+            const Jlongitude3         = document.querySelectorAll(".longitude_tpa");
+            const Jalamat3         = document.querySelectorAll(".alamat_tpa");
+
+            for (let i = 0; i < lokasi3.length; i++) {
+               
+                kode_tpa           = lokasi3[i].value;
+                nama_fasilitas_tpa = Jnama_fasilitas3[i].value;
+                luas_tpa           = formatRupiah(Jluas3[i].value);
+                latitude_tpa       = Jlatitude3[i].value;
+                longitude_tpa      = Jlongitude3[i].value;
+                alamat_tpa         = Jalamat3[i].value;
+
+                var icon = redIcon;
+
+                locations3[i]    = ["<b>TPA</b><br><table border='1'><tr><td>Kode</td><td>"+kode_tpa+"</td></tr><tr><td>Nama Fasilitas</td><td>"+nama_fasilitas_tpa+"</td></tr><tr><td>Luas</td><td>"+luas_tpa+"</td></tr><tr><td>Latitude</td><td>"+latitude_tpa+"</td></tr><tr><td>Longitude</td><td>"+longitude_tpa+"</td></tr><tr><td>Alamat</td><td>"+alamat_tpa+"</td></tr></table>", latitude_tpa, longitude_tpa, icon];
+        }
+
+
+
+
+
+
+        var map = L.map('map').setView([-6.2845781934796054, 106.70521974885833], 13);
+
+        L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+                            attribution: '<a href="https://diskominfo.tangerangselatankota.go.id/">Diskominfo</a> Kota Tangerang Selatan',
+                            maxZoom: 18,
+                            id: 'mapbox/streets-v11',
+                            tileSize: 512,
+                            zoomOffset: -1,
+                            accessToken: 'pk.eyJ1IjoicHJlc2Vuc2lrb21pbmZvIiwiYSI6ImNrejd2Y2txaTBuOGwycXFtdW56ZWVobnYifQ.vzuq9gaJtjvb2FvIQ-_hGA'
+                        }).addTo(map);
+            //tps3r marker
+            for (var i = 0; i < locations.length; i++) {
+                marker = new L.marker([locations[i][1], locations[i][2]], {icon: locations[i][3]})
+                    .bindPopup(locations[i][0])
+                    .addTo(map);
+            }
+            
+
+            //bank sampah marker 
+            for (var i = 0; i < locations2.length; i++) {
+                marker = new L.marker([locations2[i][1], locations2[i][2]], {icon: locations2[i][3]})
+                    .bindPopup(locations2[i][0])
+                    .addTo(map);
+            }
+
+            //Tpa Marker
+
+            for (var i = 0; i < locations3.length; i++) {
+                marker = new L.marker([locations3[i][1], locations3[i][2]], {icon: locations3[i][3]})
+                    .bindPopup(locations3[i][0])
+                    .addTo(map);
+            }
+
+            L.control.scale().addTo(map);
+
+            //Maps TPS3R
+
+            var map1 = L.map('map1').setView([-6.2845781934796054, 106.70521974885833], 13);
+
+            L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+                                attribution: '<a href="https://diskominfo.tangerangselatankota.go.id/">Diskominfo</a> Kota Tangerang Selatan',
+                                maxZoom: 18,
+                                id: 'mapbox/streets-v11',
+                                tileSize: 512,
+                                zoomOffset: -1,
+                                accessToken: 'pk.eyJ1IjoicHJlc2Vuc2lrb21pbmZvIiwiYSI6ImNrejd2Y2txaTBuOGwycXFtdW56ZWVobnYifQ.vzuq9gaJtjvb2FvIQ-_hGA'
+                            }).addTo(map1);
+                //tps3r marker
+                for (var i = 0; i < locations.length; i++) {
+                    marker = new L.marker([locations[i][1], locations[i][2]], {icon: locations[i][3]})
+                        .bindPopup(locations[i][0])
+                        .addTo(map1);
+                }
+
+                L.control.scale().addTo(map1);
+
+
+            //maps TPA
+            var map2 = L.map('map2').setView([-6.2845781934796054, 106.70521974885833], 13);
+
+            L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+                                attribution: '<a href="https://diskominfo.tangerangselatankota.go.id/">Diskominfo</a> Kota Tangerang Selatan',
+                                maxZoom: 18,
+                                id: 'mapbox/streets-v11',
+                                tileSize: 512,
+                                zoomOffset: -1,
+                                accessToken: 'pk.eyJ1IjoicHJlc2Vuc2lrb21pbmZvIiwiYSI6ImNrejd2Y2txaTBuOGwycXFtdW56ZWVobnYifQ.vzuq9gaJtjvb2FvIQ-_hGA'
+                            }).addTo(map2);
+
+            //Tpa Marker
+
+            for (var i = 0; i < locations3.length; i++) {
+                marker = new L.marker([locations3[i][1], locations3[i][2]], {icon: locations3[i][3]})
+                    .bindPopup(locations3[i][0])
+                    .addTo(map2);
+            }
+
+            L.control.scale().addTo(map2);
+
+            //maps Bank Sampah
+
+            var map3 = L.map('map3').setView([-6.2845781934796054, 106.70521974885833], 13);
+
+            L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+                                attribution: '<a href="https://diskominfo.tangerangselatankota.go.id/">Diskominfo</a> Kota Tangerang Selatan',
+                                maxZoom: 18,
+                                id: 'mapbox/streets-v11',
+                                tileSize: 512,
+                                zoomOffset: -1,
+                                accessToken: 'pk.eyJ1IjoicHJlc2Vuc2lrb21pbmZvIiwiYSI6ImNrejd2Y2txaTBuOGwycXFtdW56ZWVobnYifQ.vzuq9gaJtjvb2FvIQ-_hGA'
+                            }).addTo(map3);
+
+            for (var i = 0; i < locations2.length; i++) {
+                marker = new L.marker([locations2[i][1], locations2[i][2]], {icon: locations2[i][3]})
+                    .bindPopup(locations2[i][0])
+                    .addTo(map3);
+            }
+            L.control.scale().addTo(map3);
+
+
+
+
+
+
+
+    /* Fungsi formatRupiah */
+		function formatRupiah(angka, prefix){
+			var number_string = angka.replace(/[^,\d]/g, '').toString(),
+			split   		= number_string.split(','),
+			sisa     		= split[0].length % 3,
+			rupiah     		= split[0].substr(0, sisa),
+			ribuan     		= split[0].substr(sisa).match(/\d{3}/gi);
+ 
+			// tambahkan titik jika yang di input sudah menjadi angka ribuan
+			if(ribuan){
+				separator = sisa ? '.' : '';
+				rupiah += separator + ribuan.join('.');
+			}
+ 
+			rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+			return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
+		}
+
+
+ 
+
+
+
     
 
     // Data retrieved from https://netmarketshare.com

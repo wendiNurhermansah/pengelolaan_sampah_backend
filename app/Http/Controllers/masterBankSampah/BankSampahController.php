@@ -255,8 +255,6 @@ class BankSampahController extends Controller
         $latitude = explode(",", $request->kordinat);
         // dd($latitude);
 
-        
-
         if($request->foto != null){
             $image = $request->file('foto');
             $nameFoto = rand() . '.' . $image->getClientOriginalExtension();

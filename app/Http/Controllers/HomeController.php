@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bank_sampah;
 use App\Models\Kelola_bank_sampah;
 use App\Models\Kelola_tps3r;
 use App\Models\Komposisi;
 use App\Models\Sampah_terkelola;
 use App\Models\Sumber_sampah;
 use App\Models\Timbulan_sampah;
+use App\Models\Tpa;
+use App\Models\Tps3r;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Date;
 
@@ -72,6 +75,12 @@ class HomeController extends Controller
         $kawasan = Sumber_sampah::where('tahun', $tahun)->sum('kawasan');
         $lainnya2 = Sumber_sampah::where('tahun', $tahun)->sum('lainnya');
 
+        //maps
+        $tps3r_maps = Tps3r::all();
+        $bank_sampah_maps = Bank_sampah::all();
+        $tpa_maps = Tpa::all();
+        // dd($tpa_maps);
+
         return view('Home.dashboard', compact(
             'sisa_makanan','rumah_tangga',
             'kayu','perkantoran',
@@ -79,9 +88,9 @@ class HomeController extends Controller
             'plastik','perniagaan',
             'logam','publik',
             'kain','kawasan',
-            'karet','lainnya2',
-            'kaca', 'timbulan',
-            'lainnya','tpa',
+            'karet','lainnya2','tpa_maps',
+            'kaca', 'timbulan','bank_sampah_maps',
+            'lainnya','tpa','tps3r_maps',
             'tahun', 'bank_sampah', 'tps3r'
         ));
     }
