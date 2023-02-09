@@ -145,18 +145,18 @@
                             @endforeach
                             <div style="text-align: center; " class="mb-3">
                                 <button class="btn btn-primary btn-sm" onclick="semua()">All</button>
-                                <button class="btn btn-primary btn-sm" onclick="tpa()">TPA</button>
+                                <button class="btn btn-secondary btn-sm" onclick="tpa()">TPA</button>
                                 <button class="btn btn-primary btn-sm" onclick="tps3r()">TPS3R</button>
                                 <button class="btn btn-primary btn-sm" onclick="banksampah()">BANK SAMPAH</button>
-                               
+                                
                             
                             <div class="tab-content mt-4" id="pills-tabContent">
                                 <div class="tab-pane fade show active" id="pills-semua" role="tabpanel" aria-labelledby="pills-home-tab">
-                                    @include('Home.maps')
+                                    @include('Home.maps2')
                                     
                                 </div>
                                 <div class="tab-pane fade" id="pills-home" role="tabpanel" aria-labelledby="pills-profile-tab">
-                                    @include('Home.maps2')
+                                    @include('Home.maps')
                                 </div>
                                 <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                                     @include('Home.mpas1')
@@ -230,11 +230,8 @@
 
   
      function tpa(){
-
         var url = "{{route('maps_tpa')}}";
         window.location.href = url;
-  
-
     }
 
     

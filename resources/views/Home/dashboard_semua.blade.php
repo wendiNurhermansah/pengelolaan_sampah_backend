@@ -144,7 +144,7 @@
                                 </table>
                             @endforeach
                             <div style="text-align: center; " class="mb-3">
-                                <button class="btn btn-primary btn-sm" onclick="semua()">All</button>
+                                <button class="btn btn-secondary btn-sm" onclick="semua()">All</button>
                                 <button class="btn btn-primary btn-sm" onclick="tpa()">TPA</button>
                                 <button class="btn btn-primary btn-sm" onclick="tps3r()">TPS3R</button>
                                 <button class="btn btn-primary btn-sm" onclick="banksampah()">BANK SAMPAH</button>
@@ -230,10 +230,12 @@
 
   
      function tpa(){
-
+        
         var url = "{{route('maps_tpa')}}";
         window.location.href = url;
-  
+
+        
+        
 
     }
 

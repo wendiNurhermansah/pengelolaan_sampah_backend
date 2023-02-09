@@ -15,7 +15,7 @@ body { margin: 0; padding: 0; }
 #map { position: absolute; top: 150px; bottom: 20%; width: 93%; height: 500px; }
 </style> -->
 <style>
-    #map { height: 480px; }
+    #map1 { height: 480px; }
    
 
 </style>
@@ -24,7 +24,7 @@ body { margin: 0; padding: 0; }
     <div>
         
 
-        <div id="map"></div>
+        <div id="map1"></div>
         
     </div>
 

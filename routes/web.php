@@ -19,6 +19,10 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/', 'HomeController@index');
 Route::get('/dashboard', 'HomeController@index')->name('dashboard');
+Route::get('/maps_tpa', 'HomeController@maps_tpa')->name('maps_tpa');
+Route::get('/maps_semua', 'HomeController@maps_semua')->name('maps_semua');
+Route::get('/maps_tps3r', 'HomeController@maps_tps3r')->name('maps_tps3r');
+Route::get('/maps_bank_sampah', 'HomeController@maps_bank_sampah')->name('maps_bank_sampah');
 
 Route::prefix('MasterRole')->namespace('masterRole')->name('MasterRole.')->group(function(){
     //role
